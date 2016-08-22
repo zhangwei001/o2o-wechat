@@ -1,0 +1,305 @@
+{{{ include '../layout_app/header' }}}
+
+<link href="${resourcesPath}/javascript//artDialog/skins/default.css?v=${fileVersion}"  type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/icons.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/css/bootstrap.min.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/base.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/my_beauty_plus_public.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/page_module.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/send_dimension_xz.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/dialog.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/mymiljia.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+
+<style>
+    #contentDom img{width:100%}
+    #contentDom p{margin-bottom:15px}
+    .itemId_b{border:1px solid #cacaca};
+    #contentDom p:nth-of-type(even){text-indent:28px}/*偶数行*/
+</style>
+</head>
+
+<body   id="header">
+{{{ include '../layout_app/top' }}}
+<div class="page_main" id="auto_page_main">
+    <!-- 导航下按钮 S -->
+    <div class="main_btn_box">
+        <a href="<%=request.getContextPath()%>/route/${shopSid}/thirdpartnar-send_public_message?access_token=${accessToken}" class="btn_h">发微信内容</a>
+        <a  href="<%=request.getContextPath()%>/route/${shopSid}/promotions-release_promotion_activity" class="btn_c">发布优惠活动</a>
+        <a  href="<%=request.getContextPath()%>/route/${shopSid}/manage-weixin_custom_index" class="btn_c">微信用户管理</a>
+        <a  href="<%=request.getContextPath()%>/route/${shopSid}/robot-upweixin_auto_reply_index" class="btn_c">自动回复</a>
+        <a  href="<%=request.getContextPath()%>/route/${shopSid}/customized-creat_mass_message_index" class="btn_c">自定义发消息</a>
+        <a  href="<%=request.getContextPath()%>/route/${shopSid}/fodder-wechat_fodder_index" class="btn_c">素材库</a>
+    </div>
+
+    <div class="container mt5 weixinptmain wxminh500" id="w998">
+        <!-- 导航下按钮 S -->
+
+        <!-- 内容区域 S -->
+        <div class="content" id="auto_content">
+            <!-- 内容 左 S -->
+            <div class="content_left" id="auto_content_left">
+                <p class="content_left_title" id="wxPublicName"></p>
+
+
+
+
+
+                <div id="newsView">
+                    <div class="indu_new_box">
+                        <a href="javascript:;" class="indu_new_box_btn " data-type-id="0">
+                            <span class="indu_new_box_s1 products_tj_s1 "  data-type-id="0">+行业要闻</span>
+                            <span class="indu_new_box_s2">请从右边选择您要发布的内容</span>
+                        </a>
+                    </div>
+                </div>
+
+                <script type="text/html" id="selectNewsTemp">
+                    <div class="indu_new_box">
+                        <a href="javascript:;" class="indu_new_box_btn">
+                            <span class="indu_new_box_s1 "  data-type-id="0">+行业要闻</span>
+                            <span class="indu_new_box_s2">请从右边选择您要发布的内容</span>
+                        </a>
+                    </div>
+                </script>
+
+
+                <!-- 行业要闻 S -->
+                <script type="text/html" id="newsTemp">
+                    {{# var content = d.content[0]}}
+                    <div class="indu_new_box2"  data-item-id="{{content.id }}"  data-item-type="0">
+                        <img src="{{ content.image_url}}" alt="" class="indu_new_box2_pic">
+                        <span class="indu_new_box2_s1">{{content.title }}</span>
+                    </div>
+                </script>
+
+
+
+                <!-- 行业要闻 E -->
+
+                <p class="content_left_text">您获得了额外3条消息栏，点击添加对应内容</p>
+
+
+
+
+                <div id="productAdviceView">
+                    <div class="products_tj">
+                        <a class="products_tj_btn itemId" data-type-id="1">
+                            <!-- 如果提示不存在 类名改为“products_tj_s1_lg”  显示为：products_tj_s1 itemId -->
+                            <span class="products_tj_s1_lg itemId" data-type-id="1">+产品推荐</span>
+
+                            <span class="products_tj_s2">请从右边选择您要发布的内容</span>
+                        </a>
+                    </div>
+                </div>
+
+                <script type="text/html" id="selectProductTemp">
+                    <div class="products_tj">
+                        <a class="products_tj_btn itemId">
+                            <span class="products_tj_s1 itemId" data-type-id="1">+产品推荐</span>
+                            <!-- 如果提示不存在 类名改为“products_tj_s1_lg” -->
+                            <span class="products_tj_s2">请从右边选择您要发布的内容</span>
+                        </a>
+                    </div>
+                </script>
+
+                <script type="text/html" id="itemTemp">
+                    {{# var content = d.content[0]}}
+                    <div class="products_tj2 data_mount {{d.tempType}}"   data-item-id="{{content.id }}" style="margin-top:10px;">
+                        <span class="products_tj2_s1">{{content.title}}</span>
+                        <img src="{{content.image_url }}" alt="" class="products_tj2_pic">
+                    </div>
+                </script>
+
+
+                <div id="beautyAdviceView">
+                    <div class="products_zx">
+                        <a class="products_zx_btn itemId" data-type-id="2">
+                            <span class="products_tj_s1_lg itemId" data-type-id="2">+美丽资讯</span>
+                            <!-- 如果提示不存在 类名改为“products_tj_s1_lg” -->
+                            <span class="products_tj_s2">请从右边选择您要发布的内容</span>
+                        </a>
+                    </div>
+                </div>
+
+                <script  type="text/html" id="beautyAdviceSelectTemp">
+                    <div class="products_zx ">
+                        <a class="products_zx_btn">
+                            <span class="products_tj_s1 itemId" data-type-id="2">+美丽咨讯</span>
+                            <!-- 如果提示不存在 类名改为“products_tj_s1_lg” -->
+                            <span class="products_tj_s2">请从右边选择您要发布的内容</span>
+                        </a>
+                    </div>
+                </script>
+
+                <div id="eventView" style="margin-top: 10px;">
+                    <div class="products_cx">
+                        <a class="products_cx_btn itemId" data-type-id="3">
+                            <span class="products_tj_s1_lg itemId" data-type-id="3">+活动促销</span>
+                            <!-- 如果提示不存在 类名改为“products_tj_s1_lg” -->
+                            <span class="products_tj_s2">请从右边选择您要发布的内容</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <script  type="text/html" id="eventSelectTemp">
+                    <div class="products_cx">
+                        <a class="products_cx_btn">
+                            <span class="products_tj_s1 itemId" data-type-id="3">+活动促销</span>
+                            <!-- 如果提示不存在 类名改为“products_tj_s1_lg” -->
+                            <span class="products_tj_s2">请从右边选择您要发布的内容</span>
+                        </a>
+                    </div>
+                </script>
+
+
+                <a class="btn_sent_gk" title="发送给顾客" id="submitData">发送给顾客</a>
+                <!-- 灰色状态请用类名： btn_sent_gk-->
+            </div>
+            <!-- 内容 左 E -->
+
+            <script type="text/html" id="remainSendTimesTemp">
+                <p class="send_recon_text">由于微信限制，您本月还可发送{{d.content.left_count}}次消息</p>
+                <a class="look_send_dimension" title="查看已发布内容" id="checkReleased" target="_blank" >查看已发布内容</a>
+
+            </script>
+
+            <!-- 内容 右 S -->
+            <div class="content_right" id="auto_content_right">
+                <div class="content_right_main">
+                    <div class="send_recom" id="remainSendTimesView"></div>
+                    <!-- 发送内容 图 S  如果需要小图，更改类名为：content_right_massage_small-->
+                    <div class="content_right_massage_big" id="hasNoItemMessageView">
+                        <ul class="massage_list"  id="itemListView"></ul>
+                    </div>
+
+                    <a class="btn_look_more_dimension" id="getMoreItemBtn">查看更多内容</a>
+
+                </div>
+            </div>
+            <!-- 内容 右 E -->
+
+        </div>
+        <!-- 内容区域 E -->
+
+    </div>
+    <!--页面主体 E-->
+    <script type="text/html" id="hasNoItemMessageTemp">
+        <div class="shop_no_news_txt">
+            <i class="icon-no_news"></i>
+            暂时没有可选内容哦~点击<a>“自定义消息”</a>自己动手写一篇吧~
+        </div>
+    </script>
+
+
+    <script type="text/html" id="itemListTemp">
+
+        {{# for(var k=0;k<d.content.length;k++){ }}
+        {{# var item = d.content[k] }}
+        <li data-item-type="{{d.type}}">
+            <div class="massage_list_left">
+                <img src="{{item.image_url}}" alt="">
+            </div>
+            <div class="massage_list_right">
+                <p class="massage_list_title hidden_slh">{{item.title}}</p>
+                <p class="massage_list_inf hidden_slh">{{(item.description && item.description !=null)? item.description : ""}}</p>
+                <div class="massage_list_full">
+                    <a class="btn_full btn_select" title="" data-item-id="{{item.id}}" data-item-type="{{d.type}}">选择添加</a>
+                    <font>|</font>
+                    <a class="btn_full" data-item-content="true" title="查看全文" data-item-id="{{item.id}}" data-item-type="{{d.type}}">查看全文</a>
+                </div>
+            </div>
+        </li>
+        {{# } }}
+
+    </script>
+
+    <div id="detaiInfoView"></div>
+    <script type="text/html" id="detaiInfoTemp">
+        <div class="send_content_tc">
+            <div class="send_content_tc_pos">
+                <div class="send_content_tc_top"></div>
+                <div class="send_content_tc_box">
+                    <p class="send_content_tc_title">{{ d.content.title}}</p>
+                    <div class="send_content_inf">
+                        <span class="send_content_inf_s1">{{ new Date(d.content.create_time).format("yyyy-M-d")}}</span>
+                        <a class="send_content_inf_mlj">{{ d.content.app_name}}</a>
+                    </div>
+                    <div class="send_content_tc_box_text" id="contentDom">{{ d.html }}</div>
+                    <!--   <img src="../../img/mljiav2/send_dimension/send_img_big.jpg" alt="" class="send_content_tc_box_pic">-->
+                </div>
+
+                <!-- <a class="send_content_tc_close">×</a> -->
+            </div>
+
+        </div>
+
+    </script>
+</div>
+
+
+<script type="text/html" id="yingdaoTemp">
+    <div class="container weixingginfo">
+        <div class="wXinfotop">
+            <p class="fz18 fl"><i class="icon-wXinfotop01 mr10"></i>公众号信息</p>
+            <p class="fl txthui ml10 mt2"><i class="icon-wXinfotop02"></i>点击“更新”字样即可将微信公众号的名称、头像、二维码、公众号类型信息同步为最新状态。<a id="refreshEvent">更新 <span class="fsongti">>></span></a></p>
+        </div>
+
+        <ul class="gginfomain">
+            <li class="a1 poi1">
+                <p class="txt1">公众号类型：</p>
+                <p>{{ ( d.content.service_type_info==0 || d.content.service_type_info==1) ? "订阅号" : "服务号"}}</p>
+                {{# if(d.content.service_type_info==0 || d.content.service_type_info==1 || d.content.verify_type_info==-1) { }}
+                <p class="wXinfoTese poi2" ><i class="icon-wXinfotop03"></i>您需要更换公众号类型为【服务号】，才可使用全部微信服务。<a class="upgradeLink" target="_blank">如何更换？</a></p>
+                {{# } }}
+            </li>
+
+            <li class="a2 poi1">
+                <p class="txt1">是否认证：</p>
+                <p>{{ d.verify_type_info==-1 ? "未认证" : "已认证"}}</p>
+                <p class="wXinfoTese poi2"  ><i class="icon-wXinfotop03"></i>您需要【认证】服务号，才可使用全部微信服务。<a class="authLink" target="_blank">如何认证？</a></p>
+            </li>
+
+            <li class="a1">
+                <p class="txt1">公众号名称：</p>
+                <p>{{d.content.nick_name}}</p>
+
+
+            </li>
+            <li class="a3 poi1 downBcodeMain">
+                <p class="txt1">二维码：</p>
+                <p><img src="{{d.qrCodeImg}}" width="168" height="168"></p>
+                <p class="poi2 downBcode"><a class="downLoadCodeImg">下载高清二维码</a></p>
+            </li>
+            <li class="a5">
+                <p class="txt1">公众号头像：</p>
+                <p><img src="{{d.content.head_image}}" width="168" height="168"></p>
+            </li>
+            <li class="tise2">
+                <p class="ml40">如需解除绑定，请联系4007889166</p>
+            </li>
+        </ul>
+    </div>
+    </div>
+
+</script>
+
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/jquery.ui.widget.js?v=${fileVersion}"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/artDialog/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/artDialog/iframeTools.source.js?v=${fileVersion}"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/public/public.js?v=${fileVersion}"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/public/valiRight.js?v=${fileVersion}"></script>
+
+
+
+<script src="<%=request.getContextPath()%>/resources/javascript/wechat/thirdpartnar/send_public_message.js?v=${fileVersion}"></script>
+<script src="<%=request.getContextPath()%>/resources/javascript/wechat/base/mljia_wx_userUtil.js?v=${fileVersion}"></script>
+{{{include '../layout_app/footer'}}}
+
+
+
+
+
+
+
+

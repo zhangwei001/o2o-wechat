@@ -1,0 +1,95 @@
+<%@page language="java" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<jsp:include  page="../layout_main/header.jsp" />
+
+<link href="${resourcesPath}/css/bootstrap3/css/bootstrap.min.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/base.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/my_beauty_plus_public.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/send_dimension.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/send_dimension_tc.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<style>
+    #contentDom img{width:100%}
+    #contentDom p{margin-bottom:15px}
+    #contentDom p:nth-of-type(even){text-indent:28px}/*偶数行*/
+</style>
+
+</head>
+
+
+
+<jsp:include  page="../layout_main/top.jsp" />
+
+<!--页面主体 S-->
+<div class="page_main" id="auto_page_main">
+    <div class="massage_box_big">
+        <ul class="massage_list" id="auto_massage_list" ></ul>
+
+
+        <div class="user_comment_pagination" id="morePage">
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/html"  id="releasedInofTemp">
+
+    {{# for(var k =0;k<d.content.length;k++){ }}
+    {{# var  item = d.content[k] }}
+    <li>
+        <div class="massage_list_left">
+            <img src="{{item.image_url}}" alt="" >
+        </div>
+        <div class="massage_list_right">
+            <p class="massage_list_title hidden_slh">{{ item.title}}</p>
+            <p class="massage_list_inf hidden_slh">{{ ( item.description &&  item.description !=null)?  item.description : "" }}</p>
+            <div class="massage_list_full">
+                <a class="btn_full" title="查看全文" data-item-id="{{ item.template_id}}"  data-item-content='true'>查看全文</a>
+                <span class="send_time">发布日期：{{ new Date(item.create_time).format("yyyy-M-d")}}</span>
+                <!-- <span class="user_look">浏览量：{{}}</span> -->
+            </div>
+        </div>
+    </li>
+
+    {{# } }}
+</script>
+
+
+<script type="text/html" id="hasNoReleasedInfoTemp">
+    <div class="shop_no_news_txt">
+        <i class="icon-no_news"></i>您还没有发送过消息哦~
+    </div>
+</script>
+
+
+<div id="detaiInfoView"></div>
+<script type="text/html" id="detaiInfoTemp">
+    <div class="send_content_tc">
+        <div class="send_content_tc_pos">
+            <div class="send_content_tc_top"></div>
+            <div class="send_content_tc_box">
+                <p class="send_content_tc_title">{{ d.content.title}}</p>
+                <div class="send_content_inf">
+                    <span class="send_content_inf_s1">{{ new Date(d.content.create_time).format("yyyy-M-d")}}</span>
+                    <a class="send_content_inf_mlj">{{ d.content.app_name}}</a>
+                </div>
+                <div class="send_content_tc_box_text" id="contentDom">{{ d.html }}</div>
+
+            </div>
+
+            <!-- <a class="send_content_tc_close">×</a> -->
+        </div>
+
+    </div>
+
+</script>
+
+<script src="<%=request.getContextPath()%>/resources/javascript/library/laypage/laypage.js?v=${fileVersion}"></script>
+<script src="<%=request.getContextPath()%>/resources/javascript/wechat/thirdpartnar/released_public_message.js?v=${fileVersion}"></script>
+<<<<<<< HEAD
+<script src="<%=request.getContextPath()%>/resources/javascript/wechat/base/mljia_wx_userUtil.js?v=${fileVersion}"></script>
+=======
+>>>>>>> a2ef8679bb7d3469d5517e1b700f6bd385d4b536
+<jsp:include  page="../layout_main/footer.jsp" />
+

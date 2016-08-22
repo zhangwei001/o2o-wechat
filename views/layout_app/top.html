@@ -1,10 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<div class="top_navbar">
+    <div class="navbar_container">
+        <div class="fl navbar_left">
+            <p><a href="${homeUrl}" target="_blank"><i class="icon-home"></i>美丽加首页</a></p>
+        </div>
+        <div class="fr">
+            <ul class="navbar_right" id="user_module">
+                <li data-user="true"></li>
+                <li data-user="true" style="display: none"></li>
+                <li data-user="true"><a id="exitLogin">&nbsp;退出</a></li>
+                <li id="setHomes">|</li>
+                <li id="setHomes2"><a href="<%=request.getContextPath()%>/route/${shopSid}/help-wechat_help_center" target="_blank">帮助中心</a></li>
+                <!--<li>|</li>
+                 <li><a href="javascript:checkRight(60,url46,'','_blank',0,null);"><i class="icon-ggjpc"></i>工作机管理</a></li>
+                <li>|</li> -->
+                <%-- <li><a href="${homeUrl}/${shopSid}/shop?route=message&view=shop_message_index" target="_blank">消息<span id="mesNum"></span></a></li>
+                <li>|</li>  --%>
+                <li><a href="${homeUrl}/menu/index?route=app&view=menu_index"  target="_blank">店主首页</a></li>
+                <%-- <li>|</li>
+                <li><a href="${homeUrl}/staticHtml/helpCenter" target="_blank">帮助中心</a></li> --%>
+                <li id="setHomes">|</li>
+                <li id="setHomes2"><a href="javascript:;" id="addHomePage">设为首页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 轮播广告位 -->
+
+
+<div class="top_subnav_main" style="height:auto">
+
+    <!--新手指引-->
+    <div class="BeginGuide_main">
+        <div class="BeginGuide_blackbg"></div>
+        <div class="BeginGuide_center">
+            <div class="BeginGuide_pic">
+                <a class="BeginGuide_but00" title="" ></a>
+                <a class="BeginGuide_but01" title=""></a>
+
+                <a class="BeginGuide_but02" title=""></a>
+                <a class="BeginGuide_but03" title=""></a>
+
+                <a class="BeginGuide_but04" href="<%=request.getContextPath()%>/staticHtml/helpCenter/cut/setting" target="_blank"></a>
+                <a class="BeginGuide_cross" title=""></a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="header" id="auto_header">
+        <div class="header_center">
+            <a href="${homeUrl}/${shopSid}" target="_blank" class="logo" title="美丽加"></a>
+            <p class="hd_title">微信平台</p>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="navbar_container top_subnav_menu poi1" id="mlj_menu" style="display:none">
+        <div class="myShop"><a  id="menu-1">我的店面</a></div>
+        <div class="poi1 navbar_open_activ">
+            <a href="javascript:;"  id="menu-2">营业记录</a>
+            <ul class="navbar_open_menu poi2">
+                <li><a id="menu-2-1" >营业记录</a></li>
+                <li><a id="menu-2-2" >评价管理</a></li>
+            </ul>
+        </div>
+        <div class="poi1 navbar_open_activ">
+            <a href="javascript:;"  id="menu-3">顾客管理</a>
+            <ul class="navbar_open_menu poi2">
+                <li><a id="menu-3-1">顾客列表</a></li>
+                <li><a id="menu-3-2" target="_blank">潜在顾客</a></li>
+            </ul>
+        </div>
+        <div  class="poi1 navbar_open_activ"> <a  id="menu-4">卡项和护理</a>
+            <ul class="navbar_open_menu poi2">
+                <li><a id="menu-4-1">卡项管理</a></li>
+                <li><a id="menu-4-2">护理管理</a></li>
+            </ul>
+        </div>
+        <div class="poi1 navbar_open_activ">
+            <a href="javascript:;"  id="menu-5">产品库存</a>
+            <ul class="navbar_open_menu poi2">
+                <li><a  id="menu-5-1" >产品管理</a></li>
+                <li><a  id="menu-5-2">耗材管理</a></li>
+                <li><a  id="menu-5-3">出入库单</a></li>
+            </ul>
+        </div>
+        <div class="poi1 navbar_open_activ">
+            <a href="javascript:;"  id="menu-6">员工管理</a>
+            <ul class="navbar_open_menu poi2">
+                <li><a  id="menu-6-1">员工列表</a></li>
+                <li><a  id="menu-6-2" >员工考勤</a></li>
+                <li><a  id="menu-6-3" >级别管理</a></li>
+                <li><a  id="menu-6-4" >员工评价</a></li>
+                <li><a  id="menu-6-5" >员工日志</a></li>
+            </ul>
+        </div>
+
+        <div><a href="javascript:;"  id="menu-7">财务管理</a></div>
+
+        <div class="poi1 navbar_open_activ shop_setting_menu"><a id="menu-8" class="active">店面设置</a>
+            <ul class="navbar_open_menu poi2">
+                <li><a  id="menu-8-1">店铺资料</a></li>
+                <li><a  id="menu-8-2">参数设置</a></li>
+                <li><a  id="menu-8-3" >权限设置</a></li>
+                <li><a id="menu-8-4" target="_blank" >微信平台</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,81 @@
+<%@page language="java" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<jsp:include  page="../layout_second/header.jsp" />
+
+<link href="${resourcesPath}/css/bootstrap3/css/bootstrap.min.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/icons.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/dialog.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/guide_tise.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/base.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/mymiljia.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+
+
+
+</head>
+
+<jsp:include  page="../layout_second/top.jsp" />
+
+<input type="hidden" value="${shopUserId}" id="shopUserId">
+<input type="hidden" value="${limit}" id="limit"/>
+
+
+<div class="container my_mlijia_container">
+
+    <div class="container weixinOpLead">
+        <p class="mb20 mt40">从今天起把店铺装进微信，仅需3步</p>
+        <ul class="weixinOpLead_ul ">
+            <li class=" fl ">1.注册微信服务号</li>
+            <li class="fl wxOpLead_stpe3 poi1">2.认证微信服务号</li>
+            <li class="fr active">3.授权绑定美丽加</li>
+        </ul>
+        <div class="wxOpLeadMain">
+            <p class="mb30">还差一步，您就可享受如下服务：</p>
+            <ul class="wxOpLead3Ul">
+                <li>
+                    <p><i class="icon-wxLead icon-wxLead01"></i></p>
+                    <p class="tatle">订单预约</p>
+                    <p>店内全部服务，产品<br>顾客一键预约</p>
+                </li>
+
+                <li>
+                    <p><i class="icon-wxLead icon-wxLead02"></i></p>
+                    <p class="tatle">店铺推广</p>
+                    <p>店铺分享朋友圈<br>让全世界看到您</p>
+                </li>
+
+                <li>
+                    <p><i class="icon-wxLead icon-wxLead03"></i></p>
+                    <p class="tatle">优惠促销</p>
+                    <p>优惠活动一键发布</p>
+                </li>
+                <li>
+                    <p><i class="icon-wxLead icon-wxLead04"></i></p>
+                    <p class="tatle">顾客管理</p>
+                    <p>打通微信和店铺顾客<br>沟通更即时</p>
+                </li>
+                <li>
+                    <p><i class="icon-wxLead icon-wxLead05"></i></p>
+                    <p class="tatle">更多功能</p>
+                    <p>敬请期待</p>
+
+                </li>
+
+
+
+            </ul>
+
+        </div>
+
+        <p id="twoBtn"><a class="fl butsbase butblue01_s"  v-bind:href="authMljiaLink">点击授权美丽加</a><a class="fl preStpe ml20" id="backBtn" v-bind:href="backLink"><span class="fsongti"><<</span> 返回上一步</a></p>
+
+    </div>
+</div>
+
+
+<script src="<%=request.getContextPath()%>/resources/javascript/wechat/auth/authenticate_mljia_account.js?v=${fileVersion}"></script>
+
+<script src="<%=request.getContextPath()%>/resources/javascript/wechat/base/mljia_wx_userUtil.js?v=${fileVersion}"></script>
+
+<jsp:include  page="../layout_second/footer.jsp" />
+

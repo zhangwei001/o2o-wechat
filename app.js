@@ -4,15 +4,27 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var template = require('art-template');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
-// view engine setup
+
+// 视图引擎设置
+template.config('base', '');
+template.config('extname', '.html');
+template.config('encoding', 'utf-8');
+template.config('cache', true);
+template.config('openTag', '{{{');
+template.config('closeTag', '}}}');
+
+app.engine('.html', template.__express);
+app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+
+
+
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,8 +34,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+//路由配置
+app.use('/', require('./routes/shopRouters'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

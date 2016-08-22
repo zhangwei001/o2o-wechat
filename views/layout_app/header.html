@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html >
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <!-- 若页面需默认用极速核 -->
+    <meta name="renderer" content="webkit">
+    <title>美丽加_微信平台_服务号</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;IE=EDGE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="${ staticImage_Url}/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="${resourcesPath}/css/jquery.ui.css">
+
+    <link href="<%=request.getContextPath()%>/resources/javascript//artDialog/skins/default.css"  type="text/css" />
+    <link href="${resourcesPath}/css/bootstrap3/icons.css" rel="stylesheet" type="text/css" />
+
+
+
+    <script type="text/javascript">
+
+        var wxGLOBAL = {
+             webRoot:"",
+             contextPath : "${contextPath}",
+             homeUrl :"${homeUrl}",
+             download_url: "${download_url}",
+             main_Url:"${main_Url}",
+             saasActionServer:"${saasActionServer}",
+             wechatActionServer : "${wechatActionServer}",
+             uploadActionServer :"${uploadActionServer}",
+             main_Https_Url : "${main_Https_Url}",
+
+             upload_url  : "${file_upload_url}",
+             defaultPic_Url : "${defaultPic_Url}",
+             staticImage_Url : "${staticImage_Url}",
+             resImgUrl : "${resImgUrl}",
+
+            //saas action interface
+             saasActionServer : "${saasActionServer}",
+            //wechat action interface
+             wechatActionServer : "${wechatActionServer}",
+
+             uploadActionServer  :"${uploadActionServer}",
+             accessToken  :"${accessToken}",
+             shopSid : "${shopSid}",
+             fileVersion :"${fileVersion}"
+        }
+
+
+    </script>
+
+
+
+
+
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/jquery.js?v=${fileVersion}"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/jquery.cookie.js?v=${fileVersion}"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/jquery.ui.js?v=${fileVersion}"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/store.min.js?v=${fileVersion}"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/jquery.base64.js?v=${fileVersion}"></script>
+    <!-- layer.js 跟bootstarp有样式冲突， 放在最前方-->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/layer/layer.js?v=${fileVersion}"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/wechat/base/base.js?v=${fileVersion}"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/wechat/base/wx_global_util.js?v=${fileVersion}"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/wechat/base/request.js?v=${fileVersion}"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/vue/vue.js?v=${fileVersion}"></script>
+
+
+
+
