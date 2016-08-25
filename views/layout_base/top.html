@@ -1,0 +1,175 @@
+
+<style>
+.ui-autocomplete {
+    z-index: 9999;
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+</style>
+
+<div class="navbar navbar-fixed-top" style="border-bottom: 1px #ccc solid;">
+	<div style=" background-image:url(${ staticImage_Url}/mljia/headbg.png)">
+		<div class="container" id="mainicobar2">
+
+			<div class="nav-collapse collapse  pull-left">
+ 				<ul class="navkai2 ml15" >
+             	 <li><i class="icon-home"></i><a  href="{{{homeUrl}}}" target="_blank">美丽加首页</a></li>
+              </ul>
+			</div>
+
+			<div class="nav-collapse collapse  pull-right">
+			
+				<ul class="navkai2" id="user_module">
+					    <li data-user="true"></li>
+						<li data-user="true" style="display: none"></li>
+						<li data-user="true"><a id="exitLogin">&nbsp;退出</a></li>
+						<li>|</li>
+
+ 				      <li><a  href="/o2o/route/{{{shopSid}}}/help-wechat_help_center"target="_blank">帮助中心</a></li>
+					<li style="display: none;" id="setHomes">|</li>
+					<li style="display: none;" id="setHomes2"><a href="javascript:;" id="addHomePage" >设为首页</a></li>
+
+				</ul>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="container-fluid">
+	<div class="logocon2">
+		<div class="row-fluid">
+		
+			<div class=" toplogo">
+				<div class="fl">
+				<a href="{{{homeUrl}}}/{{{shopSid}}}" target="_blank">
+				<img src="{{{staticImageUrl}}}/mljia/meilijiatylogo.png">
+				</a>
+				</div>
+				<div class="fl"></div>
+				<div class="fl top_logo_txt">商家中心</div>
+			</div>
+			<div class="fr">
+				<p class="ggstand"></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row-fluid navbar-pink" style="display:none">
+	<div class="manucon mutopenmenu">
+		<div class="span12" id="mlm25">
+			<ul>
+				<li class="activebg fz16b"><a id="menu-1">我的店面</a></li>
+				<li></li>
+				<li class=" activebg fz16b kshlmenu activebg fz16b">
+					<a >营业记录</a>
+					<ul class="openmenu">
+	                	<li><a id="menu-2-1" >营业记录</a></li>
+	                	<li><a  id="menu-2-2" >评价管理</a></li>
+                	</ul>
+				</li>
+				<li></li>
+				<li class="activebg fz16b  kshlmenu">
+					<a >顾客管理</a>
+					<ul class="openmenu">
+	                	<li><a id="menu-3-1" >顾客列表</a></li>
+	                	<li><a  id="menu-3-2" >潜在顾客</a></li>
+                	</ul>
+				</li>
+				<li></li>
+				<li class="activebg fz16b kshlmenu"><a>卡项和护理</a>
+				 	<ul class="openmenu">
+	                	<li><a id="menu-4-1">卡项管理</a></li>
+	                	<li><a id="menu-4-2">护理管理</a></li>
+                	</ul>
+                </li>	
+				<li></li>
+				<li  class="activebg fz16b kshlmenu">
+					<a >产品库存</a>
+					<ul class="openmenu">
+	                	<li><a id="menu-5-1">产品管理</a></li>
+	                	<li><a id="menu-5-2">耗材管理</a></li>
+	                	<li><a id="menu-5-3">出入库单</a></li>
+                	</ul>
+				</li>
+				<li></li>
+				<li class="activebg fz16b  kshlmenu">
+					<a >员工管理</a>
+					<ul class="openmenu">
+	                	<li><a id="menu-6-1">员工列表</a></li>
+	                	<li><a id="menu-6-2">员工考勤</a></li>
+	                	<li><a id="menu-6-3">级别管理</a></li>
+	                	<li><a id="menu-6-4">员工评价</a></li>
+	                	<li><a id="menu-6-5">员工日志</a></li>
+                	</ul>
+				</li>
+				<li></li>
+				
+				<li class="activebg fz16b"><a id="menu-7">财务管理</a></li>
+				<li></li>
+ 				<li class="activebg fz16b kshlmenu"><a>店面设置</a>
+				 	<ul class="openmenu">
+                    	<li><a id="menu-8-1">店铺资料</a></li>
+	                	<li><a id="menu-8-2">参数设置</a></li>
+	                	<li><a id="menu-8-3">权限设置</a></li>
+                      	<li><a id="menu-8-4" target="_blank" >微信平台</a></li>
+                	</ul>
+              	</li>
+				<%-- <li class="activebg fz16b"><a href="javascript:;" onclick="checkRight(60,url42,'','_self',0,'${controlTarg}');">店面设置</a></li> --%>
+
+			</ul>
+
+		</div>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+//一级导航栏添加url
+(function(){
+	
+	 $("#menu-1").attr("href",wxGLOBAL.homeUrl+"/"+wxGLOBAL.shopSid);
+	 
+	 $("#menu-2-1").attr("href",wxGLOBAL.homeUrl+"/"+wxGLOBAL.shopSid+"/shop?route=business&view=shop_business_index");
+	 $("#menu-2-2").attr("href",wxGLOBAL.homeUrl+"/"+wxGLOBAL.shopSid+"/shop?route=business-comment&view=shop_comment_index");
+	 
+	 $("#menu-3-1").attr("href",wxGLOBAL.homeUrl+"/"+wxGLOBAL.shopSid+"/shop?route=custom&view=shop_custom_index");
+	 $("#menu-3-2").attr("href",wxGLOBAL.homeUrl+"/"+wxGLOBAL.shopSid+"/shop?route=custom&view=shop_custom_potential");
+	 
+	 $("#menu-4-1").attr("href",wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid + "/shop?route=cardItem-card&view=shop_card_index");
+	 $("#menu-4-2").attr("href",wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid + "/shop?route=cardItem-massage&view=shop_massage_index");
+	 
+	 $("#menu-5-1").attr("href", wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid +  "/shop?route=product&view=shop_product_index");
+	 $("#menu-5-2").attr("href", wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid +  "/shop?route=product&view=shop_product_consumable_index");
+	 $("#menu-5-3").attr("href", wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid +  "/shop?route=inventory&view=shop_inventory_index");
+	
+	 $("#menu-6-1").attr("href", wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid + "/shop?route=staff&view=shop_staff_index");
+	 $("#menu-6-2").attr("href", wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid + "/shop?route=staff&view=shop_staff_attendance");
+	 $("#menu-6-3").attr("href", wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid + "/shop?route=staff&view=shop_staff_position_level");
+	 $("#menu-6-4").attr("href", wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid + "/shop?route=staff&view=shop_staff_evaluate");
+	 $("#menu-6-5").attr("href", wxGLOBAL.homeUrl+ "/" + wxGLOBAL.shopSid + "/shop?route=staff&view=shop_staff_log_index");
+	 
+	 $("#menu-7").attr("href", wxGLOBAL.homeUrl + "/" + wxGLOBAL.shopSid + "/shop?route=finance&view=shop_finance_index");
+	 
+	 $("#menu-8-1").attr("href", wxGLOBAL.homeUrl + "/" + wxGLOBAL.shopSid + "/shop?route=setting&view=shop_setting_index");
+	 $("#menu-8-2").attr("href", wxGLOBAL.homeUrl + "/" + wxGLOBAL.shopSid + "/shop?route=setting&view=shop_setting_param");
+	 $("#menu-8-3").attr("href", wxGLOBAL.homeUrl + "/" + wxGLOBAL.shopSid + "/shop?route=setting&view=shop_setting_permissions");
+	 $("#menu-8-4").attr("href", "/o2o/route/" + wxGLOBAL.shopSid + "/thirdpartnar-send_public_message?access_token="+ store.get("wx_access_token"));
+	 
+	 
+	
+})();
+
+</script>
+
+
+
+
+
+

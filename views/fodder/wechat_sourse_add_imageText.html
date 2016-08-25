@@ -1,0 +1,242 @@
+
+
+{{{include '../layout_base/header'}}}
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/layer/skin/layer.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus_v1.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/percentage_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/weixin_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/artDialog/skins/default.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/laypage/skin/laypage.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<jsp:include  page="../layout_base/top.html" />
+
+<input type="hidden" value="${materialId}" id="materialId">
+
+<script>
+/* $(".container-fluid").addClass("weixingg_logo");
+$("#titleTips").text("新建图文消息");
+var materialId= window.globalUtil.getUrlParam("materialId");
+if(materialId>0){
+	$("#titleTips").text("修改图文消息");	
+} */
+</script>
+
+<style>
+  .ke-icon-image2 {  background-position: 0px -496px;width: 16px; height: 16px; }
+</style>
+
+<div class="container-fluid bghui2">
+
+<div class="container weixingginfo">
+<p class="bbmbs">您当前的位置：微信平台/ 新建图文消息</p>
+<div class="container weixin_postmain">
+	<div class="weixin_postleft fl">
+		<ul class="weixin_postpicul borderblue" id="coverTips"    data-container="true">
+			<li class="a1 poi1">
+				<img id="coverImage" width="70" height="66">
+				<p class="poi2" id="coverTitle" >封面标题</p>
+			</li>
+		</ul>
+		
+		<ul class="weixin_postpicul weixin_postpicul2 ">
+			<li class="a2">
+				<a class="wxpost_upimgbut_l"  onclick="saveImageTextFun(0);"></a>
+				<p class="text-center txthui lh32 fz12">最多新增8条</p>
+			</li>
+		</ul>
+	</div>
+	<div class="weixin_postright fl">
+		<div class="editston_main">
+			<ul class="editston_tatle poi1">
+				<li><input name="coverTitle" type="text" maxlength="64" placeholder="请输入标题"></li>
+				<li><a class="hidebut1">隐藏发布样式</a></li>
+			</ul>
+			
+			<div class="hidebox">
+			<ul class="editston_td1  poi1">
+				<li>作者：<input name="author" type="text"  maxlength="8" placeholder="点击添加作者"></li>
+				<li>原文链接：<input name="contentSourceUrl" style="width:260px;" type="text" placeholder="点击添加原文链接"></li>
+			</ul>
+
+			<ul class="editston_td2">
+				<li>摘要：<textarea  name="summary" maxlength="120"  placeholder="点击添加摘要（选填，如果不填写会默认抓取正文的前54个字）"></textarea>
+				</li>
+				<li class="clearfix"><p class="text-right mr15"><span id="summaryNumber">120</span>/120</p></li>
+			</ul>
+			
+			<ul class="editston_td3 poi1">
+				<li>上传封面<span class="txthui">（不超过2M）：</span></li>
+				<li></li>
+				<li style="position: relative;">
+				<a class="wxpost_upimgbut_2" title="请上传2M以内的jepg图片"><i class="icon-upimgbut"></i>上传
+					<input data-id="fileUpload" type="file" name="files[]"   style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:50;opacity:0;filter:alpha(opacity=0);"/>
+				</a></li>
+				<li><input name="showCover" type="checkbox" ></li>
+				<li>封面图片显示在正文中</li>
+			</ul>
+			</div>
+				<div class="editor_center poi1">
+					<textarea   name="content" style="width:790px;height:352px;max-width:790px;max-height:352px;"></textarea>
+			  	</div>
+		</div>
+		<div class="editor_buts">
+		
+			<a class="but0 but1" onclick="saveImageTextFun(1);">保存全部</a>
+			<a class="but0 but2"  onclick="saveImageTextFun(1,1);">保存并群发</a>
+		</div>
+	</div>
+
+</div>
+</div>
+</div>
+
+
+<script type="text/html" id="sendErrorTipsTmpl">
+<div class="wxzdhf_optise wxzdhf_optise_box3">
+	<p><i class="icon-optise01"></i></p>
+	<p class="txt01">{{tips}}</p>
+	<!--<a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a>-->
+</div>
+</script>
+
+
+
+<script type="text/html" id="leftMenuTipsTmpl">
+<ul class="weixin_editpicul weixin_editpicul poi1 borderblue"   data-container="true">
+<li class="a1 fr"></li>
+<li class="a2 fl wordsbase" data-cover="title" data-status="0" style="width:100px;">图文消息标题</li>
+<li class="a3 poi2"><a></a></li>
+<li>
+<div class="weixin_editmenu_left poi2 weixin_poi2" >
+	<a><i class="icon-editup01X fl"></i></a>
+	<a data-del="true"><i class="icon-editup02 fr"></i></a>
+
+<ul class="poi2 edit_delta_open" >
+	<li class="arrow"><i class="icon-editup05"></i></li>
+	<li class="a2">
+		<p>确定删除此文章？</p>
+		<p class="mt20">
+			<a class="but0 but1" onclick="delSingleArticleFun(this);">确定</a>
+			<a class="but0 but2" onclick="$(this).parent().parent().parent().hide().parent().removeAttr('style');">取消</a>
+		</p>
+	</li>
+</ul>
+</div>
+</li>
+</ul>
+
+</script>
+<script type="text/html" id="leftMenuTipsListTmpl">
+{{# for(var i=1;i<d.items.length;i++){ }}
+	{{# var item=d.items[i];}}
+
+<ul class="weixin_editpicul weixin_editpicul poi1 " data-uuid="{{item.uuid}}"  data-container="true">
+<li class="a1 fr" style="background-image:url({{d.download_url}}{{item.coverImgId}})"></li>
+<li class="a2 fl wordsbase" data-cover="title" data-status="0" style="width:100px;">{{item.coverTitle}}</li>
+<li class="a3 poi2"><a></a></li>
+<li>
+	<div class="weixin_editmenu_left poi2 weixin_poi2" >
+	<a><i class="icon-editup01 fl"></i></a>
+	<a data-del="true"><i class="icon-editup02 fr"></i></a>
+
+<ul class="poi2 edit_delta_open" >
+	<li class="arrow"><i class="icon-editup05"></i></li>
+	<li class="a2">
+		<p>确定删除此文章？</p>
+		<p class="mt20">
+			<a class="but0 but1" onclick="delSingleArticleFun(this,{{item.materialId}},'{{item.checkCode}}');">确定</a>
+			<a class="but0 but2" onclick="$(this).parent().parent().parent().hide().parent().removeAttr('style');">取消</a>
+		</p>
+	</li>
+</ul>
+	</div>
+</li>
+</ul>
+{{# } }}
+</script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/html" id="artImageTmpl">
+<div class="wxpt_openqr">
+<ul class="wxpt_tatle">
+	<li class="a2 ml0">图片上传</li>
+</ul>
+<div class="wxtw_upload_menu poi1">
+	<p data-tab="0" class="poi2 but1 activ"><a >从素材库选择</a></p>
+	<p data-tab="1" class="poi2 but2 "><a >本地上传</a><p>
+</div>
+
+<!--素材库 -->
+<div data-tab="0" class="wxpt_zw wxpt_tuwen wxtw_sucai_box" style="display:block;">
+	<ul class="wxpt_tuwenmain wxpt_uppicmain mb00">
+		{{# for(var i=0;i<d.items.length;i++){ }}
+			{{# if(i<8){ }}
+			<li class="wxpt_picli poi1" data-id="{{d.items[i].id}}">
+		  		<img data-id="{{d.items[i].id}}" src="{{d.download_url}}{{d.items[i].file_id}}" width="204" height="135"> 
+			</li>
+			{{#}else{ }}
+			<li class="wxpt_picli poi1" data-id="{{d.items[i].id}}">
+		  		<img data-id="{{d.items[i].id}}" data-src="{{d.download_url}}{{d.items[i].file_id}}" width="204" height="135"> 
+			</li>
+			{{# } }}
+		{{# } }}
+	</ul>
+</div>
+
+<!--上传 -->
+<div data-tab="1" class="wxpt_zw wxpt_tuwen  wxtw_upload_box" >
+
+<div class="wxpt_tuwenmain wxpt_uppicmain wxtw_upload_boxbut">
+	<p><a class="but0" title="请上传2M以内的jepg图片" style="position: relative;">上传图片
+	<input data-id="fileUpload"  data-type="art" type="file" name="files[]" multiple="multiple" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:50;opacity:0;filter:alpha(opacity=0);"/>
+	</a></p>
+	<p class=" pt4">每张图片不能超过2M</p>
+</div>
+
+  <ul class="wxpt_tuwenmain wxpt_uppicmain"  style="display:none;">
+	<li class="wxtw_upload_buts">
+		<p class="fl ml10" style="display:none;">已选四张图片，共1.0M</p>
+		<p class="wxpt_picliup02 fl ml10 mt5 poi1">
+			<span style="width: 0%;"></span>
+			<span class="txt poi2">0%</span>
+		</p>
+		<p class="fr"><a class="but0"  title="请上传2M以内的jepg图片" style="position: relative;">继续添加
+			<input data-id="fileUpload"  data-type="art" type="file" name="files[]" multiple="multiple" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:50;opacity:0;filter:alpha(opacity=0);"/>
+		</a></p>
+		<!--<p class="fr" ><a  data-start="true" class="but0">上传图片</a></p>-->
+	</li>
+	<!--图片 -->
+
+
+  </ul>
+</div>
+	<p class="wxpt_upicbuts">
+		<a class="but0 but1" onclick="confirmFun();">确认</a>
+		<a class="but0 but2" onclick="layer.closeAll();">取消</a>
+	</p>
+</div>
+</script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.fileupload.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/kindeditor/kindeditor-all-min.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/kindeditor/zh-CN.js?v={{{ fileVersion }}}"></script>
+
+
+<script src="/resources/javascript/wechat/fodder/weixin_add_source_imageText.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+
+{{{include '../layout_base/footer'}}}

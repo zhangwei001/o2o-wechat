@@ -1,0 +1,684 @@
+{{{include '../layout_main/header'}}}
+
+<link href="{{{staticResourcesUrl}}}/javascript//artDialog/skins/default.css?v={{{ fileVersion }}}"  type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/icons.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/css/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/my_beauty_plus_public.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/page_module.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/send_dimension_xz.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/mymiljia.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/weixin_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+<!-- 专用列表样式s -->
+<link rel="stylesheet" type="text/css"  href="{{{staticResourcesUrl}}}/css/bootstrap3/weixin_module.css?v={{{ fileVersion }}}" >
+<!-- 专用列表样式e -->
+<link rel="stylesheet" type="text/css"  href="{{{staticResourcesUrl}}}/css/bootstrap3/guide_tise.css?v={{{ fileVersion }}}" >
+<link href="{{{staticResourcesUrl}}}/javascript/layer/skin/layer.css??v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+<!--专用样式s-->
+<link rel="stylesheet" type="text/css"  href="{{{staticResourcesUrl}}}/css/bootstrap3/weixin_module_tise.css?v={{{ fileVersion }}}" >
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/base.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+</head>
+
+
+
+<body   id="header">
+
+{{{include '../layout_main/top'}}}
+<!-- 内容主区域S -->
+<div class="container  weixinhd_main" id="upweixin_auto_reply">
+
+	<!-- 导航下按钮 S -->
+    <div class="main_btn_box">
+        <a href="/o2o/route/{{{shopSid}}}/thirdpartnar-send_public_message?access_token={{{accessToken}}}" class="btn_c" id="sendWXInfo">发微信内容</a>
+        <a href="/o2o/route/{{{shopSid}}}/promotions-release_promotion_activity" class="btn_c">发布优惠活动</a>
+        <a href="/o2o/route/{{{shopSid}}}/manage-weixin_custom_index" class="btn_c">微信用户管理</a>
+        <a href="/o2o/route/{{{shopSid}}}/robot-upweixin_auto_reply_index" class="btn_h">自动回复</a>
+        <a href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index" class="btn_c">自定义发消息</a>
+        <a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index" class="btn_c">素材库</a>
+    </div>
+
+    <!-- 导航下按钮  end-->
+
+	<!-- 选择菜单e -->
+
+	<!--微信内容主体s-->
+	<div class="weixin_container_box" id="auto_weixin_container_box">
+
+		<!--微信内容-左s-->
+		<div class="weixin_box_left" id="auto_weixin_box_left">
+
+			<p style="display :none;">
+				<a><i class="icon-weixinBox01"></i>发送原创消息</a>
+			</p>
+			<p style="display :none;">
+				<a><i class="icon-weixinBox02"></i>素材库</a>
+			</p>
+			<p style="display :none;">
+				<a><i class="icon-weixinBox03"></i>发送历史</a>
+			</p>
+			<p class="active" >
+				<a><i class="icon-weixinBox04"></i>自动回复</a>
+			</p>
+
+
+		</div>
+		<!--微信内容-左e-->
+
+
+
+		<!--微信内容-右s-->
+		<div class="weixin_box_right" id="auto_weixin_reply_right">
+		    <div class="auto_reply_tise">
+                <i class="icon-editpadTise"></i>可以允许公众号根据用户发送的特定信息或行为来设置回复内容
+            </div>
+
+            <!--按钮-->
+            <div class="auto_reply_butbox">
+                <a class="butsbase_ib butgreen01" id="newRules">新建规则</a>
+            </div>
+            <!--无尚未创建规则时显示-->
+
+            <ul class="no_setup_tise"  id="noRulesEl" style="display: none;">
+                <li>
+                    <p class="a1">尚未创建规则</p>
+
+                    <p class="a2">示例：创建规则设定关键词为美甲，回复为美甲图片的图文，用户在公众号输入美甲，即可知道店铺可选美甲图。</p>
+
+                </li>
+            </ul>
+            
+            <div id="addReply" >
+             <!-- ****************添加右侧填充规则列表****************** -->
+            </div>
+            
+            <div id="replyList" >
+             <!-- ****************填充已有右侧填充规则列表****************** -->
+            </div>
+		
+	    </div>
+        <div class="fenyeademain3x pl15" id="pageFenye"></div>
+	</div>
+		<!--微信内容-右e-->
+
+
+	
+	<!--微信内容主体e-->
+<!-- ************************模板 Start************************************************ -->
+	<script type="text/html" id="rulesListTemp">
+         <!--添加规则e-->
+            <!--规则显示列表-->
+ {{# for(var i=0;i<d.items.length;i++){ }}
+  {{# var item = d.items[i]; }}
+
+            <div class="auto_reply_setup_main">
+                <!--head-->
+                <div class="auto_reply_setup_head" >
+                    <span id="rulesName">{{item.rule_name }}</span>
+                    <a class="fr mr20 txthui" name="1" data-index ="{{item.id}}" ><i class="icon-weixinmenu-down"></i></a>
+                    <a class="fr mr20 detelRelay" data-id = "{{ item.id }}" data-check_code ="{{ item.check_code }}" ><i class="icon-delta"></i></a>
+                    <p style="display:none;"  >{{ JSON.stringify(item) }}</p>
+                     </div>
+                <!--heade-->
+
+                <!--view-->
+               <!-- 选项卡收起内容  s -->  
+                <ul class="auto_reply_setup_view" id="editReplyContentUp{{ item.id }}">
+                    <li>
+                        <p class="tatle gl">关键词：</p>
+
+                     {{# for(var j=0;j<item.key_list.length;j++){ }}
+                          <p style="margin-right:15px;color:#222;" class="jingque">{{  item.key_list[j].key_word }}</p>
+                     {{# } }}
+
+                    </li>
+                    <li style="margin-top:25px;margin-bottom:35px">
+                        <p class="tatle">回复：</p>
+                      {{# if(item.type==0){  }}
+                          <p >1条（1条文字，0条图文，0条图片）</p>
+                      {{# }else if(item.type==4){ }}
+                         <p >1条（0条文字，1条图文，0条图片）</p>
+                      {{# }else if(item.type==1){ }}
+                        <p >1条（0条文字，0条图文，1条图片）</p>
+                      {{# } }} 
+                      
+                    </li>
+                </ul>
+                <!-- 选项卡收起内容  e--> 
+ 
+                <!-- 选项卡展开显示此内容  s -->   
+           <div id="editRelyContentDown{{item.id}}" style="display :none;">
+             <!--*******加载模板编辑，等******-->
+                 <div class="auto_reply_setup_body" >
+                    <!--left-->
+                    <div class="auto_reply_setup_left fl">
+                        <!--关键词精确 Start-->
+                        <div class="auto_reply_setup_exact" id="exactWord{{item.id}}">
+                       <!--*****填充关键词模板：*******-->
+                          
+                        </div>
+                        <!--关键词精确e-->
+
+                        <!--关键词模糊 Start-->
+                        <div class="auto_reply_setup_blurred" id="missWord{{item.id}}">
+                            <!--*****填充关键词模板：*******-->    
+                        </div>
+                        <!--关键词模糊e-->
+
+                    </div>
+                    <!--lefte-->
+
+
+                    <!--right-->
+                    <div class="auto_reply_setup_right fl">
+
+                        <p class="auto_reply_butstop">回复</p>
+                        <!--******这里有三个显示状态：*******-->
+                        <div id="showRelay{{item.id}}" class="showRelay"> 
+                             <!--******填充状态回复：*******-->
+                        </div> 
+                     <div class="auto_reply_right_buts"  data-id="{{item.id}}">
+                            <a class="fl ml20" "><i class="icon-delta"></i></a>  
+                            <a class="butsbase_ib buthui01 fr" name="图文" data-status="true" data-type="4">图文消息</a> 
+                            <a class="butsbase_ib buthui01 fr" name="图片" data-type="1" >图片</a>
+                            <a class="butsbase_ib buthui01 fr" name="图片" data-type="0" >文字</a>
+                           
+                     </div>
+
+                    </div>
+                
+                    <!--righte-->
+
+                </div>
+                <!--主体e--->
+                <!--按钮-->
+                <div class="auto_reply_save_buts text-right" style="margin-top:0px">
+                    <a class="butsbase_ib butblue01" data-id="{{item.id}}" >保存</a>
+                    <a class="butsbase_ib buthui01" data-id="{{item.id}} ">清除</a>
+                          <!--隐藏域保存type类型-->
+                            <input type="hidden" value="{{item.type}}" id="reply_type{{item.id}}"/>
+                          <!--隐藏域保存content类型-->
+                            <input type="hidden" value="{{item.reply_content}}" id="save_content{{item.id}}"/>
+                    <div style="display:none;">{{ JSON.stringify(item) }}</div>
+                </div>
+            <!--*******加载模板编辑，等******-->
+           </div>
+               
+                <!--view-e-->
+            </div>
+            <!--规则显示e-->
+            <!--规则显示-->
+
+  
+{{# } }}
+    </script>
+  
+  
+  <!-- ************bianj模板*********************** -->  
+  <script type="text/html" id="addRuleTemp">
+             <!--添加规则e-->
+            <!--规则显示列表-->
+            <div class="auto_reply_setup_main">
+                <!--head-->
+                <div class="auto_reply_setup_head" >
+                    <span id="rulesName">{{d.addNewName||""}}</span>
+                    <a class="fr mr20 txthui" name="0" data-index ="New" ><i class="icon-weixinmenu-up"></i></a>
+                    <a class="fr mr20 detelRelay" data-id = "New"  ><i class="icon-delta"></i></a>
+                    <p style="display:none;"></p>
+                     </div>
+                <!--heade-->
+
+                <!--view-->
+               <!-- 选项卡收起内容  s -->  
+                <ul class="auto_reply_setup_view"  id="editReplyContentUpNew" style="display:none;">
+                    <li>
+                        <p class="tatle gl">关键词：</p>
+                          <p style="margin-right:15px;color:#222;" class="jingque"></p>
+                    </li>
+                    <li style="margin-top:25px;margin-bottom:35px;">
+                        <p class="tatle">回复：</p>
+                       <p >0条（0条文字，0条图文，0条图片）</p>
+                    </li>
+                </ul>
+                <!-- 选项卡收起内容  e--> 
+ 
+                <!-- 选项卡展开显示此内容  s -->   
+           <div id="editRelyContentDownNew" >
+             <!--*******加载模板编辑，等******-->
+                 <div class="auto_reply_setup_body" >
+                    <!--left-->
+                    <div class="auto_reply_setup_left fl">
+                        <!--关键词精确 Start-->
+                        <div class="auto_reply_setup_exact" id="exactWordNew">
+                       <!--*****填充关键词模板：*******-->
+                         <p class="auto_reply_butstop changeKeyType" >
+                                                                      关键词<a class="fr reply_change_burt1  " data-value="1" style="margin-right:5.5px;" >模糊</a>
+                                 <a class="fr reply_change_burt2  active" data-value="0">精确</a>
+                         </p>
+                  <ul class="auto_reply_exact_ul  keyWordEL  exactEditContent"  data-type="0" >
+                      <!--填充精确编辑框-->
+                  </ul>
+                   
+                  <ul class="auto_reply_exact_ul  keyWordEL blurredEditContent" data-type="0"  style="display:none">
+                      <!--填充模糊编辑框-->
+                  </ul>
+                    
+
+                      
+                             <!--插入模板 新增-->
+                        <ul id="keyEditTemps" style="display:none;" >
+                         <li class="list"  >
+                                    <p class="p1">
+                                        <span class="s1"><input name="" value=""   maxlength="30" type="text" class="input200 inputKeyWord"></span> 
+                                        <span class="s2 fr" style="display:none;margin-left:55px;"><a  name="editCon"><i class="icon-huipen"></i></a></span>
+                                        <span class="s3 fr" style="display:none;><a  name="delCon"><i class="icon-delta"></i></a></span>
+                                        <span class="s4"><a class="butsbase_ib buthui01"  name="SureCon">确认</a></span> 
+                                        <span class="s5"><a class=""  name="resetCon">取消</a></span>
+                                    </p>
+                                   
+                                </li>
+                          </ul>
+                            <div class="auto_reply_exact_buts">
+                                <a class="butsbase_ib buthui01" data-neworold="newRule">添加关键词</a>
+                            </div>
+                        </div>
+                        <!--关键词精确e-->
+
+                        <!--关键词模糊 Start-->
+                        <div class="auto_reply_setup_blurred" id="missWordNew">
+                            <!--*****填充关键词模板：*******-->    
+                        </div>
+                        <!--关键词模糊e-->
+
+                    </div>
+                    <!--lefte-->
+
+
+                    <!--right-->
+                    <div class="auto_reply_setup_right fl">
+
+                        <p class="auto_reply_butstop">回复</p>
+                        <!--******这里有三个显示状态：*******-->
+                        <div id="showRelayNew" class="showRelay"> 
+                             <!--******填充状态回复：*******-->
+                        </div> 
+                     <div class="auto_reply_right_buts"  data-id="New" style="margin-top:166px;">
+                            <a class="fl ml20" "><i class="icon-delta" style="display:none;"></i></a>  
+                            <a class="butsbase_ib buthui01 fr" name="图文" data-status="true" data-type="4">图文消息</a> 
+                            <a class="butsbase_ib buthui01 fr" name="图片" data-type="1" >图片</a>
+                            <a class="butsbase_ib buthui01 fr" name="文字" data-type="0" >文字</a>
+                           
+                     </div>
+
+                    </div>
+                
+                    <!--righte-->
+
+                </div>
+                <!--主体e--->
+                <!--按钮-->
+                <div class="auto_reply_save_buts text-right" style="margin-top:0px">
+                    <a class="butsbase_ib butblue01" data-id="New" >保存</a>
+                    <a class="butsbase_ib buthui01" data-id="New ">清除</a>
+                         <!--隐藏域保存精确type类型-->
+                            <input type="hidden" value="0" id="key_type"/>
+                          <!--隐藏域保存回复type类型-->
+                            <input type="hidden" value="" id="reply_typeNew"/>
+                          <!--隐藏域保存content类型-->
+                            <input type="hidden" value="" id="save_contentNew"/>
+                    <div style="display:none;"></div>
+                </div>
+            <!--*******加载模板编辑，等******-->
+           </div>
+               
+                <!--view-e-->
+            </div>
+            <!--规则显示e-->
+            <!--规则显示-->
+
+  </script>  
+     
+   <!-- ------删除提醒弹框---------- -->
+<script type="text/html" id="confirmTmpl">
+<div class="wxqf_openqr wxqf_pic_delta">
+<ul class="wxqf_openqrul1">
+    <li class="li1"><a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a></li>
+    <li class="li2">
+        <p class="tatle">删除提醒</p>
+        <p><i class="icon-picdelta_op"></i>确定删除当前自动回复？</p>
+    </li>
+</ul>
+<p class="wxpt_upicbuts">
+    <a class="but0 but1" onclick="confrimDelFun('{{d.id}}','{{d.check_code}}');">确认</a>
+    <a class="but0 but2" onclick="layer.closeAll();">取消</a>
+</p>
+</div>
+</script>
+
+ <!-- ------删除提醒回复内容---------- -->
+<script type="text/html" id="confirmContentTmpl">
+<div class="wxqf_openqr wxqf_pic_delta">
+<ul class="wxqf_openqrul1">
+    <li class="li1"><a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a></li>
+    <li class="li2">
+        <p class="tatle">删除提醒</p>
+        <p><i class="icon-picdelta_op"></i>确定删除当前回复内容？</p>
+    </li>
+</ul>
+<p class="wxpt_upicbuts">
+    <a class="but0 but1" onclick="DelContentFun('{{d.id}}');">确认</a>
+    <a class="but0 but2" onclick="layer.closeAll();">取消</a>
+</p>
+</div>
+</script>
+
+<!-- 左边编辑模板 -->
+<script type="text/html" id="leftEdit">
+             <p class="auto_reply_butstop changeKeyType">
+             
+                                        关键词<a class="fr reply_change_burt1 " data-value="1" style="margin-right:5.5px;" >模糊</a>
+                     <a class="fr reply_change_burt2 active" data-value="0">精确</a>
+           
+             </p>
+
+                  <!--精确填充-->
+                  <ul class="auto_reply_exact_ul overflow_y_s keyWordEL exactEditContent" data-type="show">
+                     {{# if(d.accurate_list==null && d.accurate_list==""){ }}
+                                 
+                      {{# }else{ }}
+                         {{# for(var i=0;i<d.accurate_list.length;i++){ }} 
+                               {{# var item = d.accurate_list[i]; }} 
+                                <!--循环-->
+                                <li class="list">
+                                    <p class="p1">
+                                        <span class="s1"><input name="" value="{{item.key_word}}" readonly="readonly"  maxlength="30" type="text" class="input200 inputKeyWord"></span> 
+                                        <span class="s2 fr" style="margin-left:55px;"><a class=" editContent" name="editCon"><i class="icon-huipen"></i></a></span>
+                                        <span class="s3 fr"><a class=" delContent" name="delCon"><i class="icon-delta"></i></a></span>
+                                        <span class="s4" style="display:none;"><a class="butsbase_ib buthui01" data-key_id ="{{item.key_id}}" name="SureCon">确认</a></span> 
+                                        <span class="s5" style="display:none;"><a class="" data-value="{{item.key_word}}" name="resetCon">取消</a></span>
+                                    </p>
+                                   
+                                </li>
+                                <!--循环e-->
+                            
+                           {{# } }}   
+                       {{# } }} 
+                     
+                   </ul>
+
+                    <!--模糊填充-->
+                  <ul class="auto_reply_exact_ul overflow_y_s keyWordEL blurredEditContent"  style="display:none;">
+                     {{# if(d.fuzzy_list==null && d.fuzzy_list==""){ }}
+                                 
+                      {{# }else{ }}
+                         {{# for(var i=0;i<d.fuzzy_list.length;i++){ }} 
+                               {{# var item = d.fuzzy_list[i]; }} 
+                                <!--循环-->
+                                <li class="list">
+                                    <p class="p1">
+                                        <span class="s1"><input name="" value="{{item.key_word}}" readonly="readonly"  maxlength="30" type="text" class="input200 inputKeyWord"></span> 
+                                        <span class="s2 fr " style="margin-left:55px;"><a class=" editContent" name="editCon"><i class="icon-huipen"></i></a></span>
+                                        <span class="s3 fr"><a class=" delContent" name="delCon"><i class="icon-delta"></i></a></span>
+                                        <span class="s4" style="display:none;"><a class="butsbase_ib buthui01" data-key_id ="{{item.key_id}}" name="SureCon">确认</a></span> 
+                                        <span class="s5" style="display:none;"><a class="" data-value="{{item.key_word}}" name="resetCon">取消</a></span>
+                                    </p>
+                                   
+                                </li>
+                                <!--循环e-->
+                            
+                           {{# } }}   
+                       {{# } }} 
+                     
+                   </ul>
+                             <!--插入模板 新增-->
+                        <ul id="keyEditTemps" style="display:none;" >
+                         <li class="list"  >
+                                    <p class="p1">
+                                        <span class="s1"><input name="" value=""   maxlength="30" type="text" class="input200 inputKeyWord"></span> 
+                                        <span class="s2 fr" style="display:none;margin-left:55px;"><a  name="editCon"><i class="icon-huipen"></i></a></span>
+                                        <span class="s3 fr" style="display:none;"><a  name="delCon"><i class="icon-delta"></i></a></span>
+                                        <span class="s4"><a class="butsbase_ib buthui01" data-key_id ="{{item.key_id}}" name="SureCon">确认</a></span> 
+                                        <span class="s5"><a class="" name="resetCon">取消</a></span>
+                                    </p>
+                                   
+                                </li>
+                          </ul>
+                            <div class="auto_reply_exact_buts">
+                                <a class="butsbase_ib buthui01" >添加关键词</a>
+                            </div>
+</script>
+
+<!-- 右边的编辑模板 -->
+<script type="text/html" id="rightEdit">
+                  
+                    {{# if(d.type == 0 || d.type == 1 || d.type == 4){ }}
+                          <!--1.添加文字时显示-->
+                     <textarea data-type ="0" cols="50" rows="4" class="auto_reply_right_txt fl overflow_y_s" readonly="readonly" ></textarea>
+                        <!--添加文字时显示e-->
+
+                         <!--2.添加图片时显示-->
+                         <div class="auto_reply_right_pic  fl overflow_y_s"    >
+                            <a class="upload_imgs" data-type ="2" style="background-image: url(../../img/mljiav2/mybeautyplus/pg_index_user_pic.jpg)"></a>
+                        </div>
+                        <!--添加图片时显示e-->
+
+                        <!--3.添加图文时显示-->
+                        <div class="auto_reply_right_tw  fl overflow_y_s" >
+                            <div class="wxsc_li item">
+                                <p class="a1">20:50</p>
+                                <p class="a2 poi1" style="background-image: url(../../img/mljiav2/mybeautyplus/pg_index_user_pic.jpg)">
+                                    <a  data-type ="4"  class="wordsbase poi2 tatle">圣诞大酬宾，火热开抢啦！</a>
+                                </p>
+                                <p class="a3">
+                                    <span class="fl wordsbase itemA3_txt">主题2 标题</span>
+                                    <span class="fr itemA3_img" style="background-image: url(../../img/mljiav2/mybeautyplus/pg_index_user_pic.jpg)"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <!--添加图文时显示e-->
+                    {{# }else { }}
+
+                    {{# } }}
+                       
+
+</script>
+
+
+<!-- 图文编辑模板 -->
+<script type="text/html" id="imageTextInfoTmpl">
+{{# var items=d.items;}}
+                <!--3.添加图文时显示-->
+                        <div class="auto_reply_right_tw  fl overflow_y_s "  >
+                            <div class="wxsc_li item imgAndContetEL" data-material_id="{{items.id}}" >
+                                <p  style="margin-top:-10px;">{{ items.create_time }}</p>
+                                <p class="a2 poi1" style="margin-top:-5px;background-image: url({{d.download_url}}{{ items.cover_file_id }})">
+                                    <a  data-type ="4"  class="wordsbase poi2 tatle">{{ items.title}}</a>
+                                </p>
+                                  {{# for(var j=0;j<items.sub_list.length;j++){ }}
+                                        {{# var ite=items.sub_list[j];}}
+                                 <p class="a3">
+                                    <span class="fl wordsbase itemA3_txt" title="{{ite.title}}">{{(ite.title.length>6)? (ite.title.substring(0,6)+'...') :ite.title }}</span>
+                                    <span class="fr itemA3_img" style="background-image: url({{d.download_url}}/{{ ite.cover_file_id}})"></span>
+                                </p>                                  
+                              {{# } }}
+                                 
+                                
+                            </div>
+                        </div>
+         <!--添加图文时显示e-->
+</script>
+
+         
+<!-- 文字消息窗口模板 -->
+<script type="text/html" id="artTextLayerTmpl">
+
+
+<!--添加文字弹窗-->
+<div class="weixin_sms_txt" id="auto_weixin_sms_txt"> 
+  
+  <!--通用头部s-->
+  <div class="base_add_fl_title"> <span class="base_add_fl_logo"></span>
+    <p class="base_add_fl_title_p1">添加文字</p>
+   
+    <a class="base_tc_btn_close fr">×</a> 
+   </div>
+  
+  <!--通用头部e--> 
+  
+  <!--主体s-->
+
+  <textarea name="content" placeholder="此处输入文字回复"  class="wx_op_txt_box" maxlength="300" id="textareaEdit{{d.relay_id}}">{{ d.text || "" }}</textarea>
+    <p class="text-right poi2" style="top:327px; left:20px;color:#cbcbcb;"><span id="lessWords" style="margin-right:-770px" >300</span></p>
+  <!--主体e--> 
+  <!--按钮-->
+  
+  <div class="weixin_send_tw_opbuts" style="margin-top:25px;">
+    <a href="javascript:;" class="butsbase_ib butblue01" onclick="insertTestArea('{{d.relay_id}}',{{d.type}})">确认</a>
+   <a href="javascript:;" class="butsbase_ib buthui01" onclick="layer.closeAll();">取消</a>
+   </div>
+</div>
+
+</script>
+
+
+<!-- 图片消息窗口 -->
+<script type="text/html" id="artImageLayerTmpl">
+<div class="weixin_sms_tw" id="auto_weixin_sms_tw"> 
+  
+  <!--通用头部s-->
+  <div class="base_add_fl_title"> <span class="base_add_fl_logo"></span>
+    <p class="base_add_fl_title_p1">选择图片</p>
+    <p class="fr base_add_pic_buts ">
+    <a class="butsbase butblue01 ">上传图片 
+      <input data-id="fileUpload" type="file" name="files[]" multiple="multiple" style="margin-top:-35px; width:120px;z-index:999;opacity:0;filter:alpha(opacity=0);"/>
+   </a>
+    
+   </p>
+    <p class="fr txthui">大小不超过2M</p>
+    <a class="base_tc_btn_close fr">×</a>
+     </div>
+
+<div class="wxpt_zw wxpt_tuwen">
+{{# if(d.items.length>0){ }}
+    <ul id="containerUl" class="wxpt_tuwenmain wxpt_uppicmain" style="margin-left:2px;">
+        {{# for(var j=0;j<d.items.length;j++){ }}
+            {{# var item=d.items[j]; }}
+            <li class="wxpt_picli poi1" data-material_id="{{ item.id}}">
+                <img src="{{d.download_url}}{{ item.file_id}}" width="204" height="135"> 
+            </li>
+        {{# } }}
+    </ul>
+{{# }else{ }}
+<div id="empty" class="wxpt_tuwenmain wxpt_picupff" style="margin-left:5px;">
+    <p class="fz24 a1">暂无图片素材，<a style="position: relative;" >立即上传
+    <input data-id="fileUpload" type="file" name="files[]" multiple="multiple" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:999;opacity:0;filter:alpha(opacity=0);"/>
+    </a></p>
+</div>
+{{# } }}
+
+</div>
+
+
+
+   <div class="weixin_send_tw_opbuts" style="margin-top:25px;">
+       <a href="javascript:;" class="butsbase_ib butblue01" onclick="addImageFun('{{d.id}}');">确认</a>
+       <a href="javascript:;" class="butsbase_ib buthui01"  onclick="layer.closeAll();">取消</a>
+  </div>
+
+</div>
+
+</script>
+
+<!-- 图文消息窗口 -->
+<script type="text/html" id="artImageTextLayerTmpl">
+<div class="weixin_sms_tw" id="auto_weixin_sms_tw"> 
+  
+  <!--通用头部s-->
+  <div class="base_add_fl_title"> <span class="base_add_fl_logo"></span>
+    <p class="base_add_fl_title_p1">选择图文消息</p>
+    <p class="fr base_add_title_input poi1">
+      <input name="seachWords" type="text" placeholder="标题/作者/摘要">
+      <a class="icon-input_sousuo poi2" id="seachKeys"></a></p>
+    <a class="base_tc_btn_close fr">×</a> </div>
+
+<div class="wxpt_zw wxpt_tuwen">
+{{# if(d.items.length>0){ }}
+<ul class="wxpt_tuwenmain" style="margin-left:2px;">
+ {{# for(var i=0;i<d.items.length;i++){ }}
+    {{# var item=d.items[i];}}
+<li class="wxsc_li item  poi1" data-material_id="{{ item.id}}" data-sync={{ item.is_sync}} style="width:225px;margin-right:15px;">
+     <p style="margin-top:-10px;">{{ item.create_time }}</p>
+     <p class="a2 poi1" style="margin-top:-5px;background-image: url({{d.download_url}}{{ item.cover_file_id }})">
+         <a  data-type ="4"  class="wordsbase  tatle">{{ item.title}}</a>
+     </p>
+   
+    {{# for(var j=0;j<item.sub_list.length;j++){ }}
+        {{# var ite=item.sub_list[j];}}
+        <p class="a6"><span class="fl fz16 wordsbase" title="{{ite.title}}" style="width:100px;" >{{ite.title}}</span><span class="fr"><img src="{{d.download_url}}/{{ ite.cover_file_id}}" width="204" height="135"></span></p>
+    {{# } }}
+</li>
+ {{# } }}
+</ul>
+ {{# }else{ }}
+<div class="wxpt_tuwenmain wxpt_picupff" style="margin-left:5px;">
+    <p class="fz24 a1">暂无图文素材，<a  href="<%=request.getContextPath()%>/route/{{ d.shopId }}/fodder-wechat_sourse_add_imageText" target="_blank">去新增</a></p>
+</div>
+
+ {{# } }}
+</div>
+
+
+  <div class="weixin_send_tw_opbuts" style="margin-top:25px;">
+  <a href="javascript:;" class="butsbase_ib butblue01" onclick="addImageTextFun('{{d.id}}');">确认</a>
+  <a href="javascript:;" class="butsbase_ib buthui01"  onclick="layer.closeAll();">取消</a>
+  </div>
+</div>
+</script>
+
+<!-- 搜索图文 -->
+<script type="text/html" id="seachImageTextTmpl">
+  {{# if(d.items.length>0){ }}
+<ul class="wxpt_tuwenmain" style="margin-left:2px;">
+ {{# for(var i=0;i<d.items.length;i++){ }}
+    {{# var item=d.items[i];}}
+<li class="wxsc_li item  poi1" data-material_id="{{ item.id}}" data-sync={{ item.is_sync}} style="width:225px;margin-right:15px;">
+     <p  style="margin-top:-10px;">{{ item.create_time }}</p>
+     <p class="a2 poi1" style="margin-top:-5px;;background-image: url({{d.download_url}}{{ item.cover_file_id }})">
+         <a  data-type ="4"  class="wordsbase  tatle">{{ item.title}}</a>
+     </p>
+   
+    {{# for(var j=0;j<item.sub_list.length;j++){ }}
+        {{# var ite=item.sub_list[j];}}
+        <p class="a6"><span class="fl fz16 wordsbase" title="{{ite.title}}" style="width:100px;" >{{ite.title}}</span><span class="fr"><img src="{{d.download_url}}/{{ ite.cover_file_id}}" width="204" height="135"></span></p>
+    {{# } }}
+</li>
+ {{# } }}
+</ul>
+ {{# }else{ }}
+<div class="wxpt_tuwenmain wxpt_picupff" style="margin-left:5px;">
+    <p class="fz24 a1">搜索无结果，<a  href="javascript:;" target="_blank" id="getAll">查看全部</a></p>
+</div>
+
+ {{# } }}
+</script>
+
+</div>
+
+
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.fileupload.js?v={{{ fileVersion }}}"></script>
+
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/laypage/laypage.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/robot/upweixin_auto_reply_index.js?v={{{ fileVersion }}}"></script>
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+{{{include '../layout_main/footer'}}}
+
+
+
+
+
+
+
+

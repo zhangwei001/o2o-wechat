@@ -1,14 +1,14 @@
-{{{ include '../layout_app/header' }}}
+{{{include '../layout_app/header'}}}
 
-<link href="${resourcesPath}/javascript//artDialog/skins/default.css?v=${fileVersion}"  type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/icons.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/css/bootstrap.min.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/base.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/my_beauty_plus_public.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/page_module.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/send_dimension_xz.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/dialog.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/mymiljia.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript//artDialog/skins/default.css?v={{{ fileVersion }}}"  type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/icons.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/css/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/base.css?v={{{fileVersion}}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/my_beauty_plus_public.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/page_module.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/send_dimension_xz.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/mymiljia.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
 
 <style>
     #contentDom img{width:100%}
@@ -19,16 +19,16 @@
 </head>
 
 <body   id="header">
-{{{ include '../layout_app/top' }}}
+{{{include '../layout_app/top'}}}
 <div class="page_main" id="auto_page_main">
     <!-- 导航下按钮 S -->
     <div class="main_btn_box">
-        <a href="<%=request.getContextPath()%>/route/${shopSid}/thirdpartnar-send_public_message?access_token=${accessToken}" class="btn_h">发微信内容</a>
-        <a  href="<%=request.getContextPath()%>/route/${shopSid}/promotions-release_promotion_activity" class="btn_c">发布优惠活动</a>
-        <a  href="<%=request.getContextPath()%>/route/${shopSid}/manage-weixin_custom_index" class="btn_c">微信用户管理</a>
-        <a  href="<%=request.getContextPath()%>/route/${shopSid}/robot-upweixin_auto_reply_index" class="btn_c">自动回复</a>
-        <a  href="<%=request.getContextPath()%>/route/${shopSid}/customized-creat_mass_message_index" class="btn_c">自定义发消息</a>
-        <a  href="<%=request.getContextPath()%>/route/${shopSid}/fodder-wechat_fodder_index" class="btn_c">素材库</a>
+        <a href="/o2o/route/{{{shopSid}}}/thirdpartnar-send_public_message?access_token=${accessToken}" class="btn_h">发微信内容</a>
+        <a  href="/o2o/route/{{{shopSid}}}/promotions-release_promotion_activity" class="btn_c">发布优惠活动</a>
+        <a  href="/o2o/route/{{{shopSid}}}/manage-weixin_custom_index" class="btn_c">微信用户管理</a>
+        <a  href="/o2o/route/{{{shopSid}}}/robot-upweixin_auto_reply_index" class="btn_c">自动回复</a>
+        <a  href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index" class="btn_c">自定义发消息</a>
+        <a  href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index" class="btn_c">素材库</a>
     </div>
 
     <div class="container mt5 weixinptmain wxminh500" id="w998">
@@ -284,16 +284,17 @@
 
 </script>
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/jquery.ui.widget.js?v=${fileVersion}"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/artDialog/artDialog.source.js?skin=default"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/artDialog/iframeTools.source.js?v=${fileVersion}"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/public/public.js?v=${fileVersion}"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/public/valiRight.js?v=${fileVersion}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.ui.widget.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/artDialog/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/artDialog/iframeTools.source.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/public/public.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/public/valiRight.js?v={{{ fileVersion }}}"></script>
 
 
 
-<script src="<%=request.getContextPath()%>/resources/javascript/wechat/thirdpartnar/send_public_message.js?v=${fileVersion}"></script>
-<script src="<%=request.getContextPath()%>/resources/javascript/wechat/base/mljia_wx_userUtil.js?v=${fileVersion}"></script>
+<script src="/resources/javascript/wechat/thirdpartnar/send_public_message.js?v={{{ fileVersion }}}"></script>
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+
 {{{include '../layout_app/footer'}}}
 
 

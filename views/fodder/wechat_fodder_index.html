@@ -1,0 +1,171 @@
+
+
+{{{include '../layout_base/header'}}}
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/layer/skin/layer.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus_v1.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/percentage_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/weixin_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/artDialog/skins/default.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/laypage/skin/laypage.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/mymiljia.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+</head>
+<body  data-shop-sid="{{{shopSid}}}" id="header">
+{{{include '../layout_base/top'}}}
+
+
+<div class="container weixinptmain" id="w1000">
+	<ul class="jilumanu mt10">
+	    <li  ><a id="sendWXInfo">发微信内容</a></li>
+	    <li class="weixinyhtit"><a href="/o2o/route/{{{shopSid}}}/promotions-release_promotion_activity">发布优惠活动</a></li>
+		<li ><a href="/o2o/route/{{{shopSid}}}/manage-weixin_custom_index">微信用户管理</a></li>
+		<li  ><a href="/o2o/route/{{{shopSid}}}/robot-upweixin_auto_reply_index">自动回复</a></li>
+    	<li ><a href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index">自定义发消息</a></li>
+     	<li class="activ"><a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index">素材库</a></li>
+       
+	</ul>
+	
+	<ul class="wxtf_menu2">
+        <li  class="activ"><a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index " >图文素材</a></li>
+        <li><a href="/o2o/route/{{{shopSid}}}/fodder-weixin_source_image_index">图片库</a></li>
+    </ul>
+</div>
+
+
+<div  class="container mt5 weixinptmain wxminh500 "  >
+<ul class="weixinffadd">
+	<li class="a1" id="totalNumber">共0条</li>
+	<li class="a2"><span><input type="text" maxlength="10" placeholder="标题/作者/摘要"></span>
+	<span><a id="seachKeys"><img src="{{{staticImageUrl}}}/mljia/weixinpt_sou.gif" width="15" height="15"></a></span></li>
+	<li class="a3 fr"><a class="weixinaddbut" href="/o2o/route/{{{shopSid}}}/fodder-wechat_sourse_add_imageText" target="_blank">+新建图文消息</a></li>
+</ul>
+
+<ul class="wxsc_picwen item_list infinite_scroll masonry" id="containerUl">
+
+</ul>
+ 
+<div class="ebderror_tise" id="emptyTipsDiv"  style="display: none;">
+	<img src="{{{staticImageUrl}}}/mljia/dengpao_r2_c2.gif" width="16" height="22">暂无图文素材，请新增。
+</div>
+
+<div class="ebderror_tise" id="tipsDiv"  style="display: none;">
+	<img src="{{{staticImageUrl}}}/mljia/dengpao_r2_c2.gif" width="16" height="22">您当前绑定的账号为未认证的订阅号，无法使用素材库，请重新绑定认证的服务号。
+</div>
+
+
+	<div class="fenyeademain3x pl15" id="pageFenye"></div>
+	
+</div>
+
+<script type="text/html" id="imgTextTmpl">
+{{#for(var i=0;i<d.items.length;i++){ }}
+{{# var item=d.items[i];}}
+<li class="wxsc_li item masonry_brick">
+	{{# if(item.target_url){ }}
+	<p class="a1"><a href="{{item.target_url}}" target="_blank"><img src="{{d.download_url}}{{ item.cover_file_id }}" width="204" height="135"></a></p>
+	{{# }else{ }}
+	<p class="a1"><img src="{{d.download_url}}{{ item.cover_file_id }}" width="204" height="135"></p>
+	{{# } }}
+	<p class="a2 fz16">{{ item.title}}</p>
+	<p class="a3">{{ item.create_time}}</p>
+	{{# if(item.description && item.description.length>1 && item.sub_list.length==0){ }}
+		<p class="a4" title="{{item.description}}">{{ item.description.substring(0, 50) }}</p>
+	{{# } }}
+	{{# for(var j=0;j<item.sub_list.length;j++){ }}
+		{{# var ite=item.sub_list[j];}}
+		<p class="a6"><span class="fl fz16 wordsbase" title="{{ite.title}}" style="width:100px;" >{{ite.title}}</span>
+		<span class="fr">
+				{{# if(ite.target_url){ }}
+			<a href="{{ite.target_url}}" target="_blank"><img src="{{d.download_url}}/{{ ite.cover_file_id}}" width="204" height="135"></a>
+				{{# }else{ }}
+			 <img src="{{d.download_url}}/{{ ite.cover_file_id}}" width="204" height="135"> 
+				{{# } }}
+		</span>
+		</p>
+	{{# } }}
+	<p class="a5"  data-id="{{item.id}}" data-code="{{item.check_code}}">
+		<a data-index="1" href="<%=request.getContextPath()%>/route/${shopSid}/fodder-wechat_sourse_add_imageText?materialId={{item.id}}" target="_blank"><i class="icon-wxsucaizw01"></i></a>
+		<a data-index="2"><i class="icon-wxsucaizw02"></i></a>
+	</p>
+</li>
+{{# } }}
+</script>
+
+<script type="text/html" id="confirmTmpl">
+<div class="wxqf_openqr wxqf_pic_delta">
+<ul class="wxqf_openqrul1">
+	<li class="li1"><a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a></li>
+	<li class="li2">
+		<p class="tatle">删除提醒</p>
+		<p><i class="icon-picdelta_op"></i>您确定要删除当前图文素材吗？</p>
+	</li>
+</ul>
+<p class="wxpt_upicbuts">
+	<a class="but0 but1" onclick="confrimDelFun();">确认</a>
+	<a class="but0 but2" onclick="layer.closeAll();">取消</a>
+</p>
+</div>
+</script>
+
+
+<script type="text/html" id="yingdaoTemp">
+	 <div class="container weixingginfo">
+		<div class="wXinfotop">
+	        <p class="fz18 fl"><i class="icon-wXinfotop01 mr10"></i>公众号信息</p>
+	        <p class="fl txthui ml10 mt2"><i class="icon-wXinfotop02"></i>点击“更新”字样即可将微信公众号的名称、头像、二维码、公众号类型信息同步为最新状态。<a id="refreshEvent">更新 <span class="fsongti">>></span></a></p>
+        </div>
+
+        <ul class="gginfomain">
+            <li class="a1 poi1">
+                <p class="txt1">公众号类型：</p>
+                <p>{{ ( d.content.service_type_info==0 || d.content.service_type_info==1) ? "订阅号" : " "}}</p>
+                 {{# if(d.content.service_type_info==0 || d.content.service_type_info==1 || d.content.verify_type_info==-1) { }}
+				  <p class="wXinfoTese poi2" ><i class="icon-wXinfotop03"></i>您需要更换公众号类型为【服务号】，才可使用全部微信服务。<a class="upgradeLink" target="_blank">如何更换？</a></p>
+                 {{# } }}
+            </li>
+
+            <li class="a2 poi1">
+                <p class="txt1">是否认证：</p>
+                <p>{{ d.verify_type_info==-1 ? "未认证" : "已认证"}}</p>
+				<p class="wXinfoTese poi2"  ><i class="icon-wXinfotop03"></i>您需要【认证】服务号，才可使用全部微信服务。<a class="authLink" target="_blank">如何认证？</a></p>
+            </li>
+            
+            <li class="a1">
+                <p class="txt1">公众号名称：</p>
+                <p>{{d.content.nick_name}}</p>
+
+
+            </li>
+            <li class="a3 poi1 downBcodeMain">
+                <p class="txt1">二维码：</p>
+                <p><img src="{{d.qrCodeImg}}" width="168" height="168"></p>
+                <p class="poi2 downBcode"><a class="downLoadCodeImg">下载高清二维码</a></p>
+            </li>
+            <li class="a5">
+                <p class="txt1">公众号头像：</p>
+                <p><img src="{{d.content.head_image}}" width="168" height="168"></p>
+            </li>
+            <li class="tise2">
+                <p class="ml40">如需解除绑定，请联系4007889166</p>
+            </li>
+        </ul>
+    </div>
+  </div>
+
+</script>
+
+
+
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.masonry.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/laypage/laypage.js?v={{{ fileVersion }}}"></script>
+
+
+<script src="/resources/javascript/wechat/fodder/weixin_fodder_index.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+
+{{{include '../layout_base/footer'}}}

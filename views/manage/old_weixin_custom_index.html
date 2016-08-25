@@ -1,0 +1,394 @@
+<%@page language="java" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<jsp:include  page="../layout_base/header.html" />
+
+<link href="${resourcesPath}/css/jquery.ui.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap/bootstrap.min.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap/plus.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+
+<link href="${resourcesPath}/css/bootstrap/plus_v1.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap/percentage_tc.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap/weixin_tc.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap/dialog.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+
+<link href="${resourcesPath}/javascript/library/artDialog/skins/default.css?v=${fileVersion}" rel="stylesheet" type="text/css" /> 
+<link href="${resourcesPath}/javascript/library/laypage/skin/laypage.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="${resourcesPath}/css/bootstrap3/mymiljia.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+
+
+<input type="hidden" value="${shopId}" id="shopId"/>
+<input type="hidden" value="${shop_id}" id="shop_id"/>
+<input type="hidden" value="${limit}" id="limit"/>
+<input type="hidden" id="controlTarg" value="7" />
+<input type="hidden" id="shopSetId" value="4" />
+<input type="hidden" id="newUnBindCount" value="-1" />
+<input type="hidden" id="bindStatus" value="${bindStatus}" />
+<input type="hidden" value="${shopUserId}" id="shopUserId">
+<script>
+(function(){
+	var shop_id=$("#shop_id").val();
+	
+	if(sessionStorage){
+		if(sessionStorage.SHOPID){
+			if(shop_id){
+				sessionStorage.SHOPID=shop_id;
+			}else{
+				$("#shop_id").val(sessionStorage.SHOPID);
+			}
+		}else{
+			if(shop_id){
+				sessionStorage.SHOPID=shop_id;
+			}
+		}
+	}
+})();
+</script>
+</head>
+
+<jsp:include  page="../layout_base/top.html" />
+
+<div class="container weixinptmain" id="w1000">
+	<%-- <ul class="jilumanu mt10">
+		 <li ><a href="<%=request.getContextPath()%>/${shopId}/weixin/auto/reply/index">自动回复设置</a></li>
+		<li class="activ"><a href="<%=request.getContextPath()%>/${shopId}/weixin/custrom/index/-1">微信用户管理</a></li>
+    	<li><a href="<%=request.getContextPath()%>/${shopId}/weixin/massage/add">微信群发</a></li>
+    	<li ><a href="<%=request.getContextPath()%>/${shopId}/weixin/">微信对话</a></li>
+     	<li><a href="<%=request.getContextPath()%>/${shopId}/weixin/source/index">素材库</a></li>
+		<li class="weixinyhtit"><a href="<%=request.getContextPath()%>/${shopId}/weixin/preferential/activity">微信优惠活动管理</a></li>
+	</ul> --%>
+	
+	<ul class="jilumanu mt10">
+	    <li  ><a id="sendWXInfo">发微信内容</a></li>
+	    <li class="weixinyhtit"><a href="<%=request.getContextPath()%>/route/${shopSid}/promotions-release_promotion_activity">发布优惠活动</a></li>
+		<li class="activ"><a href="<%=request.getContextPath()%>/route/${shopSid}/manage-weixin_custom_index">微信用户管理</a></li>
+		<li  ><a href="<%=request.getContextPath()%>/route/${shopSid}/robot-upweixin_auto_reply_index">自动回复</a></li>
+    	<li ><a href="<%=request.getContextPath()%>/route/${shopSid}/customized-creat_mass_message_index">自定义发消息</a></li>
+<%--      	<li ><a href="<%=request.getContextPath()%>/${shopId}/weixin/">微信对话</a></li> --%>
+     	<li><a href="<%=request.getContextPath()%>/route/${shopSid}/fodder-wechat_fodder_index">素材库</a></li> 
+       
+	</ul>
+</div>
+
+
+<div class="container mt5 weixinptmain wxminh500">
+<div class="wxdh_banner"><img src="${ staticImage_Url}/mljia/weixinbannerptr2_c2.jpg" width="1000" height="100"></div>
+
+<ul class="wxdh_sosuo wxyhgg_sosuo ml0">
+<li class="a1">关注时间：</li>
+<li class="a2"><input name="" id="startTime" class="laydate-icon" autocomplete="off" onkeyup="this.value=''" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" type="text" class="input01" value=""></li>
+<li class="a2p">—</li>
+<li class="a3"><input name="" id="endTime" class="laydate-icon" autocomplete="off" onkeyup="this.value=''" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" type="text" class="input01" value=""></li>
+
+<li>手机号：</li>
+<li class="a4"><input name="" id="phone" type="text" class="input01"  ></li>
+<li class="a5"><a class="butbase but1" data-btn="0" id="btn">查询</a></li>
+</ul>
+
+<div class="wxdh_dhk01 wxdh_yhlb">
+
+		<p class="wxdh_plusmenu">
+			<a href="javascript:;"  data-status="-1" >全部</a> 
+			<a href="javascript:;"  data-status="2">已关联</a>
+			<a href="javascript:;"  data-status="1">未关联</a> 
+			<a href="javascript:;"  data-status="0">潜在用户</a>
+		</p>
+
+		<div  id="temlInsert">
+			<!-- 模板插入位子#cardContentPanel -->
+		</div>
+ 		
+	<br>	
+<div class="fenyeademain3x pl15" id="pageFenye"></div>
+
+</div>
+
+	
+</div>
+
+ 
+
+<script type="text/html" id="cardContentPanel">
+<ul class="wxdh_dhktatle">
+	<li class="apic">微信头像</li>
+	<li class="a1">微信昵称</li>
+	<li class="a2">关注时间</li>
+	<li class="a3">姓名</li>
+	<li class="a4">手机号</li>
+	<li class="a5">关联状态
+		<a class="poi1 wxdh_tise_but">
+			<img src="${ staticImage_Url}/mljia/cataloghb_star5.png" width="16" height="16">
+			<ul class="wxdh_tise poi2">
+				<li class="a1"><img src="${ staticImage_Url}/mljia/wxdh_yhlb_arrow.png" width="17" height="7"></li>
+				<li class="a2">
+					<p>关联状态为微信用户与店铺顾客数据的账号同步</p>
+				</li>
+			</ul>
+		</a>
+	</li>
+	<li class="a6">操作</li>
+	<li class="a7">关联顾客</li>
+</ul>
+{{# if(d.length<=0 ){ }}
+	<p class="lh40 text-center" id="yesNull">没有信息</p>
+{{# }else{ }}
+	{{# for(var i=0;i<d.length;i++){ }}
+		{{# if(d[i].bind_status==0 ){ }}
+
+			{{# if(d[i].cell_phone==null || d[i].cell_phone==""){ }}
+
+					<ul class="wxdh_dhtd1">
+						<li class="apic"><img src='{{d[i].head_img}}' width="180" height="180" /></li>
+						<li class="a1">{{d[i].nick_name || "--"}}</li>
+						<li class="a2">{{d[i].subscribe_time || "--"}}</li>
+						<li class="a3">{{d[i].user_name || "--"}}</li>
+						<li class="a4">{{d[i].cell_phone || "--"}}</li>
+						<li class="a5">
+							<a class="poi1 wxdh_tise_but" >潜在用户
+								<ul class="wxdh_tise poi2">
+									<li class="a1"><img src="${ staticImage_Url}/mljia/wxdh_yhlb_arrow.png" width="17" height="7"></li>
+									<li class="a2">
+										<p>该微信用户未填写手机号或尚未提交审核。</p>
+									</li>
+								</ul>
+							</a>
+						</li>
+						<li class="a6 poi1" data-openId='{{d[i].open_id}}' data-coustomId='{{d[i].custom_id}}' data-checkCode='{{d[i].check_code}}' data-id='{{d[i].id}}' data-cellPhone='{{d[i].cell_phone}}' data-appId='{{d[i].appId}}'><a href='javascript:'>--</a></li>
+						<li class="a7">{{d[i].custom_name || "--"}}</li>
+					</ul>
+
+				
+			{{# }else { }}
+				<ul class="wxdh_dhtd1">
+					<li class="apic"><img src='{{d[i].head_img}}' width="180" height="180" /></li>
+					<li class="a1">{{d[i].nick_name || "--"}}</li>
+					<li class="a2">{{d[i].subscribe_time+'' || "-"}}</li>
+					<li class="a3">{{d[i].user_name || "--"}}</li>
+					<li class="a4">{{d[i].cell_phone || "--"}}</li>
+					<li class="a5">
+						<a class="poi1 wxdh_tise_but" >潜在用户
+							<ul class="wxdh_tise poi2">
+								<li class="a1"><img src="${ staticImage_Url}/mljia/wxdh_yhlb_arrow.png" width="17" height="7"></li>
+								<li class="a2">
+									<p>该微信用户未填写手机号或尚未提交审核。</p>
+								</li>
+							</ul>
+						</a>
+					</li>
+					<li class="a6 poi1" name="relationCustom" data-openId='{{d[i].open_id}}' data-coustomId='{{d[i].custom_id}}' data-checkCode='{{d[i].check_code}}' data-id='{{d[i].id}}' data-cellPhone='{{d[i].cell_phone}}' data-appId='{{d[i].app_id}}'>
+						<a href='javascript:' onclick='relationCustom(this)' data-statu='1'>点击关联</a>
+						<ul class="poi2 wx_soubox01 wxop_type01" style="display: none;">
+  							<li class="a1"><img src="${ staticImage_Url}/mljia/edprice_toparror.gif" width="17" height="10"></li> 
+ 							<li class="a2">
+							<p class=" ml18">
+ 								<span class="td1"><input type="text" name="customName" placeholder="搜索关联顾客的手机号/姓名"> </span>
+ 								<span class="td2"> <a onclick="selectCustomName(this);" href="javascript:;" class="ml12 but01">搜索</a></span>
+						 	</p>
+ 							<p><a   class="addCustome" data-name="{{ d[i].user_name }}" data-phone="{{ d[i].cell_phone }}"  target="_blank">+添加顾客</a></p>
+ 							</li>
+  							<li class="a3"><span class="ml20">微信用户关联后，可在手机上实时查看卡项和消费记录</span></li>
+ 						</ul>	
+						
+						<ul class="poi2 wx_soubox01 wx_soubox02 wxop_type02" style="display: none;">
+  							<li class="a1"><img src="${ staticImage_Url}/mljia/edprice_toparror.gif" width="17" height="10"></li> 
+							<li class="a2p"><span class="ml24">搜索结果</span><span class="fr mr20"><a href="javascript:;" onclick="javascript:returnFun(this);">搜索</a></span></li>
+ 							<li class="a2">
+ 								<p class="wxsousuo_list">
+ 									<span class="td1"><img src="${ staticImage_Url}/mljia/wxpt_optmptuwen.gif" width="204" height="135"></span>
+ 									<span class="td2">文思思</span>
+  									<span class="td3">15265845265</span>
+ 									<span class="td4"> <a onclick="saveItemPriceData(this);" class="ml12 but01">确定关联</a></span>
+ 								</p>
+ 							</li>
+  							<li class="a3"><span>微信用户关联后，可在手机上实时查看卡项和消费记录</span></li>
+					 	</ul>
+					</li>
+					<li class="a7">{{d[i].custom_name || "--"}}</li>
+				</ul>
+			{{# } }}
+			
+		{{# }else if(d[i].bind_status==1 ){ }}
+
+			{{# if(d[i].is_new==1 ){ }}
+				<ul class="wxdh_dhtd1 fb">
+					<li class="apic"><img src='{{d[i].head_img}}' width="180" height="180" /></li>
+					<li class="a1">{{d[i].nick_name || "--"}}</li>
+					<li class="a2">{{d[i].subscribe_time+'' || "-"}}</li>
+					<li class="a3">{{d[i].user_name || "--"}}</li>
+					<li class="a4">{{d[i].cell_phone || "--"}}</li>
+					<li class="a5">
+						<a class="poi1 wxdh_tise_but">未关联
+							<ul class="wxdh_tise poi2">
+								<li class="a1"><img src="${ staticImage_Url}/mljia/wxdh_yhlb_arrow.png" width="17" height="7"></li>
+								<li class="a2">
+									<p>未找到匹配的顾客，可能是该用户尚未成为本店顾客或顾客手机号填写错误。请手动关联或新增顾客。</p>
+								</li>
+							</ul>
+						</a> 
+					</li>
+					<li class="a6 poi1" name="relationCustom" data-openId='{{d[i].open_id}}' data-coustomId='{{d[i].custom_id}}' data-checkCode='{{d[i].check_code}}' data-id='{{d[i].id}}' data-cellPhone='{{d[i].cell_phone}}' data-appId='{{d[i].app_id}}'>
+						<a href='javascript:' onclick='relationCustom(this)' data-statu='1'>点击关联</a>
+						<ul class="poi2 wx_soubox01 wxop_type01" style="display: none;">
+  							<li class="a1"><img src="${ staticImage_Url}/mljia/edprice_toparror.gif" width="17" height="10"></li> 
+ 							<li class="a2">
+							<p class=" ml18">
+ 								<span class="td1"><input type="text" name="customName"  placeholder="搜索关联顾客的手机号/姓名"> </span>
+ 								<span class="td2"><a onclick="selectCustomName(this);" href="javascript:;" class="ml12 but01">搜索</a></span>
+							 </p>
+ 							<p><a   class="addCustome" data-name="{{ d[i].user_name }}" data-phone="{{ d[i].cell_phone }}" target="_blank">+添加顾客</a></p>
+ 							</li>
+  							<li class="a3"><span class="ml20">微信用户关联后，可在手机上实时查看卡项和消费记录</span></li>
+ 						</ul>	
+						
+						<ul class="poi2 wx_soubox01 wx_soubox02 wxop_type02" style="display: none;">
+  							<li class="a1"><img src="${ staticImage_Url}/mljia/edprice_toparror.gif" width="17" height="10"></li> 
+							<li class="a2p"><span class="ml24">搜索结果</span><span class="fr mr20"><a href="javascript:;" onclick="javascript:returnFun(this);">搜索</a></span></li>
+ 							<li class="a2">
+ 								<p class="wxsousuo_list">
+ 									<span class="td1"><img src="${ staticImage_Url}/mljia/wxpt_optmptuwen.gif" width="204" height="135"></span>
+ 									<span class="td2">文思思</span>
+  									<span class="td3">15265845265</span>
+ 									<span class="td4"> <a onclick="saveItemPriceData(this);" class="ml12 but01">确定关联</a></span>
+ 								</p>
+ 							</li>
+  							<li class="a3"><span>微信用户关联后，可在手机上实时查看卡项和消费记录</span></li>
+						 </ul>
+					</li>
+					<li class="a7">{{d[i].custom_name || "--"}}</li>
+				</ul>
+			{{# }else { }}
+				<ul class="wxdh_dhtd1">
+					<li class="apic"><img src='{{d[i].head_img}}' width="180" height="180" /></li>
+					<li class="a1">{{d[i].nick_name || "--"}}</li>
+					<li class="a2">{{d[i].subscribe_time || "-"}}</li>
+					<li class="a3">{{d[i].user_name || "--"}}</li>
+					<li class="a4">{{d[i].cell_phone || "--"}}</li>
+					<li class="a5">
+						<a class="poi1 wxdh_tise_but">未关联
+							<ul class="wxdh_tise poi2">
+								<li class="a1"><img src="${ staticImage_Url}/mljia/wxdh_yhlb_arrow.png" width="17" height="7"></li>
+								<li class="a2">
+									<p>未找到匹配的顾客，可能是该用户尚未成为本店顾客或顾客手机号填写错误。请手动关联或新增顾客。</p>
+								</li>
+							</ul>
+						</a> 
+					</li>
+					<li class="a6 poi1" name="relationCustom" data-openId='{{d[i].open_id}}' data-coustomId='{{d[i].custom_id}}' data-checkCode='{{d[i].check_code}}' data-id='{{d[i].id}}' data-cellPhone='{{d[i].cell_phone}}' data-appId='{{d[i].app_id}}'>
+						<a href='javascript:' onclick='relationCustom(this)' data-statu='1'>点击关联</a>
+						<ul class="poi2 wx_soubox01 wxop_type01" style="display: none;">
+  							<li class="a1"><img src="${ staticImage_Url}/mljia/edprice_toparror.gif" width="17" height="10"></li> 
+ 							<li class="a2">
+							<p class=" ml18">
+ 								<span class="td1"><input type="text" name="customName" placeholder="搜索关联顾客的手机号/姓名"> </span>
+ 								<span class="td2"> <a onclick="selectCustomName(this);" class="ml12 but01">确定</a></span>
+							 </p>
+ 							<p><a  class="addCustome" data-name="{{ d[i].user_name }}" data-phone="{{ d[i].cell_phone }}" target="_blank">+添加顾客</a></p>
+ 							</li>
+  							<li class="a3"><span class="ml20">微信用户关联后，可在手机上实时查看卡项和消费记录</span></li>
+ 						</ul>	
+						
+						<ul class="poi2 wx_soubox01 wx_soubox02 wxop_type02" style="display: none;">
+  							<li class="a1"><img src="${ staticImage_Url}/mljia/edprice_toparror.gif" width="17" height="10"></li> 
+							<li class="a2p"><span class="ml24">搜索结果</span><span class="fr mr20"><a href="javascript:;" onclick="javascript:returnFun(this);">搜索</a></span></li>
+ 							<li class="a2">
+ 								<p class="wxsousuo_list">
+ 									<span class="td1"><img src="${ staticImage_Url}/mljia/wxpt_optmptuwen.gif" width="204" height="135"></span>
+ 									<span class="td2">文思思</span>
+  									<span class="td3">15265845265</span>
+ 									<span class="td4"> <a onclick="saveItemPriceData(this);" class="ml12 but01">确定关联</a></span>
+ 								</p>
+ 							</li>
+  							<li class="a3"><span>微信用户关联后，可在手机上实时查看卡项和消费记录</span></li>
+						 </ul>
+					</li>
+					<li class="a7">{{d[i].custom_name || "--"}}</li>
+				</ul>
+			{{# } }}
+		
+		{{# }else { }}
+			<ul class="wxdh_dhtd1">
+				<li class="apic"><img src='{{d[i].head_img}}' width="180" height="180" /></li>
+				<li class="a1">{{d[i].nick_name || "--"}}</li>
+				<li class="a2">{{d[i].subscribe_time || "--"}}</li>
+				<li class="a3">{{d[i].user_name || "--"}}</li> 
+				<li class="a4">{{d[i].cell_phone || "--"}}</li>
+				<li class="a5">
+					<a class="poi1 wxdh_tise_but">已关联
+						<ul class="wxdh_tise poi2">
+							<li class="a1"><img src="${ staticImage_Url}/mljia/wxdh_yhlb_arrow.png" width="17" height="7"></li>
+							<li class="a2">
+								<p>已成功关联用户微信号，如需解除绑定，请联系美丽加客服。</p>
+							</li>
+						</ul>
+					</a> 
+				</li>
+				<li class="a6 poi1" data-openId='{{d[i].open_id}}' data-coustomId='{{d[i].custom_id}}' data-checkCode='{{d[i].check_code}}' data-id='{{d[i].id}}' data-cellPhone='{{d[i].cell_phone}}'><a href='javascript:' onclick='cancelAssociation(this)'>取消关联</a></li>
+				<li class="a7">{{d[i].custom_name || "--"}}</li>
+			</ul>
+		{{# } }}
+	{{# } }}
+{{# } }}
+
+		
+	
+
+</script>
+
+
+
+
+
+
+<script type="text/html" id="yingdaoTemp">
+	 <div class="container weixingginfo">
+		<div class="wXinfotop">
+	        <p class="fz18 fl"><i class="icon-wXinfotop01 mr10"></i>公众号信息</p>
+	        <p class="fl txthui ml10 mt2"><i class="icon-wXinfotop02"></i>点击“更新”字样即可将微信公众号的名称、头像、二维码、公众号类型信息同步为最新状态。<a id="refreshEvent">更新 <span class="fsongti">>></span></a></p>
+        </div>
+
+        <ul class="gginfomain">
+            <li class="a1 poi1">
+                <p class="txt1">公众号类型：</p>
+                <p>{{ ( d.content.service_type_info==0 || d.content.service_type_info==1) ? "订阅号" : " "}}</p>
+                 {{# if(d.content.service_type_info==0 || d.content.service_type_info==1 || d.content.verify_type_info==-1) { }}
+				  <p class="wXinfoTese poi2" ><i class="icon-wXinfotop03"></i>您需要更换公众号类型为【服务号】，才可使用全部微信服务。<a class="upgradeLink" target="_blank">如何更换？</a></p>
+                 {{# } }}
+            </li>
+
+            <li class="a2 poi1">
+                <p class="txt1">是否认证：</p>
+                <p>{{ d.verify_type_info==-1 ? "未认证" : "已认证"}}</p>
+				<p class="wXinfoTese poi2"  ><i class="icon-wXinfotop03"></i>您需要【认证】服务号，才可使用全部微信服务。<a class="authLink" target="_blank">如何认证？</a></p>
+            </li>
+            
+            <li class="a1">
+                <p class="txt1">公众号名称：</p>
+                <p>{{d.content.nick_name}}</p>
+
+
+            </li>
+            <li class="a3 poi1 downBcodeMain">
+                <p class="txt1">二维码：</p>
+                <p><img src="{{d.qrCodeImg}}" width="168" height="168"></p>
+                <p class="poi2 downBcode"><a class="downLoadCodeImg">下载高清二维码</a></p>
+            </li>
+            <li class="a5">
+                <p class="txt1">公众号头像：</p>
+                <p><img src="{{d.content.head_image}}" width="168" height="168"></p>
+            </li>
+            <li class="tise2">
+                <p class="ml40">如需解除绑定，请联系4007889166</p>
+            </li>
+        </ul>
+    </div>
+  </div>
+
+</script>
+
+
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/laydate-master/laydate.js?v=${fileVersion}"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/laypage/laypage.js?v=${fileVersion}"></script>
+
+<script src="<%=request.getContextPath()%>/resources/javascript/wechat/manage/oldsweixinCustorm.js?v=${fileVersion}"></script>
+<script src="<%=request.getContextPath()%>/resources/javascript/wechat/base/mljia_wx_userUtil.js?v=${fileVersion}"></script>
+<jsp:include  page="../layout_base/footer.html" />

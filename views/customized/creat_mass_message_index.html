@@ -1,0 +1,434 @@
+
+{{{include '../layout_base/header'}}}
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/layer/skin/layer.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus_v1.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/percentage_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/weixin_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/artDialog/skins/default.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/laypage/skin/laypage.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/mymiljia.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+</head>
+<body  data-shop-sid="{{{shopSid}}}" id="header">
+{{{include '../layout_base/top'}}}
+
+<div class="container weixinptmain" id="w1000">
+
+    
+    <ul class="jilumanu mt10">
+	    <li  ><a id="sendWXInfo">发微信内容</a></li>
+	    <li class="weixinyhtit"><a href="<%=request.getContextPath()%>/route/${shopSid}/promotions-release_promotion_activity">发布优惠活动</a></li>
+		<li ><a href="/o2o/route/{{{shopSid}}}/manage-weixin_custom_index">微信用户管理</a></li>
+		<li  ><a href="/o2o/route/{{{shopSid}}}/robot-upweixin_auto_reply_index">自动回复</a></li>
+    	<li class="activ"><a href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index">自定义发消息</a></li>
+     	<li><a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index">素材库</a></li>
+       
+	</ul>
+	 <ul class="wxtf_menu2">
+    	<li class="activ"><a href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index">新建群发消息</a></li>
+    	<li><a href="/o2o/route/{{{shopSid}}}/customized-weixin_mass_history_index">发送历史</a></li>
+    </ul>
+</div>
+
+
+<div class="container mt5 weixinptmain wxminh500" id="w998">
+<ul class="weixinffadd weixinqfsel">
+
+<li class="a3"><a class="weixinaddbut">选择群发对象</a></li>
+<li>（已选择<span id="selectNumber">0</span>人）</li>
+</ul>
+
+<p class="wxqf_tise">注意：通过筛选操作，可筛选出复合条件的会员进行短信群发，单次最多10000人，由于微信限制，每次群发最多100次，图文消息10次，单个用户每月最多接收4条群发消息。</p>
+
+
+<div class="wxqf_main">
+	<ul class="wxqf_ul01">
+		<li class="activ"  data-index="4"><a class="a1">图文消息</a></li>
+		<li data-index="0"><a class="a2">文字</a></li>
+		<li data-index="1"><a class="a3">图片</a></li>
+	</ul>
+	<!-- tab区 -->
+	 	<ul class="wxqf_ul02 wxqf_tuwen01" data-tab="true">
+			<li class="fl" style="cursor: pointer;" onclick="artLayer(0);">
+				<p><img src="{{{staticImageUrl}}}/mljia/wxaddicon_r2_c2.gif" width="23" height="23"></p>
+				<p>从素材库中选择</p>
+			</li> 
+			<a href="/o2o/route/{{{shopSid}}}/fodder-wechat_sourse_add_imageText" target="_blank">
+			<li class="fr"  style="cursor: pointer;">
+				<p><img src="{{{staticImageUrl}}}/mljia/wxaddicon_r2_c2.gif" width="23" height="23"></p>
+				<p>新建图文</p>
+			</li>
+			</a>
+		</ul>
+		<div data-tab="true" class="wxqf_text02">
+		 	<textarea   maxlength="650"  placeholder="请输入文字消息"></textarea>
+		 		<p><span id="textNumber">0</span>/600</p>
+		</div>
+	 	<ul class="wxqf_ul02 wxqf_pict03"  data-tab="true">
+			<li class="fl" style="cursor: pointer;" onclick="artLayer(1);">
+				<p><img src="{{{staticImageUrl}}}/mljia/wxaddicon_r2_c2.gif" width="23" height="23"></p>
+				<p>从素材库中选择</p>
+			</li> 
+			<li class="fr"  style="cursor: pointer;position: relative;">
+				<input data-id="fileUpload" type="file" name="files[]"  style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:999;opacity:0;filter:alpha(opacity=0);"/>
+				<p><img src="{{{staticImageUrl}}}/mljia/wxaddicon_r2_c2.gif" width="23" height="23"></p>
+				<p>上传图片</p>
+			</li>
+		</ul>
+	 <!-- 内容区 -->
+	 <div  id="tabContent">
+	 	<ul class="wxqf_ul03 poi1" style="display: none;"></ul>
+	 	<ul class="wxqf_ul02" style="display: none;"></ul>
+	 	<ul class="wxqf_ul03 poi1" style="display: none;"></ul>
+	 </div>
+	 
+</div>
+
+
+<div class="wxqf_buts">
+<a class="butbase but1"  onclick="artConfirmFun(this);">发送</a>
+</div>
+
+<script type="text/html" id="sendErrorTipsTmpl">
+<div class="wxzdhf_optise wxzdhf_optise_box3">
+	<p><i class="icon-optise01"></i></p>
+	<p class="txt01">{{tips}}</p>
+	<!--<a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a>-->
+</div>
+</script>
+
+
+<script type="text/html" id="sendConfirmTmpl">
+<div class="wxqf_openqr wxqf_nosave">
+<ul class="wxqf_openqrul1">
+	<li class="li1"><a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a></li>
+	<li class="li2">
+		<p class="tatle">操作确认</p>
+		<p><i class="icon-picseleed"></i>消息开始群发后无法撤销，是否确认群发？</p>
+	</li>
+</ul>
+	<p class="wxqf_openqrul2">
+		<a class="but0 but1" id="sendMass">确认</a>
+		<a class="but0 but2" onclick="layer.closeAll();">取消</a>
+	</p>
+</div>
+</script>
+
+
+
+<!-- 选择群发对象窗口 -->
+<script type="text/html" id="artSelectCustomTmpl">
+
+<div class="wxqf_openseldx poii1">
+<p class="tatle fz18">选择群发对象
+	<span class="fr mr20 mtm20">
+		<a onclick="layer.closeAll();"><img src="{{{staticImageUrl}}}/mljia/bigcross_r2_c2.gif" width="24" height="24"></a>
+	</span>
+</p>
+
+<div class="wxqf_selulmain">
+		<ul class="wxqf_selul1">
+		<li >关注时间：</li>
+		<li><input name="startTime" data-time="true" type="text" class="input" onkeyUp="this.value=''" autocomplete="off"></li>
+		<li class="a2">—</li>
+		<li><input name="endTime" data-time="true" type="text" class="input"  onkeyUp="this.value=''" autocomplete="off"></li>
+</ul>
+
+<ul class="wxqf_selul1">
+		<li>关联状态：</li>
+		<li><input name="lianType" type="radio" value="-1" class="radio" checked>全部</li>
+		<li><input name="lianType" type="radio" value="0" class="radio">未填手机号</li>
+		<li><input name="lianType" type="radio" value="1" class="radio">已填手机号</li>
+</ul>
+
+<ul class="wxqf_selul1">
+		<li>关联店铺：</li>
+		<li><input name="shop" type="radio" value="-1" class="radio">所有店铺</li>
+		{{# for(var i=0;i<d.shopItems.length;i++){  }}
+			<li><input name="shop" type="radio" value="{{d.shopItems[i].shop_id}}" class="radio">{{d.shopItems[i].shop_name}}</li>
+		{{# } }}
+</ul>
+	<p class="wxqf_selul1"><a class="wxqf_soubut" id="seachCustomByCondition">搜索</a></p>
+</div>
+
+<div class="wxqf_selul2">
+	<ul class="tatle">
+		<li class="a0">&nbsp;</li>
+		<li class="a4">昵称</li>
+		<li class="a1">手机号</li>
+		<li class="a2">关注时间</li>
+		<li class="a5">关联店铺</li>
+		<li class="a3">关联顾客</li>
+	</ul>
+	<div id="userContainer"></div>
+</div>
+
+<div class="yuanpage poi2" id="pageFenye"></div>
+
+	<ul class="wxqfop_btmenu poi2">
+		<li><input name="selectAll" type="checkbox" value="0"></li>
+		<li>全选</li>
+		<li class="ml15"><a onclick="clearSelectedFun();">[清空]</a></li>
+		<li class="fr ml15"><a class="but1" onclick="confrimSelectUserFun();">确认</a></li>
+		<li class="fr txtpink">已选择<span id="getNumber">0</span>人</li>
+	</ul>
+</div>
+
+</script>
+
+
+
+<script type="text/html" id="userListTmpl">
+{{# for(var i=0;i<d.items.length;i++){ }}
+{{# var item=d.items[i];}}
+
+<ul class="td1">
+<li class="a0"><input name="custom" type="checkbox" value="{{ item.open_id }}" data-id="{{ item.id}}"></li>
+<li class="a4 wordsbase">{{ item.nick_name||'--' }}</li>
+<li class="a1">{{ item.cell_phone||'--' }}</li>
+<li class="a2">{{ item.subscribe_time||'--' }}</li>
+<li class="a5 wordsbase">
+{{# if(item.bind_list && item.bind_list.length>0){ }}
+		{{# for(var j=0;j<item.bind_list.length;j++){ }}
+			{{# var ite=item.bind_list[j];}}
+				<p>{{ ite.shop_name||'--'}}</p>
+		{{# } }}
+{{# }else{ }}
+		--
+{{# } }}
+</li>
+<li class="a3 wordsbase">
+{{# if(item.bind_list && item.bind_list.length>0){ }}
+		{{# for(var j=0;j<item.bind_list.length;j++){ }}
+			{{# var ite=item.bind_list[j];}}
+				<p>{{ ite.custom_name||'--'}}</p>
+		{{# } }}
+{{# }else{ }}
+		--
+{{# } }}
+</li>
+</ul>
+{{# } }}
+</script>
+
+
+<!-- 图文消息窗口 -->
+<script type="text/html" id="artImageTextLayerTmpl">
+<div class="wxpt_openqr">
+<ul class="wxpt_tatle">
+	<li class="a1"><img src="{{{staticImageUrl}}}/mljia/yinyelogo_r2_c2.png" width="97" height="55"></li>
+	<li class="a2">选择图文消息</li>
+
+	<li class="a3"><a href="/o2o/route/{{{shopSid}}}/fodder-wechat_sourse_add_imageText" target="_blank" class="but1">+新建图文消息</a></li>
+	<li class="a4p"><span><input name="seachWords" type="text" placeholder="标题/作者/摘要"></span>
+    <span><a id="seachKeys"><img src="{{{staticImageUrl}}}/mljia/weixinpt_sou.gif" width="15" height="15"></a></span></li>
+</ul>
+
+<div class="wxpt_zw wxpt_tuwen">
+{{# if(d.items.length>0){ }}
+<ul class="wxpt_tuwenmain" data-type="4">
+ {{# for(var i=0;i<d.items.length;i++){ }}
+    {{# var item=d.items[i];}}	
+<li class="wxsc_li item  poi1" data-id="{{ item.id}}" data-sync={{ item.is_sync}}>
+	<p class="a1"><img src="{{d.download_url}}{{ item.cover_file_id }}" width="204" height="135"></p>
+	<p class="a2 fz18">{{ item.title}}</p>
+	<p class="a3">{{ item.create_time}}</p>
+	{{# if(item.description && item.description.length>1 && item.sub_list.length==0){ }}
+		<p class="a4" title="{{item.description}}">{{ item.description.substring(0, 50) }}</p>
+	{{# } }}
+	{{# for(var j=0;j<item.sub_list.length;j++){ }}
+		{{# var ite=item.sub_list[j];}}
+		<p class="a6"><span class="fl fz16 wordsbase" title="{{ite.title}}"  style="width:100px;">{{ite.title}}</span><span class="fr"><img src="{{d.download_url}}/{{ ite.cover_file_id}}" width="204" height="135"></span></p>
+	{{# } }}
+</li>
+ {{# } }}
+</ul>
+ {{# }else{ }}
+<div class="wxpt_tuwenmain wxpt_picupff">
+	<p class="fz24 a1">暂无图文素材，<a  href="/o2o/route/{{{shopSid}}}/fodder-wechat_sourse_add_imageText" target="_blank">去新增</a></p>
+</div>
+
+ {{# } }}
+</div>
+<p class="wxqf_openqrul2 wxpt_opbuts">
+	<a class="but0 but1">确认</a>
+	<a class="but0 but2" onclick="layer.closeAll();">取消</a>
+</p>
+</div>
+</script>
+
+
+<script type="text/html" id="seachImageTextTmpl">
+{{# if(d.items.length>0){ }}
+<ul class="wxpt_tuwenmain">
+ {{# for(var i=0;i<d.items.length;i++){ }}
+    {{# var item=d.items[i];}}
+<li class="wxsc_li item  poi1" data-id="{{ item.id}}" data-sync={{ item.is_sync}}>
+	<p class="a1"><img src="{{d.download_url}}{{ item.cover_file_id }}" width="204" height="135"></p>
+	<p class="a2 fz18">{{ item.title}}</p>
+	<p class="a3">{{ item.create_time}}</p>
+	{{# if(item.description && item.description.length>1 && item.sub_list.length==0){ }}
+		<p class="a4" title="{{item.description}}">{{ item.description.substring(0, 50) }}</p>
+	{{# } }}
+	{{# for(var j=0;j<item.sub_list.length;j++){ }}
+		{{# var ite=item.sub_list[j];}}
+		<p class="a6"><span class="fl fz16 wordsbase" title="{{ite.title}}" style="width:100px;" >{{ite.title}}</span><span class="fr"><img src="{{d.download_url}}/{{ ite.cover_file_id}}" width="204" height="135"></span></p>
+	{{# } }}
+</li>
+ {{# } }}
+</ul>
+ {{# }else{ }}
+<div class="wxpt_tuwenmain wxpt_picupff">
+	<p class="fz24 a1">搜索无结果，<a id="getAll">查看全部</a></p>
+</div>
+
+ {{# } }}
+</script>
+
+
+	<script type="text/html" id="artContainerTmpl">
+		{{#var item=d.item;}}
+		<li class="wxsc_li item  poi1" data-id="{{ item.id}}" data-sync={{ item.is_sync}}>
+			<p class="a1"><img src="{{d.download_url}}{{ item.cover_file_id }}" width="204" height="135"></p>
+			<p class="a2 fz18">{{ item.title}}</p>
+			<p class="a3">{{ item.create_time}}</p>
+			{{# if(item.description && item.description.length>1 && item.sub_list.length==0){ }}
+			<p class="a4" title="{{item.description}}">{{ item.description.substring(0, 50) }}</p>
+			{{# } }}
+			{{# for(var j=0;j<item.sub_list.length;j++){ }}
+			{{# var ite=item.sub_list[j];}}
+			<p class="a6"><span class="fl fz16 wordsbase" title="{{ite.title}}"  style="width:100px;">{{ite.title}}</span><span class="fr"><img src="{{d.download_url}}/{{ ite.cover_file_id}}" width="204" height="135"></span></p>
+			{{# } }}
+		</li>
+	</script>
+
+
+<script type="text/html" id="liTmpl">
+ {{# for(var i=0;i<d.items.length;i++){ }}
+    {{# var item=d.items[i];}}	
+<li class="wxpt_tuwenli poi1" data-id="{{ item.id}}" data-sync={{ item.is_sync}}>
+	<p class="a1"><img src="{{d.download_url}}{{ item.cover_file_id }}" width="204" height="135"></p>
+	<p class="a2 fz18">{{ item.title}}</p>
+	<p class="a3">{{ item.create_time}}</p>
+	{{# if(item.description && item.description.length>1 && item.sub_list.length==0){ }}
+		<p class="a4" title="{{item.description}}">{{ item.description.substring(0, 50) }}</p>
+	{{# } }}
+	{{# for(var j=0;j<item.sub_list.length;j++){ }}
+		{{# var ite=item.sub_list[j];}}
+		<p class="a6"><span class="fl fz16 wordsbase" title="{{ite.title}}" style="width:100px;">{{ite.title}}</span>
+         <span class="fr"><img src="{{d.download_url}}/{{ ite.cover_file_id}}" width="204" height="135"></span>
+		</p>
+	{{# } }}
+</li>
+ {{# } }}
+</script>
+
+
+<!-- 图片消息窗口 -->
+<script type="text/html" id="artImageLayerTmpl">
+<div class="wxpt_openqr">
+<ul class="wxpt_tatle">
+	<li class="a1"><img src="${ staticImage_Url}/mljia/yinyelogo_r2_c2.png" width="97" height="55"></li>
+	<li class="a2">添加图片回复</li>
+	<li class="a3"><a class="but1" style="position: relative;">上传图片
+	<input data-id="fileUpload" type="file" name="files[]" multiple="multiple" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:999;opacity:0;filter:alpha(opacity=0);"/>
+	</a></li>
+	<li class="a4">大小不超过2M</li>
+</ul>
+
+<div class="wxpt_zw wxpt_tuwen">
+{{# if(d.items.length>0){ }}
+	<ul id="containerUl" class="wxpt_tuwenmain wxpt_uppicmain"  data-type="1">
+		{{# for(var j=0;j<d.items.length;j++){ }}
+			{{# var item=d.items[j]; }}
+			<li class="wxpt_picli poi1" data-id="{{ item.id}}">
+  				<img src="{{d.download_url}}{{ item.file_id}}" width="204" height="135"> 
+			</li>
+		{{# } }}
+	</ul>
+{{# }else{ }}
+<div id="empty" class="wxpt_tuwenmain wxpt_picupff">
+	<p class="fz24 a1">暂无图片素材，<a style="position: relative;">立即上传
+	<input data-id="fileUpload" type="file" name="files[]" multiple="multiple" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:999;opacity:0;filter:alpha(opacity=0);"/>
+	</a></p>
+</div>
+{{# } }}
+
+</div>
+
+<p class="wxqf_openqrul2 wxpt_opbuts">
+	<a class="but0 but1">确认</a>
+	<a class="but0 but2"  onclick="layer.closeAll();">取消</a>
+</p>
+
+</div>
+
+</script>
+
+
+
+<script type="text/html" id="yingdaoTemp">
+	 <div class="container weixingginfo">
+		<div class="wXinfotop">
+	        <p class="fz18 fl"><i class="icon-wXinfotop01 mr10"></i>公众号信息</p>
+	        <p class="fl txthui ml10 mt2"><i class="icon-wXinfotop02"></i>点击“更新”字样即可将微信公众号的名称、头像、二维码、公众号类型信息同步为最新状态。<a id="refreshEvent">更新 <span class="fsongti">>></span></a></p>
+        </div>
+
+        <ul class="gginfomain">
+            <li class="a1 poi1">
+                <p class="txt1">公众号类型：</p>
+                <p>{{ ( d.content.service_type_info==0 || d.content.service_type_info==1) ? "订阅号" : " "}}</p>
+                 {{# if(d.content.service_type_info==0 || d.content.service_type_info==1 || d.content.verify_type_info==-1) { }}
+				  <p class="wXinfoTese poi2" ><i class="icon-wXinfotop03"></i>您需要更换公众号类型为【服务号】，才可使用全部微信服务。<a class="upgradeLink" target="_blank">如何更换？</a></p>
+                 {{# } }}
+            </li>
+
+            <li class="a2 poi1">
+                <p class="txt1">是否认证：</p>
+                <p>{{ d.verify_type_info==-1 ? "未认证" : "已认证"}}</p>
+				<p class="wXinfoTese poi2"  ><i class="icon-wXinfotop03"></i>您需要【认证】服务号，才可使用全部微信服务。<a class="authLink" target="_blank">如何认证？</a></p>
+            </li>
+            
+            <li class="a1">
+                <p class="txt1">公众号名称：</p>
+                <p>{{d.content.nick_name}}</p>
+
+
+            </li>
+            <li class="a3 poi1 downBcodeMain">
+                <p class="txt1">二维码：</p>
+                <p><img src="{{d.qrCodeImg}}" width="168" height="168"></p>
+                <p class="poi2 downBcode"><a class="downLoadCodeImg">下载高清二维码</a></p>
+            </li>
+            <li class="a5">
+                <p class="txt1">公众号头像：</p>
+                <p><img src="{{d.content.head_image}}" width="168" height="168"></p>
+            </li>
+            <li class="tise2">
+                <p class="ml40">如需解除绑定，请联系4007889166</p>
+            </li>
+        </ul>
+    </div>
+  </div>
+
+</script>
+
+
+</div>
+
+
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.fileupload.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/laydate-master/laydate.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/laypage/laypage.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/customized/creat_mass_message_index.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+
+{{{include '../layout_base/footer'}}}
+

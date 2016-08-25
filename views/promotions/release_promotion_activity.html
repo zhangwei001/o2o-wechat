@@ -1,0 +1,529 @@
+
+
+{{{include '../layout_base/header'}}}
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/layer/skin/layer.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus_v1.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/percentage_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/weixin_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/artDialog/skins/default.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/laypage/skin/laypage.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+</head>
+<body  data-shop-sid="{{{shopSid}}}" id="header">
+{{{include '../layout_base/top'}}}
+
+<!-- /.carousel -->
+
+<div class="container weixinptmain" id="w1000">
+
+	<ul class="jilumanu mt10">
+	    <li  ><a  id="sendWXInfo">发微信内容</a></li>
+	    <li class="weixinyhtit activ" ><a href="/o2o/route/{{{shopSid}}}/promotions-release_promotion_activity">发布优惠活动</a></li>
+		<li ><a href="/o2o/route/{{{shopSid}}}/manage-weixin_custom_index">微信用户管理</a></li>
+		<li  ><a href="/o2o/route/{{{shopSid}}}/robot-upweixin_auto_reply_index">自动回复</a></li>
+    	<li ><a href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index">自定义发消息</a></li>
+     	<li><a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index">素材库</a></li>
+       
+	</ul>
+</div>
+
+<div class="container mt5 weixinptmain wxminh500" id="w998">
+
+	<div class="ebderror_tise txtcheng">
+		<img src="{{{staticImageUrl}}}/mljia/dengpao_r2_c2.gif" width="16"
+			height="22">微信优惠活动管理提供优惠促销的发布，顾客查看途径为“优惠推荐-优惠促销”。快来创建优惠活动试试吧~
+	</div>
+
+	<ul class="weixinffadd">
+		<li class="a3"><a class="weixinaddbut weixinaddhdbut" onclick="insertActivity()">+新增优惠活动</a></li>
+	</ul>
+
+	<ul class="wxdh_sosuo wxyhgg_hdsosuo">
+		<li class="a1">关键词</li>
+		<li class="a2"><input name="keyWords" id="keyWords" type="text" class="input01" value=""></li>
+		<li class="a2 ml20">状态</li>
+		<li class="a3"><select name="activityState" id="activityState">
+				<option value="">全部</option>
+				<option value="0">草稿</option>
+				<option value="1">未开始</option>
+				<option value="2">进行中</option>
+				<option value="3">已结束</option>
+		</select></li>
+		<li class="a5"><a class="butbase but1" onclick="clickSelectActivity(1)">搜索</a></li>
+	</ul>
+
+	<div class="wxdh_yh01" id="insertPreferentialTemp">
+		
+	</div>
+	
+	<div class="fenyeademain3x pl15" id="pageFenye"></div>
+
+</div>
+
+<!-- 优惠活动信息列表 -->
+<script type="text/html" id="preferentialTemp">
+	<ul class="wxdh_yhhdtatle">
+			<li class="a1">序号</li>
+			<li class="a2">活动名称</li>
+			<li class="a3">描述</li>
+			<li class="a4">优惠时间</li>
+			<li class="a5">状态</li>
+			<li class="a6">操作</li>
+			<li class="a7">订单总量</li>
+		</ul>
+		{{# if(d.data.length>0){ }}
+		{{# for(var i=0;i<d.data.length;i++){ }}
+			{{# var item = d.data[i]; }}
+			<ul class="wxdh_yhhdtd1 {{ item.activity_state==3 ? 'wxdh_yhhdtd1_done':''}}">
+				<li class="a1">{{i+1}}</li>
+				<li class="a2 wordsbase">{{item.activity_name ? item.activity_name:""}}</li>
+				<li class="a3 wordsbase">{{item.describe ? item.describe:""}}</li>
+				<li class="a4">
+					{{# if(item.start_time && item.end_time){ }}
+						{{ (new Date(item.start_time)).format("yyyy-MM-dd hh:mm") }}
+						至 
+						{{ (new Date(item.end_time)).format("yyyy-MM-dd hh:mm") }}
+					{{# } }}
+				</li>
+
+				{{# if(item.activity_state==0){ }}
+					<li class="a5">草稿</li>
+					<li class="a6">
+						<a onclick="operateActivity(2,{{item.activity_id}})">开始活动</a>
+						<a class="ml10" onclick="updateActivityTemp(0,{{item.activity_id}})">修改</a> 
+						<a class="ml10" onclick="deleteActivity({{item.activity_id}})">删除</a>
+					</li>
+				{{# }else if(item.activity_state==1){ }}
+					<li class="a5">未开始</li>
+					<li class="a6">
+						<a onclick="operateActivity(2,{{item.activity_id}})">开始活动</a>
+						<a class="ml10" onclick="updateActivityTemp(1,{{item.activity_id}})">修改</a> 
+						<a class="ml10" onclick="shopActivityShow({{item.activity_id}})">预览</a>
+						<a class="ml10" onclick="deleteActivity({{item.activity_id}})">删除</a>
+					</li>
+				{{# }else if(item.activity_state==2){ }}
+					<li class="a5">进行中</li>
+					<li class="a6">
+						<a onclick="endActivity({{item.activity_id}})">结束活动</a>
+						<a class="ml10" onclick="shopActivityShow({{item.activity_id}})">预览</a>
+						<a class="ml10" onclick="deleteActivity({{item.activity_id}})">删除</a>
+					</li>
+				{{# }else if(item.activity_state==3){ }}
+					<li class="a5">已结束</li>
+					<li class="a6">
+						<a onclick="operateActivity(1,{{item.activity_id}})">复制活动</a>
+						<a class="ml10" onclick="deleteActivity({{item.activity_id}})">删除</a>
+					</li>
+				{{# } }}
+
+				<li class="a7">{{item.order_count || 0}}</li>
+			</ul>
+		{{# } }}
+		{{# }else{ }}
+			<p class="wxdh_nohd">暂无符合条件的活动~</p>
+		{{# } }}
+</script>
+
+<!-- 删除优惠活动确认窗 -->
+<script type="text/html" id="deleteActivityTemp">
+	<div class="wxqf_openqr wxqf_sanop ">
+		<ul class="wxqf_openqrul1">
+			<li class="li1"><a onclick="closeOperateActivity(3)"><i class="icon-editup06 fr"></i></a></li>
+			<li class="li2">
+				<p>确定删除活动？</p>
+			</li>
+		</ul>
+		<p class="wxpt_upicbuts">
+			<a class="but0 but1" onclick="operateActivity(4,{{d.activity_id}})">确定</a>
+			<a class="but0 but2" onclick="closeOperateActivity(4)">取消</a>
+		</p>
+	</div>
+</script>
+
+<!-- 删除成功弹窗 -->
+<script type="text/html" id="deleteSuccessActivityTemp">
+	<div class="wxzdhf_optise wxzdhf_optise_box5">
+		<p><i class="icon-optise02"></i></p>
+		<p class="txt01">删除成功</p>
+		<a ><i class="icon-editup06 fr"></i></a>
+	</div>
+</script>
+
+<!-- 结束活动确认窗 -->
+<script type="text/html" id="endActivityTemp">
+	<div class="wxqf_openqr wxqf_sanop wxqf_sanop_box02">
+		<ul class="wxqf_openqrul1">
+			<li class="li1"><a onclick="closeOperateActivity(3)"><i class="icon-editup06 fr"></i></a></li>
+			<li class="li2">
+				<p class="tatle">结束活动后，该活动不会在微信公众号上显示</p>
+				<p>确定结束？</p>
+			</li>
+		</ul>
+		<p class="wxpt_upicbuts">
+			<a class="but0 but1" onclick="operateActivity(3,{{d.activity_id}})">确定</a>
+			<a class="but0 but2" onclick="closeOperateActivity(3)">取消</a>
+		</p>
+	</div>
+</script>
+
+<!-- 复制活动成功窗 -->
+<script type="text/html" id="copySuccessActivityTemp">
+	<div class="wxzdhf_optise wxzdhf_optise_box4">
+		<p><i class="icon-optise02"></i></p>
+		<p class="txt01">复制活动成功</p>
+		<a ><i class="icon-editup06 fr"></i></a>
+	</div>
+</script>
+
+
+<!-- 新增活动 -->
+<script type="text/html" id="insertActivityTemp">
+	<div class="xzyhinfo_main">
+		<ul class="xzyh_index_tatle">
+			<li class="a1"></li>
+			<li class="a2">新增优惠活动</li>
+			<li class="fr"><a onclick="closeInsert()"><img src="{{d.staticImage_Url}}/mljia/bigcross_r2_c2.gif" width="24" height="24"></a></li>
+		</ul>
+
+		<ul class="xzyhul_base xzyhul_tatle">
+			<li class="a1">活动名称：</li>
+			<li class="a2 poi1"><input name="activity_name" type="text" onkeyup="this.value=this.value.replace(/^ +| +$/g,'').noSpace()"><span class="poi2 txtr_tast">10个字符以内</span></li>
+		</ul>
+
+		<ul class="xzyhul_base xzyhul_info">
+			<li class="a1">活动描述：</li>
+			<li class="a2 poi1"><textarea style="resize: none;" placeholder="示例：凡参加该活动的顾客都可免费获得面膜一盒哟~" name="describe" cols="" rows="" onkeyup="this.value=this.value.replace(/^ +| +$/g,'').noSpace()"></textarea><span class="poi2 txtr_tast" data-describe="true" >300个字符以内</span></li>
+		</ul>
+
+		<ul class="xzyhul_base xzyhul_uppic">
+			<li class="a1">活动图片：</li>
+			<li class="a2 poi1">
+				<a class="xzyhul_addpicbut fl" style="position: relative;" id="fileUpload">
+					<input data-id="fileUpload" type="file" name="files[]" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:999;opacity:0;filter:alpha(opacity=0);"/>
+				</a>
+			</li>
+		</ul>
+
+		<ul class="xzyhul_base xzyhul_settime">
+			<li class="a1">活动时间：</li>
+			<li class="a2 poi1">
+				<div class="fl">	
+					<input name="start_time" type="text" class="text-center" onclick="laydate({choose:endDateCallBack, istime: true, istoday:false, format: 'YYYY-MM-DD hh:mm'})" style="border: solid 1px #ccc;" readonly >
+					<span class="ml10 mr10">至</span>
+					<input name="end_time" type="text" class="text-center" onclick="laydate({choose:endDateCallBack, istime: true, istoday:false, format: 'YYYY-MM-DD hh:mm'})" style="border: solid 1px #ccc;" readonly >
+				</div>
+				<a class="yhhd_timelmit_but" id="activityTime" style="display:none"></a>
+			</li>
+		</ul>
+
+
+		<ul class="xzyhul_base xzyhul_setproject poi1" id="isShowHide">
+			<li class="a1">优惠项目：</li>
+			<li class="a2 poi1">
+				<div class="zyhul_project_main">
+					<select name="isShow" id="isShow">
+						<option value="0">卡项</option>
+						<option value="1">护理</option>
+						<option value="2">产品</option>
+					</select>
+            		<input name="orderInfo" type="text" id="orderInfo" placeholder="请输入搜索关键字" >
+            		<a class="icon-xmusoubut"></a>
+            	</div>
+            </li>
+			<li class="poi2 wxthopen_project ovf overflow_y_s" id="optionItem" style="display:none">
+				
+			</li>
+		</ul>
+		
+		<div class="text-center syop_main_buts" id="endBtnTemp"><a class=" butsbase butblue01_s fl" onclick="insertActivityfun(1)">完成</a> <a class="butsbase  buthui01_s fl ml50" onclick="closeInsert()">取消</a></div>
+	</div>
+</script>
+
+<!-- 修改活动 -->
+<script type="text/html" id="updateActivityTemp">
+	<div class="xzyhinfo_main">
+		<input type="hidden" value="{{d.data.activity_id}}" name="activity_id" /> 
+		<ul class="xzyh_index_tatle">
+			<li class="a1"></li>
+			<li class="a2">修改优惠活动</li>
+			<li class="fr"><a onclick="closeUpdate({{d.data.activity_state}})"><img src="{{d.staticImage_Url}}/mljia/bigcross_r2_c2.gif" width="24" height="24"></a></li>
+		</ul>
+
+		<ul class="xzyhul_base xzyhul_tatle">
+			<li class="a1">活动名称：</li>
+			<li class="a2 poi1"><input name="activity_name" type="text" value="{{d.data.activity_name ? d.data.activity_name:""}}" onkeyup="this.value=this.value.replace(/^ +| +$/g,'').noSpace()"><span class="poi2 txtr_tast">10个字符以内</span></li>
+		</ul>
+
+		<ul class="xzyhul_base xzyhul_info">
+			<li class="a1">活动描述：</li>
+			<li class="a2 poi1"><textarea style="resize: none;" placeholder="示例：凡参加该活动的顾客都可免费获得面膜一盒哟~" name="describe" cols="" rows="" onkeyup="this.value=this.value.replace(/^ +| +$/g,'').noSpace()">{{d.data.describe ? d.data.describe:""}}</textarea><span class="poi2 txtr_tast" data-describe="true">300个字符以内</span></li>
+		</ul>
+
+		<ul class="xzyhul_base xzyhul_uppic">
+			<li class="a1">活动图片：</li>
+			<li class="a2 poi1">
+				{{# if(d.data.img_ids && d.data.img_ids.length>0){ }}
+					{{# for(var i=0;i<d.data.img_ids.length;i++){ }}
+						<div class="poi1 xzyhul_picdiv" name="imageCount" style="background-image:url({{d.download_url}}{{d.data.img_ids[i]}})">
+							<p class="poi2 xzyhul_picmenu">
+								<a>修改<input data-id="fileUploadUpdate" data-img-id="{{d.data.img_ids[i]}}" type="file" name="files[]" style="position:absolute;left:7px;top:4px;width:24px;height:16px;z-index:999;opacity:0;filter:alpha(opacity=0);overflow: hidden;cursor:pointer;"></a>
+								<span class="line">|</span><a onclick="deleteImg(this,{{d.data.img_ids[i]}})">删除</a>
+							</p>
+						</div>
+					{{# } }}
+				{{# } }}
+				<a class="xzyhul_addpicbut fl" style="position: relative;" id="fileUpload">
+					<input data-id="fileUpload" type="file" name="files[]" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:999;opacity:0;filter:alpha(opacity=0);"/>
+				</a>
+			</li>
+		</ul>
+
+		<ul class="xzyhul_base xzyhul_settime">
+			<li class="a1">活动时间：</li>
+			<li class="a2 poi1">
+				<div class="fl">	
+					<input name="start_time" type="text" class="text-center" value="{{d.data.start_time ? d.data.start_time:""}}" onclick="laydate({choose:endDateCallBack, istime: true, istoday:false, format: 'YYYY-MM-DD hh:mm'})" style="border: solid 1px #ccc;" readonly >
+					<span class="ml10 mr10">至</span>
+					<input name="end_time" type="text" class="text-center" value="{{d.data.end_time ? d.data.end_time:""}}" onclick="laydate({choose:endDateCallBack, istime: true, istoday:false, format: 'YYYY-MM-DD hh:mm'})" style="border: solid 1px #ccc;" readonly >
+				</div>
+				<a class="yhhd_timelmit_but" id="activityTime" style="display:none"></a>
+			</li>
+		</ul>
+
+
+		<ul class="xzyhul_base xzyhul_setproject poi1" id="isShowHide">
+			<li class="a1">优惠项目：</li>
+			<li class="a2 poi1">
+				<div class="zyhul_project_main">
+					<select name="isShow" id="isShow">
+						<option value="0">卡项</option>
+						<option value="1">护理</option>
+						<option value="2">产品</option>
+					</select>
+            		<input name="orderInfo" type="text" id="orderInfo" placeholder="请输入搜索关键字">
+            		<a class="icon-xmusoubut"></a>
+            	</div>
+            </li>
+			<li class="poi2 wxthopen_project ovf overflow_y_s" id="optionItem" style="display:none">
+			</li>
+		</ul>
+		{{# if(d.data.items && d.data.items.length>0){ }}
+			{{# for(var i=0;i<d.data.items.length;i++){ }}
+				<ul class="wxthopen_joined_ul" data-type="{{d.data.items[i].item_type}}" data-id="{{d.data.items[i].item_id}}">   
+					<li class="a1"><img src="{{d.data.items[i].item_img_url}}" width="323" height="242"></li>   
+					<li class="a2"><p>{{d.data.items[i].item_name ? d.data.items[i].item_name:""}}</p></li>   
+					<li class="a3"><p class="mb5">原价</p><p class="txthui lh30" data-price="true">¥{{d.data.items[i].item_price ? d.data.items[i].item_price:""}}<input type="hidden" name="price" value="{{d.data.items[i].item_price ? d.data.items[i].item_price:''}}"></p></li>   
+					<li class="a4"><p class="mb5">折扣</p><p><input name="offPrice" type="text" value="{{d.data.items[i].item_discount ? d.data.items[i].item_discount:""}}"><span class="txthui">折</span></p></li>   
+					<li class="a5"><p class="mb5">优惠价</p><p><input name="discountPrice" type="text" value="{{d.data.items[i].pre_price ? d.data.items[i].pre_price:""}}"><span class="txthui">元</span></p>   
+					</li><li class="a6"><a onclick="isDeleteItem({{d.data.items[i].item_type}},{{d.data.items[i].item_id}})"><i class="icon-wxhd_delte"></i></a></li>  
+				</ul>
+			{{# } }} 
+		{{# } }}
+		
+		<div class="text-center syop_main_buts" id="endBtnTemp"><a class=" butsbase butblue01_s fl" onclick="updateActivityfun(1,{{d.data.activity_state}})">完成</a> <a class="butsbase  buthui01_s fl ml50" onclick="closeUpdate({{d.data.activity_state}})">取消</a></div>
+	</div>
+</script>
+
+<!-- 上传图片提示 -->
+<script type="text/html" id="sendErrorTipsTmpl">
+	<div class="wxzdhf_optise wxzdhf_optise_box3">
+		<p><i class="icon-optise01"></i></p>
+		<p class="txt01">{{tips}}</p>
+		<!--<a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a>-->
+	</div>
+</script>
+
+<!-- 关闭新增弹窗提示 -->
+<script type="text/html" id="colseInsertTemp">
+	<div class="wxqf_openqr wxqf_sanop wxqf_sanop_box01">
+		<ul class="wxqf_openqrul1">
+			<li class="li1"><a onclick="closeInsertLaytip()"><i class="icon-editup06 fr"></i></a></li>
+			<li class="li2">
+				<p>活动尚未创建完成，关闭后是否将活动保存为草稿？</p>
+			</li>
+		</ul>
+		<p class="wxpt_upicbuts">
+			<a class="but0 but1" onclick="insertActivityfun(2)">确定</a>
+			<a class="but0 but2" onclick="closeOperateActivity()">取消</a>
+		</p>
+	</div>
+</script>
+
+<!-- 下拉框项目 -->
+<script type="text/html" id="optionItemTemp">
+	{{# if(d.items.length>0){ }}
+		{{# for(var i=0;i<d.items.length;i++){ }}
+			<ul class="wxthopen_project_ul">
+				<li class="a1"><img src="{{d.download_url}}{{d.items[i].imgId}}" width="323" height="242"></li>
+				<li class="a2"><p>{{d.items[i].name}}</p><p class="txthui">¥{{d.items[i].price}}</p></li>
+				{{# if(d.items[i].type==0){ }}
+					<li class="a3"><a class="butsbase butblue01_s" onclick="joinActivitie({{d.items[i].itemType}},{{d.items[i].id}})">加入活动</a></li>
+				{{# }else{ }}
+					<li class="a3"><a class="butsbase buthui01_s" onclick="cancelItemActivitie(0,{{d.items[i].itemType}},{{d.items[i].id}})">取消加入</a></li>
+				{{# } }}
+			</ul>
+		{{# } }}
+	{{# }else{ }}
+		<div class="shop_no_news_txt ">
+              <i class="icon-no_news"></i>亲，还没有记录哦~
+        </div>
+	{{# } }}
+</script>
+
+<!-- 新增活动加入项目成功提示 -->
+<script type="text/html" id="insertItemSuccessTip">
+	<div class="wxzdhf_optise wxzdhf_optise_box5">
+		<p><i class="icon-optise02"></i></p>
+		<p class="txt01">加入成功</p>
+		<a ><i class="icon-editup06 fr"></i></a>
+	</div>
+</script>
+
+<!-- 新增活动成功提示 -->
+<script type="text/html" id="insertActivitySuccessTip">
+	<div class="wxzdhf_optise wxzdhf_optise_box5">
+		<p><i class="icon-optise02"></i></p>
+		<p class="txt01">新增成功</p>
+		<a ><i class="icon-editup06 fr"></i></a>
+	</div>
+</script>
+
+<!-- 修改活动成功提示 -->
+<script type="text/html" id="updateActivitySuccessTip">
+	<div class="wxzdhf_optise wxzdhf_optise_box5">
+		<p><i class="icon-optise02"></i></p>
+		<p class="txt01">修改成功</p>
+		<a ><i class="icon-editup06 fr"></i></a>
+	</div>
+</script>
+
+<!-- 取消活动加入项目成功提示 -->
+<script type="text/html" id="cancelItemSuccessTip">
+	<div class="wxzdhf_optise wxzdhf_optise_box5">
+		<p><i class="icon-optise02"></i></p>
+		<p class="txt01">已取消成功</p>
+		<a ><i class="icon-editup06 fr"></i></a>
+	</div>
+</script>
+
+<!-- 加入项目后显示项目模板 -->
+<script type="text/html" id="successItemTemp">
+	<ul class="wxthopen_joined_ul" data-type="{{d.items.itemType}}" data-id="{{d.items.id}}">
+		<li class="a1"><img src="{{d.download_url}}{{d.items.imgId}}" width="323" height="242"></li>
+		<li class="a2"><p>{{d.items.name}}</p></li>
+		<li class="a3"><p class="mb5">原价</p><p class="txthui lh30" data-price="true">¥{{d.items.price}}<input type="hidden" name="price" value="{{d.items.price}}" /></p></li>
+		<li class="a4"><p class="mb5">折扣</p><p><input name="offPrice" type="text" value="" ><span class="txthui">折</span></p></li>
+		<li class="a5">
+			<p class="mb5">优惠价</p>
+			<p><input name="discountPrice" type="text" value="" ><span class="txthui">元</span></p>
+		</li>
+		<li class="a6"><a onclick="isDeleteItem({{d.items.itemType}},{{d.items.id}})"><i class="icon-wxhd_delte"></i></a></li>
+	</ul>
+</script>
+
+<!-- 确认是否删除项目 -->
+<script type="text/html" id="isDeleteTemp">
+	<div class="wxqf_openqr wxqf_sanop ">
+		<ul class="wxqf_openqrul1">
+			<li class="li1"><a onclick="closeIsDeleteItemTempLay()"><i class="icon-editup06 fr"></i></a></li>
+			<li class="li2">
+				<p >确定删除？</p>
+			</li>
+		</ul>
+		<p class="wxpt_upicbuts">
+			<a class="but0 but1" onclick="cancelItemActivitie(1,{{d.type}},{{d.id}})">确定</a>
+			<a class="but0 but2" onclick="closeIsDeleteItemTempLay()">取消</a>
+		</p>
+	</div>
+</script>
+
+<!-- 加入项目超过上限失败提示 -->
+<script type="text/html" id="joinFailTemp">
+	<div class="wxzdhf_optise wxzdhf_optise_box6">
+		<p><i class="icon-optise01"></i></p>
+		<p class="txt01">加入失败，活动商品不能超过4个</p>
+		<a ><i class="icon-editup06 fr"></i></a>
+	</div>
+</script>
+
+<!-- 活动为修改完成提示 -->
+<script type="text/html" id="noUpdateSuccessTip">
+	<div class="wxqf_openqr wxqf_sanop">
+		<ul class="wxqf_openqrul1">
+			<li class="li1"><a onclick="closeUpdateLayFun()"><i class="icon-editup06 fr"></i></a></li>
+			<li class="li2">
+				<p>活动未修改完成，关闭后是否保存修改？</p>
+			</li>
+		</ul>
+		<p class="wxpt_upicbuts">
+			<a class="but0 but1" onclick="updateActivityfun(0,{{d.status}})">确定</a>
+			<a class="but0 but2" onclick="closeOperateActivity()">取消</a>
+		</p>
+	</div>
+</script>
+
+<!-- 预览活动，生成二维码 -->
+<script type="text/html" id="weixinActivityShow">
+	<div class="wxqf_openqrcode">
+		<p class="a1">优惠活动二维码 <a onclick="closeOperateActivity()"><i class="icon-editup06 fr"></i></a></p>
+		<p class="a2">注：用微信扫描二维码可在手机上预览该活动</p>
+		<p class="a3">
+			<iframe src="{{d.serviceAddr}}render=image&msize=0.2&size=225&level=Q&encode=1&content={{d.joinDimCodeUrl}}" width="225" height="225" border="0" scrolling="no" style="border:0px; border: none;margin-left: 6px;margin-top: 6px;"></iframe>
+		</p>
+	</div>
+</script>
+
+<!-- 活动时间过期 -->
+<script type="text/html" id="ActivityTimeOver">
+	<div class="wxqf_openqr wxqf_sanop wxqf_sanop_box03">
+		<ul class="wxqf_openqrul1">
+			<li class="li1"><a onclick="closeOperateActivity()"><i class="icon-editup06 fr"></i></a></li>
+			<li class="li2">
+				<p>活动时间已过期，无法开始活动</p>
+				<p class="tatle">是否前往修改活动时间？</p>
+			</li>
+		</ul>
+		<p class="wxpt_upicbuts">
+			<a class="but0 but1" onclick="updateActivityTemp(1,{{d.activity_id}})">确定</a>
+			<a class="but0 but2" onclick="closeOperateActivity()">取消</a>
+		</p>
+	</div>
+</script>
+
+<!-- 活动信息未填写完整 -->
+<script type="text/html" id="ActivityInfoIncomplete">
+	<div class="wxqf_openqr wxqf_sanop wxqf_sanop_box03">
+		<ul class="wxqf_openqrul1">
+			<li class="li1"><a onclick="closeOperateActivity()"><i class="icon-editup06 fr"></i></a></li>
+			<li class="li2">
+				<p>活动信息尚未填写完整，无法开始活动</p>
+				<p class="tatle">是否前往完善信息？</p>
+			</li>
+		</ul>
+		<p class="wxpt_upicbuts">
+			<a class="but0 but1" onclick="updateActivityTemp(1,{{d.activity_id}})">确定</a>
+			<a class="but0 but2" onclick="closeOperateActivity()">取消</a>
+		</p>
+	</div>
+</script>
+
+
+
+
+
+
+
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.fileupload.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/laydate-master/laydate.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/laypage/laypage.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/promotions/release_promotion_activity.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}}"></script>
+
+{{{include '../layout_base/footer'}}}
+

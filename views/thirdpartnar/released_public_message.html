@@ -1,13 +1,11 @@
-<%@page language="java" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<jsp:include  page="../layout_main/header.jsp" />
+{{{include '../layout_main/header'}}}
 
-<link href="${resourcesPath}/css/bootstrap3/css/bootstrap.min.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/base.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/my_beauty_plus_public.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/send_dimension.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/send_dimension_tc.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/css/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/base.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/my_beauty_plus_public.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/send_dimension.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/send_dimension_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
 <style>
     #contentDom img{width:100%}
     #contentDom p{margin-bottom:15px}
@@ -16,21 +14,21 @@
 
 </head>
 
+<body   id="header">
 
+<input type="hidden" id="controlTarg" value="7" />
+<input type="hidden" id="shopSetId" value="4" />
+<input type="hidden" id="newUnBindCount" value="-1" />
+<input type="hidden" value="2014-01-01" id="startDate"/>
+<input type="hidden" value="" id="endDate"/>
 
-<jsp:include  page="../layout_main/top.jsp" />
-
+{{{include '../layout_main/top'}}}
 <!--页面主体 S-->
 <div class="page_main" id="auto_page_main">
     <div class="massage_box_big">
         <ul class="massage_list" id="auto_massage_list" ></ul>
-
-
-        <div class="user_comment_pagination" id="morePage">
-
-        </div>
+        <div class="user_comment_pagination" id="morePage"></div>
     </div>
-
 </div>
 
 <script type="text/html"  id="releasedInofTemp">
@@ -85,11 +83,11 @@
 
 </script>
 
-<script src="<%=request.getContextPath()%>/resources/javascript/library/laypage/laypage.js?v=${fileVersion}"></script>
-<script src="<%=request.getContextPath()%>/resources/javascript/wechat/thirdpartnar/released_public_message.js?v=${fileVersion}"></script>
-<<<<<<< HEAD
-<script src="<%=request.getContextPath()%>/resources/javascript/wechat/base/mljia_wx_userUtil.js?v=${fileVersion}"></script>
-=======
->>>>>>> a2ef8679bb7d3469d5517e1b700f6bd385d4b536
-<jsp:include  page="../layout_main/footer.jsp" />
+<script src="{{{staticResourcesUrl}}}/javascript/library/laypage/laypage.js?v={{{ fileVersion }}}"></script>
+<script src="/resources/javascript/wechat/thirdpartnar/released_public_message.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+
+{{{include '../layout_main/footer'}}}
+
 

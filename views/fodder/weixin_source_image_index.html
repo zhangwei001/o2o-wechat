@@ -1,0 +1,106 @@
+
+
+{{{include '../layout_base/header'}}}
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/layer/skin/layer.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/plus_v1.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/percentage_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/weixin_tc.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/artDialog/skins/default.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/javascript/library/laypage/skin/laypage.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/mymiljia.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body  data-shop-sid="{{{shopSid}}}" id="header">
+{{{include '../layout_base/top'}}}
+
+<div class="container weixinptmain" id="w1000">
+	<ul class="jilumanu mt10">
+        <li  ><a id="sendWXInfo">发微信内容</a></li>
+        <li class="weixinyhtit"><a href="/o2o/route/{{{shopSid}}}/promotions-release_promotion_activity">发布优惠活动</a></li>
+        <li ><a href="/o2o/route/{{{shopSid}}}/manage-weixin_custom_index">微信用户管理</a></li>
+        <li  ><a href="/o2o/route/{{{shopSid}}}/robot-upweixin_auto_reply_index">自动回复</a></li>
+        <li ><a href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index">自定义发消息</a></li>
+
+        <li class="activ"><a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index">素材库</a></li>
+       
+    </ul>
+   <ul class="wxtf_menu2">
+        <li><a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index " >图文素材</a></li>
+        <li class="activ"><a href="/o2o/route/{{{shopSid}}}/fodder-weixin_source_image_index">图片库</a></li>
+    </ul>
+</div>
+
+
+
+<div  class="container weixinptmain wxminh500">
+<ul class="weixinffadd weixinffup">
+<li class="wxpt_progress_bar mt20" style="display: none;" id="progressBar">
+	<p class="wxpt_picliup02 fl poi1">
+		<span style="width: 0%;"></span>
+		<span class="txt poi2">0%</span>
+	</p>
+	<p class="wxpt_picliup_txt fl">共0张（0k），已有0张成功上传</p>
+</li>
+
+	<li class="a1 fr"><a class="weixinaddbut " style="position: relative;">+ 本地上传
+	<input id="fileUpload" type="file" name="files[]" multiple="multiple" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:999;opacity:0;filter:alpha(opacity=0);"/>
+	</a></li>
+	<li class="a2 fr"><a id="batchDel" class="weixinaddbut weixinaddbut02">批量删除</a></li>
+</ul>
+
+<ul class="wxsc_pictpk" id="containerUl" data-total="0"></ul>
+
+
+<div class="ebderror_tise" id="emptyTipsDiv"  style="display: none;">
+	<img src="{{{staticImageUrl}}}/mljia/dengpao_r2_c2.gif" width="16" height="22">暂无图片素材，请新增。
+</div>
+
+
+<div class="ebderror_tise" id="tipsDiv" style="display: none;">
+	<img src="{{{staticImageUrl}}}/mljia/dengpao_r2_c2.gif" width="16" height="22">您当前绑定的账号为未认证的订阅号，无法使用素材库，请重新绑定认证的服务号。
+</div>
+
+ <div class="fenyeademain3x pl15" id="pageFenye"></div>
+ 
+</div>
+
+<script type="text/html" id="sendErrorTipsTmpl">
+<div class="wxzdhf_optise wxzdhf_optise_box3">
+	<p><i class="icon-optise01"></i></p>
+	<p class="txt01">{{tips}}</p>
+	<!--<a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a>-->
+</div>
+</script>
+
+
+<script type="text/html" id="confirmTmpl">
+<div class="wxqf_openqr wxqf_pic_delta">
+<ul class="wxqf_openqrul1">
+	<li class="li1"><a onclick="layer.closeAll();"><i class="icon-editup06 fr"></i></a></li>
+	<li class="li2">
+		<p class="tatle">删除提醒</p>
+		<p><i class="icon-picdelta_op"></i>您确定要删除当前图片吗？</p>
+	</li>
+</ul>
+<p class="wxpt_upicbuts">
+	<a class="but0 but1" onclick="confrimDelFun();">确认</a>
+	<a class="but0 but2" onclick="layer.closeAll();">取消</a>
+</p>
+</div>
+</script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.fileupload.js?v={{{ fileVersion }}}"></script>
+
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.masonry.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/laypage/laypage.js?v={{{ fileVersion }}}"></script>
+
+
+<script src="/resources/javascript/wechat/fodder/weixin_source_image_index.js?v={{{ fileVersion }}}"></script>
+
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+
+{{{include '../layout_base/footer'}}}

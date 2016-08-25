@@ -1,22 +1,20 @@
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/javascript/library/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/bootstrap/bootstrap.min.js"></script>
 
 <div class="footer_main">
     <div class="navbar_container  footer_container">
         <p class="footerm mt20 ml20">
-            <a href="${staticHomeUrl}/static/event/helpcenter/aboutUs.html" target="_blank">关于我们</a>
+            <a href="{{{staticHomeUrl}}}/static/event/helpcenter/aboutUs.html" target="_blank">关于我们</a>
             <c>|</c>
-            <a href="${staticHomeUrl}/static/event/helpcenter/contactUs.html" target="_blank">联系我们</a>
+            <a href="{{{staticHomeUrl}}}/static/event/helpcenter/contactUs.html" target="_blank">联系我们</a>
             <c>|</c>
-            <a href="${staticHomeUrl}/static/event/helpcenter/recruitment.html" target="_blank">诚聘英才</a>
+            <a href="{{{staticHomeUrl}}}/static/event/helpcenter/recruitment.html" target="_blank">诚聘英才</a>
             <c>|</c>
-            <a href="${staticHomeUrl}/shopList/opinion?shopId=${shopId}" target="_blank">意见反馈</a>
+            <a href="{{{staticHomeUrl}}}/static/event/helpcenter/legal.html" target="_blank">法律声明</a>
             <c>|</c>
-            <a href="${staticHomeUrl}/static/event/helpcenter/legal.html" target="_blank">法律声明</a>
+            <a href="{{{staticHomeUrl}}}/static/event/helpcenter/webMap.html" target="_blank">网站地图</a>
             <c>|</c>
-            <a href="${staticHomeUrl}/static/event/helpcenter/webMap.html" target="_blank">网站地图</a>
-            <c>|</c>
-            <a href="${staticHomeUrl}/static/event/helpcenter/shopHelper.html" target="_blank">店铺助手</a>
+            <a href="{{{staticHomeUrl}}}/static/event/helpcenter/shopHelper.html" target="_blank">店铺助手</a>
         </p>
         <p class="ml20  text-center">深圳市美丽加互联网有限公司 版权所有 2013-2016&nbsp;|&nbsp;<a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备13068402号</a>
             <script type="text/javascript2">
@@ -24,8 +22,8 @@
 				document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa99432a7d8ebdb44b06e9c2fbf97beba'   type='text/javascript'%3E%3C/script%3E"));
 		</script>
         </p>
-        <p  class="ml20">
-            <!-- 网站实名认证 -->
+        <!--<p  class="ml20">
+            &lt;!&ndash; 网站实名认证 &ndash;&gt;
             <a id="_pingansec_bottomimagesmall_shiming" ></a>
             <script type="text/javascript">
                 $(document).ready(function(){
@@ -73,7 +71,7 @@
                     },1500);
                 });
             </script>
-        </p>
+        </p>-->
     </div>
 
     <div class="navbar-fixed-bottom" style="margin-left: 92%; margin-bottom: 5%">
@@ -81,7 +79,7 @@
             <a  id="toAnimateTop" style="display: none;"><i class="icon-upper"></i></a>
         </p>
         <%-- <p class="fuchuanb">
-        <a href="${main_Url}/shopList/opinion?shopId=${shopId}" target="_blank"><i class="icon-upper"></i></a>
+        <a href="{{{main_Url}}}/shopList/opinion?shopId=${shopId}" target="_blank"><i class="icon-upper"></i></a>
     </p> --%>
     </div>
 

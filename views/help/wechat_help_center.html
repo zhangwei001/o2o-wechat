@@ -1,0 +1,41 @@
+
+{{{include '../layout_second/header'}}}
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/css/bootstrap.min.css?v={{{fileVersion}}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/icons.css?v={{{fileVersion}}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/help_module.css?v={{{fileVersion}}}" rel="stylesheet" type="text/css" />
+
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/dialog.css?v={{{fileVersion}}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/guide_tise.css?v={{{fileVersion}}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/base.css?v={{{fileVersion}}}" rel="stylesheet" type="text/css" />
+
+</head>
+<body  data-shop-sid="{{{shopSid}}}" id="header">
+{{{include '../layout_second/top'}}}
+<!-- 内容主区域S -->
+<div class="container  help_center_main mt30" >
+  <div class="help_container_box" > 
+    <!--帮助中心-左s-->
+    <div class="help_center_left fl">
+      <ul class="help_center_buts_ul">
+        <li class="tatle">微信帮助中心</li>
+        <li ><a class="active navATag" id="buts1"><i class="icon-help_square fl"></i><span class="fl navBtn" data-itemId="intro">公众平台简介</span></a></li>
+        <li class=""><a  class="navATag" id="buts2"><i class="icon-help_square fl"></i><span class="fl navBtn" data-itemId="register">注册服务号</span></a></li>
+        <li class=""><a   class="navATag" id="buts3"><i class="icon-help_square fl"></i><span class="fl navBtn" data-itemId="auth">认证服务号</span></a></li>
+        <li class=""><a   class="navATag" id="buts4"><i class="icon-help_square fl"></i><span class="fl navBtn" data-itemId="upgrade">订阅升级服务号</span></a></li>
+      </ul>
+    </div>
+    <div class="help_center_right fl" id="helpCenteView">  </div>
+  </div>
+
+</div>
+
+
+
+<script src="/resources/javascript/wechat/help/wechat_help_center.js?v={{{fileVersion}}}"></script>
+
+<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{fileVersion}}}"></script>
+
+{{{include '../layout_second/footer'}}}
+
