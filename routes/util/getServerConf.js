@@ -8,7 +8,6 @@ var getServerSyncConf=function(){
     //同步读取
     var obj={};
     try{
-
         var json = fs.readFileSync(path.resolve(__dirname, '../../conf/server.json'),'utf8').toString();
         obj=JSON.parse(stripJsonComments(json));
     }catch(e){

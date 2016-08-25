@@ -14,7 +14,9 @@ $(function(){
 //	download_url='http://dev.mljia.cn/cn.mljia.web/download/image/';
 //	upload_url='http://dev.mljia.cn/cn.mljia.web/upload/image';
 	/*********************获取图片列表***************************/
-	
+		//设置导航
+	$("#sendWXInfo").attr("href", "/o2o/route/"+ wxGLOBAL.shopSid + "/thirdpartnar-send_public_message?access_token=" + store.get("wx_access_token"));
+
 	function initData(page){
 		$.get(requestUrl.material.selectMaterial,{
 			user_id:userId,

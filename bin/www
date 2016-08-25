@@ -20,7 +20,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-server.setTimeout(1000*10);
+
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -87,5 +87,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  console.log(' server is started Listening on ' + bind);
+  console.log(' Express server is started! Listening on ' + bind);
 }

@@ -33,8 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //路由配置
-//路由配置
-app.use('/', require('./routes/shopRouters'));
+
 app.use('/o2o/route', require('./routes/shopRouters'));
 app.use('/o2o/route', require('./routes/userRouters'));
 
