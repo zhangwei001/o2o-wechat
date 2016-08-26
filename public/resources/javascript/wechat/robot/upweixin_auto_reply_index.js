@@ -584,7 +584,7 @@ $(function(){
         //数据渲染dom
         laytpl($("#yingdaoTemp").html()).render({
             content:content,
-            qrCodeImg:download_url+"/image/"+content.qr_file_image
+            qrCodeImg:wxGLOBAL.download_url+"/image/"+content.qr_file_image
 
         },function(html){
             $(".wxminh500").empty().append(html).css({"background-color":"#fff"});
@@ -735,7 +735,7 @@ $(function(){
                     if(resData.status==200 && resData.content){
                         var resultData= JSON.parse($.base64.decode(resData.content,"utf8"));
                         var imgHtml = '<div class="auto_reply_right_pic  fl overflow_y_s">'
-                            + '<a class="upload_imgs" data-material_id='+resultData.id+' style="background-image:url('+download_url+resultData.file_id+')"></a></div>';
+                            + '<a class="upload_imgs" data-material_id='+resultData.id+' style="background-image:url('+wxGLOBAL.download_url+resultData.file_id+')"></a></div>';
                         $(_pageId +"#showRelay"+relayItems.id).html(imgHtml);
 
                     }else{
@@ -907,7 +907,7 @@ $(function(){
                     var insertHtml = $("#imageTextInfoTmpl").html();
                     laytpl(insertHtml).render({
                         items:results,
-                        download_url:download_url
+                        download_url:wxGLOBAL.download_url
                     },function(html){
                         setTimeout(function(){
                             $(_pageId +"#showRelay"+relayId).html(html);
@@ -970,7 +970,7 @@ $(function(){
             //获取图片资源
             initImageData(function(items){
                 laytpl($("#artImageLayerTmpl").html()).render({
-                    download_url:download_url,
+                    download_url:wxGLOBAL.download_url,
                     id:relayId||'',
                     items:items
                 },function(html){
@@ -1004,7 +1004,7 @@ $(function(){
             //图文模板
             initImageTextData('',function(items){
                 laytpl($("#artImageTextLayerTmpl").html()).render({
-                    download_url:download_url,
+                    download_url:wxGLOBAL.download_url,
                     id:relayId||'',
                     shopId:shopId,
                     items:items
@@ -1272,7 +1272,7 @@ $(function(){
                 }
                 laytpl($("#seachImageTextTmpl").html()).render({
                     items:items,
-                    download_url:download_url
+                    download_url:wxGLOBAL.download_url
                 },function(html){
                     $(".wxpt_zw").html(html);
                 });
