@@ -1,0 +1,204 @@
+{{{include '../../layout_second/header'}}}
+
+
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/css/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/weixin_module.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/icons.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/wifi_module.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/guide_tise.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/base.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/weixin_module_tise.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+<style>
+.stewifi_inpiut .p2{height:12px;}
+
+</style>
+</head>
+
+<body   id="header">
+{{{include '../../layout_second/top'}}}
+
+<input type="hidden" id="shopIdKey" value="{{{ shopSid }}}">
+
+<div class="page_main" id="auto_page_main">
+	        <!-- 内容主区域S -->
+	<div class="container  weixinhd_main"> 
+		  
+		  <ul class="top_menu_box_type2 " id="auto_topmenu_box">
+		    <li><a id="navigation_set"  >公众号首页</a><a  id="wifiRouter"  class="active">一键连WiFi</a></li>
+		  </ul>
+		  
+		  <!-- 选择菜单e --> 
+		  
+		  <!--微信内容主体s-->
+		  <div class="weixin_container_box "  > </div>
+		  
+		  <script type="text/html" id="wifiStepTemp">
+			<div class="stewifi_main">
+				<ul class="stewifi_menu">
+					<li class="p1"></li>
+					<li class="p2"><p class="tatle">一键连WiFi</p><p>吸粉神器，立刻将店铺顾客转化为微信粉丝！<br>店铺接入微信连WiFi后，顾客通过微信扫二维码或点击商家主页菜单等方式即可快速上网</p></li>
+					<li class="p3"><a id="setWifiStepBtn" class=" butsbase butblue01">设置WiFi</a></li>
+				</ul>
+				<ul class="stewifi_stpe">
+					<li>
+						<p class="pic pic01"></p><p class="tatle">第一步 - 设置店铺网络</p><p>进入设置页面，按照指引添加WiFi设备</p>
+					</li>
+					<li>
+						<p class="pic pic02"></p><p class="tatle">第二步 - 扫码获取WiFi密码</p><p>扫描店铺二维码，获取店铺WIFI名称及密码</p>
+					</li>
+					<li>
+						<p class="pic pic03"></p><p class="tatle">第三步 - 粉丝接入WiFi</p><p>复制WiFi密码，成功连WiFi</p>
+					</li>
+				</ul>
+		  </div>
+		</script>
+		
+		
+		
+		  
+		  
+		  
+		<script type="text/html" id="noWifiTemp">
+			<div class="wifi_tab_main">
+				<div class="stewifi_main">
+					<div class="stewifi_redtise">
+						<i class="icon-editpadTise"></i>将店铺内的WiFi名和密码在此处输入，顾客才可以获取到本店WiFi。如果不知道如何获取，请联系美丽加客服4007-889-166或联系店务经理。
+
+					</div>
+					<div class="stewifi_inpiutMain">
+						<ul class="stewifi_inpiut">
+							<li class="stewifi_text"><p>WiFi名称</p></li>
+							<li class="stewifi_input">
+								<p class="p1"><input class="wifiName" name="" type="text" placeholder="请输入无线网络名称"></p>
+								<p class="p2" >请输入网络名称</p>
+							</li>
+						</ul>
+						<ul class="stewifi_inpiut">
+							<li class="stewifi_text"><p>WiFi密码</p></li>
+							<li class="stewifi_input">
+								<p class="p1"><input class="wifiPassword" name="" type="text" placeholder="请输入无线网络密码"></p>
+								<p class="p2" ></p>
+							</li>
+						</ul>
+					</div>
+					<div class="stewifi_buts text-center"><a  class=" saveWifi butsbase_ib butblue01">保存</a></div>
+				</div>
+			</div>
+      </script>
+      
+      <script type="text/html" id="hasSetWifiTemp">
+			<!--主体-->
+<div class="wifi_tab_main">
+	<div class="stewifi_main">
+		<!--设置提示-->
+		<ul class="stewifi_menu">
+			<li class="p1"></li>
+			<li class="p2">
+		    <p class="tatle">一键连WiFi</p>
+			<p>吸粉神器，立刻将店铺顾客转化为微信粉丝！<br>
+		店铺接入微信连WiFi后，顾客通过微信扫二维码或点击商家主页菜单等方式即可快速上网</p></li>
+			<li class="p3" style="display:none"><a href="" class=" butsbase butblue01">设置WiFi</a></li>
+		</ul>
+		<ul class="stewifi_eidtmenu">
+			<li class="a1">
+		    <p>当前配置</p>
+			<p><span>WiFi名称</span><span>{{ d.wifiInfo.wifiCount }}</span></p>
+			<p><span>WiFi密码</span><span>{{ d.wifiInfo.wifiPassWord }}</span></p></li>
+		    <li class="a2">
+		   <a  class="butsbase_ib buthui01 mr20" id="editBtn">修改</a><a id="deleBtn" class="butsbase_ib buthui01">删除</a>
+		    </li>
+		</ul>
+		<ul class="stewifi_stpe"  style="display:none">
+			<li>
+				<p class="pic pic01"></p>
+				<p class="tatle">第一步 - 设置店铺网络</p>
+				<p>进入设置页面，按照指引添加WiFi设备</p>
+			</li>
+			<li>
+				<p class="pic pic02"></p>
+				<p class="tatle">第二步 - 扫码获取WIFI密码</p>
+				<p>扫描店铺二维码，获取店铺WIFI名称及密码</p>
+			</li>
+			<li>
+				<p class="pic pic03"></p>
+				<p class="tatle">第三步 - 粉丝接入WiFi</p>
+				<p>复制WiFi密码，成功连WiFi</p>
+			</li>
+		</ul>
+	</div>
+</div>
+
+	  </script>
+	  
+	  <script type="text/html" id="edtiWifiTemp">
+	<div class="wifisetTc_main poi1">
+	  <div class="wifisetTc_box1">修改网络<a  class="crossbut"></a> </div>
+	  <div class="wifisetTc_box4">
+	  	  <div class="wifisetTc_tise"><i class="icon-exclamation_orange_s"></i>网络名称（密码）修改后，需同步修改所有设备的网络名称（密码），否则无法正常连网</div>
+		  <div class="stewifiTc_inpiutMain">
+			  <ul class="stewifiTc_inpiut">
+				<li class="stewifiTc_text"><p>新的网络名称<br>（SSID）</p></li>
+				<li class="stewifiTc_input">
+					<p class="p1"><input name=""  value="{{ d.wifiInfo.wifiCount }}"  class="wifiName"  type="text" placeholder="请输入无线网络名称"></p>
+					<p class="p2"></p>
+				</li>
+			 </ul>
+			<ul class="stewifiTc_inpiut">
+				<li class="stewifiTc_text"><p>密码</p></li>
+				<li class="stewifiTc_input">
+					<p class="p1"><input name="" value="{{ d.wifiInfo.wifiPassWord }}" class="wifiPassword"  type="text" placeholder="请输入无线网络密码"></p>
+					<p class="p2"></p>
+				</li>
+			</ul>
+		  </div>
+	  </div>
+	  <div class="wifisetTc_box3"> <a  id="reSavaWifiBtn" class="saveWifi butsbase_ib butblue01 mr30">保存</a> <a id="quitEditWifi" class="butsbase_ib buthui01">取消</a> </div>
+	</div>
+	 </script>
+	 
+	 
+	 <script type="text/html" id="deleteWifiTemp">
+		<div class="wifisetTc_main poi1">
+  			<div class="wifisetTc_box1"> 操作确认 <a class="crossbut"></a> </div>
+  			<div class="wifisetTc_box2">
+    			<p class="p1"><i class="icon-exclamation_big"></i></p>
+    			<p class="p2">此操作将清空WiFi配置，顾客无法再通过服务号连接WiFi是否删除？ </p>
+  			</div>
+  			<div class="wifisetTc_box3"> <a  id="deleteSure" class="butsbase_ib butblue01 mr30">确认</a> <a  id="cancelDeletWifi" class="butsbase_ib buthui01">取消</a> </div>
+		</div>
+	</script>
+	
+	<script type="text/html" id="savaSuccess">
+   	<div class="wxzdhf_optise">
+  		<p><i class="icon-optise02"></i></p>
+  		<p class="txt01">保存成功</p>
+	</div>
+   </script>
+	  
+
+</div>
+</div>
+
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.ui.widget.js?v={{{ fileVersion }}}"></script>
+ <script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/artDialog/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/artDialog/iframeTools.source.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/public/public.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/public/valiRight.js?v={{{ fileVersion }}}"></script>
+
+
+
+<script src="/o2o/resources/javascript/wechat/tools/wifi/shop_wifi_snapshoot.js?v={{{ fileVersion }}}"></script>
+<script src="/o2o/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+{{{include '../../layout_second/footer'}}}
+
+
+
+
+
+
+
+

@@ -1,0 +1,123 @@
+{{{include '../../layout_second/header'}}}
+
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/css/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/icons.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/weixin_module.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/guide_tise.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/base.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+
+<style>
+.resetPosition{postion:relateve;top:638px;left:578px}
+</style>
+
+</head>
+
+<body   id="header">
+{{{include '../../layout_second/top'}}}
+<input type="hidden" id="shopIdKey" value="{{{ shopSid }}}">
+    <div class="page_main" id="auto_page_main">
+ 
+ <!-- 内容主区域S -->
+<div class="container  weixinhd_main"> 
+  
+  <!-- 选择菜单s -->
+  
+   <ul class="top_menu_box_type2 " id="auto_topmenu_box">
+    <li><a  class="active" >公众号首页</a><a  id="navigation_set">一键连WiFi</a></li>
+  </ul>
+ 
+  <div class="weixin_container_box mb20" id="auto_weixin_container_box"> 
+    <div class="weixinCode_banner"></div>
+    <div class="weixinCode_info_main poi1">
+      <ul class="weixinCode_umr">
+        <li class="li1">
+          <p class="code"><img id="focusImg" width="83" height="82"></p>
+          <p class=""><a class="butsbase_ib butblue02" target="_blank">下载店铺二维码</a></p>
+        </li>
+        <li class="li2">
+          <p class="txt1">线上运营  hold住顾客</p>
+          <p class="txt2">无需申请，立即开通。<br>
+            顾客扫码或支付均可成为店铺粉丝，便于商家运营。<br>
+            顾客可在公众号内查询个人消费，连接<a id="jumpSetWifiPage">店铺WiFi</a>。<br>
+            顾客预约和点评店铺服务及员工，参加店铺营销活动。</p>
+        </li>
+      </ul>
+      <ul class="weixinCode_umr">
+        <li class="li1">
+          <p class="code"><img id="payImg" width="83" height="82"></p>
+          <p class="txt2"><a href="" class=" butsbase_ib butblue02" target="_blank">下载收银二维码</a></p>
+        </li>
+        <li class="li2">
+          <p class="txt1">零维护、更商务、超方便</p>
+          <p class="txt2">直接向店铺付款更商务，增强顾客信任。<br>
+            目前免手续费、提现费，太省了！<br>
+            入账成功后，App、SaaS立即有提醒。<br>
+            App、SaaS上查询所有的入账记录，方便对账。 </p>
+        </li>
+      </ul>
+    </div>
+    <!--二维码主体E--> 
+    
+  </div>
+  <!--微信内容主体e--> 
+  
+  <!-- 规则介绍 -->
+  <div class="weixin_container_box " id="auto_weixin_container_box"> 
+    
+    <!-- 标题 -->
+    <div class="finance_report_income_tatle weixinCode_luletatle">疑惑解答</div>
+    <!-- 标题 -->
+    
+    <ul class="weixinCode_lule">
+      <li class="list01">
+        <p class="txt1">1.如何增加自己的粉丝？</p>
+        <p class="txt2">答：让顾客扫描店铺专属公众号关注，或顾客付款时微信扫码支付，<br>
+          或让顾客在美丽加服务号内回复本店店铺号。</p>
+        <p class="txt1">2.发展顾客成为粉丝有什么好处？</p>
+        <p class="txt2">答：一键获取WiFi，立即设置WiFi。商家设置营销活动，便于运营。</p>
+        <p class="txt1">3.顾客如何关联查询自己的消费信息？</p>
+        <p class="txt2">答：店铺收银时选择微信支付，让顾客在线扫码，或者顾客在公众号<br>
+          提交手机号码验证。</p>
+        <p class="txt2">关联后顾客可接收消费通知，查询消费卡、消费记录，预约和店铺店铺服务。</p>
+      </li>
+      <li class="list02">
+        <p class="txt1">1.扫码支付支持哪些支付方式？</p>
+        <p class="txt2">答：当前支持微信支付&支付宝支付。</p>
+        <p class="txt1">2.顾客扫码后，钱在哪里？</p>
+        <p class="txt2">答：店主的美丽宝中可查看每一笔进账。</p>
+        <p class="txt1">3.美丽宝的钱在哪里可以看？</p>
+        <p class="txt2">答：商家版app工作台就可以看到，支持<br>
+          随时提现，第二个工作日到账。</p>
+      </li>
+    </ul>
+    
+     <div class=" weixinCode_lule_tise">如果你想拥有/绑定独立的公众号，请<a   id="toBindLink">前往申请&绑定<span class="font_songti">>></a></a></div>
+  
+    
+  </div>
+
+</div>
+ 
+
+</div>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/jquery.ui.widget.js?v={{{ fileVersion }}}"></script>
+ <script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/artDialog/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/artDialog/iframeTools.source.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/public/public.js?v={{{ fileVersion }}}"></script>
+<script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/public/valiRight.js?v={{{ fileVersion }}}"></script>
+
+
+
+<script src="/o2o/resources/javascript/wechat/tools/qrcode/qrcode_pay_focus.js?v={{{ fileVersion }}}"></script>
+<script src="/o2o/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+
+{{{include '../../layout_second/footer'}}}
+
+
+
+
+
+
+
+

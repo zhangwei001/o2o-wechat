@@ -11,8 +11,9 @@
     "staticImageUrl": "http://static.mljiadev.cn/wechat/o2o/resources/img",
     "homeUrl":"http://o2o.mljiadev.cn",
     "downloadUrl":"http://dl.mljia.cn/",
-    "uploadActionServer":"http://upload.mljia.cn/upload/cloud/image",
+    "uploadActionServer":"http://upload.mljia.cn",
     //任何服务器都不变
     "staticHomeUrl":"http://o2o.mljia.cn/"
+
 
 }

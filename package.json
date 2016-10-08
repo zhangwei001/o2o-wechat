@@ -15,6 +15,7 @@
     "log4js": "^0.6.38",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
-    "strip-json-comments": "^2.0.1"
+    "strip-json-comments": "^2.0.1",
+    "superagent": "^2.2.0"
   }
 }

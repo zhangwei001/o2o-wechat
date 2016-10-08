@@ -1,24 +1,20 @@
-<%@page language="java" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<jsp:include  page="../layout_second/header.jsp" />
+{{{include '../layout_second/header'}}}
 
 
-<link href="${resourcesPath}/css/bootstrap3/css/bootstrap.min.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/icons.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/dialog.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/guide_tise.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/base.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
-<link href="${resourcesPath}/css/bootstrap3/mymiljia.css?v=${fileVersion}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/css/bootstrap.min.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/icons.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/dialog.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/guide_tise.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/base.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
+<link href="{{{staticResourcesUrl}}}/css/bootstrap3/mymiljia.css?v={{{ fileVersion }}}" rel="stylesheet" type="text/css" />
 
 
 
 </head>
 
-<jsp:include  page="../layout_second/top.jsp" />
+<body>
+{{{include '../layout_second/top'}}}
 
-<input type="hidden" value="${shopUserId}" id="shopUserId">
-<input type="hidden" value="${limit}" id="limit"/>
 
 <div class="container my_mlijia_container">
     <div class="container weixinOpLead">
@@ -44,9 +40,9 @@
 
 
 
-<script src="<%=request.getContextPath()%>/resources/javascript/wechat/auth/register_server_number.js?v=${fileVersion}"></script>
+<script src="/o2o/resources/javascript/wechat/auth/register_server_number.js?v={{{ fileVersion }}}"></script>
 
-<script src="<%=request.getContextPath()%>/resources/javascript/wechat/base/mljia_wx_userUtil.js?v=${fileVersion}"></script>
+<script src="/o2o/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
 
-<jsp:include  page="../layout_second/footer.jsp" />
+{{{include '../layout_second/footer'}}}
 

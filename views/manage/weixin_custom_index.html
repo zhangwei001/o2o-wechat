@@ -22,24 +22,33 @@
 <link rel="stylesheet" type="text/css"  href="{{{staticResourcesUrl}}}/css/bootstrap3/weixin_module_tc.css" >
 
 
+<input type="hidden" id="controlTarg" value="7" />
+<input type="hidden" id="shopSetId" value="4" />
+<input type="hidden" id="newUnBindCount" value="-1" />
+<input type="hidden" id="bindStatus" value="-1" />
+<input type="hidden" value="" id="shopUserId"/>
+<input type="hidden" value="2014-01-01" id="startDate"/>
+<input type="hidden" value="" id="endDate"/>
+
+
 <script>
-(function(){
-	var shop_id=$("#shop_id").val();
-	
-	if(sessionStorage){
-		if(sessionStorage.SHOPID){
-			if(shop_id){
-				sessionStorage.SHOPID=shop_id;
-			}else{
-				$("#shop_id").val(sessionStorage.SHOPID);
-			}
-		}else{
-			if(shop_id){
-				sessionStorage.SHOPID=shop_id;
-			}
-		}
-	}
-})();
+    (function(){
+        var shop_id=$("#shop_id").val();
+
+        if(sessionStorage){
+            if(sessionStorage.SHOPID){
+                if(shop_id){
+                    sessionStorage.SHOPID=shop_id;
+                }else{
+                    $("#shop_id").val(sessionStorage.SHOPID);
+                }
+            }else{
+                if(shop_id){
+                    sessionStorage.SHOPID=shop_id;
+                }
+            }
+        }
+    })();
 </script>
 </head>
 
@@ -47,246 +56,246 @@
 {{{include '../layout_main/top'}}}
 
 <div class="container  weixinhd_main" id="upweixin_custom_index">
-	<!-- 导航下按钮 S -->
-	<div class="main_btn_box">
-		<a href="/o2o/route/{{{shopSid}}}/thirdpartnar-send_public_message?access_token={{{accessToken}}}" class="btn_c" id="sendWXInfo">发微信内容</a>
-		<a href="/o2o/route/{{{shopSid}}}/promotions-release_promotion_activity" class="btn_c">发布优惠活动</a>
-		<a href="/o2o/route/{{{shopSid}}}/manage-weixin_custom_index" class="btn_h">微信用户管理</a>
-		<a href="/o2o/route/{{{shopSid}}}/robot-upweixin_auto_reply_index" class="btn_c">自动回复</a>
-		<a href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index" class="btn_c">自定义发消息</a>
-		<a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index" class="btn_c">素材库</a>
-	</div>
-
-	<!-- 导航下按钮  end-->
-    
-     <!--微信内容主体s-->
-  <div class="weixin_container_box" id="auto_weixin_container_box" style="background-image:url();"> 
-    
-    <!--提示s-->
-<div class="weixin_user_tise"><i class="icon-editpadTise"></i>微信用户管理中的关联是为了将微信公众号的粉丝与顾客一 一对应，这样顾客才能从微信端查询消费卡信息和订单信息。如有疑问，请点击帮助</div>
-<!--提示e-->
-
-   
-    <!--搜索s-->
-    <ul class=" weixin_user_search">
-      <li class="a1">关注时间：</li>
-      <li class="a2">
-        <input name="" type="text" id="config-demo" readonly="readonly" style="background: #fff;border:1px solid #aaa;"  class="input02 form-control"  id="ResultDate"/> 
-           <!--  <i class="glyphicon glyphicon-calendar fa fa-calendar" style="top:-30px;margin-left:250px;"></i> -->
-          <i class="icon-weixinmenu-calendar" id="dateInit" style="margin-top:-35px;margin-left:240px;"></i>
-      </li>
-      <li class="ml30">手机号：</li>
-      <li class="a4" style="margin-top:-2px;">
-        <input name="" type="text" class="input01" value="" onkeyup="this.value=this.value.replace(/\D/g,'')"  id="telPhone" style="background: #fff;border:1px solid #aaa;"  maxlength="11">
-        <p id="errorMsg" style="color:red;display:block;margin-left:6px;display:none;"></p>
-      </li>
-      <li class="a5" ><a class=" butsbase butblue01" id="searchButton" data-btn="0" name="0" >查询</a></li>
-      <li class="a5"  style="margin-left:10px;"><a id="resethButton" class=" butsbase butblue01" style=" background:#F1F3F8; border:1px solid #f1f3f8;color:gray;">清除</a></li>
-    </ul>
-    <!--搜索e--> 
-    
-    <!--表格s-->
-    <div class="weixin_user_tab_main" >
-      <div class="weixin_user_plusmenu">
-       <a  class="activ"  href="javascript:;" data-status="-1">全部</a>
-        <a class="" href="javascript:;" data-status="2">已关联</a> 
-        <a class="" href="javascript:;" data-status="1">未关联</a> 
-        <a class=""  href="javascript:;"data-status="0">潜在用户</a>
-       </div>
-      
-      <!-- //填充模板数据 -->
-      <div id="tempUserInfo"></div>
- <div class="fenyeademain3x pl15" id="pageFenye" style="margin-top:10px;"></div>
+    <!-- 导航下按钮 S -->
+    <div class="main_btn_box">
+        <a href="/o2o/route/{{{shopSid}}}/thirdpartnar-send_public_message?access_token={{{accessToken}}}" class="btn_c" id="sendWXInfo">发微信内容</a>
+        <a href="/o2o/route/{{{shopSid}}}/promotions-release_promotion_activity" class="btn_c">发布优惠活动</a>
+        <a href="/o2o/route/{{{shopSid}}}/manage-weixin_custom_index" class="btn_h">微信用户管理</a>
+        <a href="/o2o/route/{{{shopSid}}}/robot-upweixin_auto_reply_index" class="btn_c">自动回复</a>
+        <a href="/o2o/route/{{{shopSid}}}/customized-creat_mass_message_index" class="btn_c">自定义发消息</a>
+        <a href="/o2o/route/{{{shopSid}}}/fodder-wechat_fodder_index" class="btn_c">素材库</a>
     </div>
-    <!--表格e--> 
-   
 
-    
-    
-    <!--分页s-->
-    <div class="PageBreakage_main poi1" id="pageFenye" >
-    
- 
-    <!--       <ul class="PageBreakage_list fr">
-      <li class="prePage noPrePage"><a><i class="icon-PageBreakageL"></i>上一页</a></li>
-      <li class="pageNum thisPage">1</li>
-      <li class="pageNum"><a>2</a></li>
-      <li class="pageNum"><a>3</a></li>
-      <li class="nextPage"><a href="">下一页<i class="icon-PageBreakageR"></i></a></li>
-      <li>每页20条，共129条</li>
-      <li class="ml10">到第</li>
-      <li>
-        <input name="" type="text" class="selectPage">
-      </li>
-      <li>页</li>
-      <li><a class="butsbase buthui01">确定</a></li>
-    </ul> -->
+    <!-- 导航下按钮  end-->
+
+    <!--微信内容主体s-->
+    <div class="weixin_container_box" id="auto_weixin_container_box" style="background-image:url();">
+
+        <!--提示s-->
+        <div class="weixin_user_tise"><i class="icon-editpadTise"></i>微信用户管理中的关联是为了将微信公众号的粉丝与顾客一 一对应，这样顾客才能从微信端查询消费卡信息和订单信息。如有疑问，请点击帮助</div>
+        <!--提示e-->
+
+
+        <!--搜索s-->
+        <ul class=" weixin_user_search">
+            <li class="a1">关注时间：</li>
+            <li class="a2">
+                <input name="" type="text" id="config-demo" readonly="readonly" style="background: #fff;border:1px solid #aaa;"  class="input02 form-control"  id="ResultDate"/>
+                <!--  <i class="glyphicon glyphicon-calendar fa fa-calendar" style="top:-30px;margin-left:250px;"></i> -->
+                <i class="icon-weixinmenu-calendar" id="dateInit" style="margin-top:-35px;margin-left:240px;"></i>
+            </li>
+            <li class="ml30">手机号：</li>
+            <li class="a4" style="margin-top:-2px;">
+                <input name="" type="text" class="input01" value="" onkeyup="this.value=this.value.replace(/\D/g,'')"  id="telPhone" style="background: #fff;border:1px solid #aaa;"  maxlength="11">
+                <p id="errorMsg" style="color:red;display:block;margin-left:6px;display:none;"></p>
+            </li>
+            <li class="a5" ><a class=" butsbase butblue01" id="searchButton" data-btn="0" name="0" >查询</a></li>
+            <li class="a5"  style="margin-left:10px;"><a id="resethButton" class=" butsbase butblue01" style=" background:#F1F3F8; border:1px solid #f1f3f8;color:gray;">清除</a></li>
+        </ul>
+        <!--搜索e-->
+
+        <!--表格s-->
+        <div class="weixin_user_tab_main" >
+            <div class="weixin_user_plusmenu">
+                <a  class="activ"  href="javascript:;" data-status="-1">全部</a>
+                <a class="" href="javascript:;" data-status="2">已关联</a>
+                <a class="" href="javascript:;" data-status="1">未关联</a>
+                <a class=""  href="javascript:;"data-status="0">潜在用户</a>
+            </div>
+
+            <!-- //填充模板数据 -->
+            <div id="tempUserInfo"></div>
+            <div class="fenyeademain3x pl15" id="pageFenye" style="margin-top:10px;"></div>
+        </div>
+        <!--表格e-->
+
+
+
+
+        <!--分页s-->
+        <div class="PageBreakage_main poi1" id="pageFenye" >
+
+
+            <!--       <ul class="PageBreakage_list fr">
+              <li class="prePage noPrePage"><a><i class="icon-PageBreakageL"></i>上一页</a></li>
+              <li class="pageNum thisPage">1</li>
+              <li class="pageNum"><a>2</a></li>
+              <li class="pageNum"><a>3</a></li>
+              <li class="nextPage"><a href="">下一页<i class="icon-PageBreakageR"></i></a></li>
+              <li>每页20条，共129条</li>
+              <li class="ml10">到第</li>
+              <li>
+                <input name="" type="text" class="selectPage">
+              </li>
+              <li>页</li>
+              <li><a class="butsbase buthui01">确定</a></li>
+            </ul> -->
+        </div>
+        <!--分页e-->
+
     </div>
-    <!--分页e-->
-    
-  </div>
-  <!--微信内容主体e--> 
-  
-  <!-- 引导页模板 -->
-<script type="text/html" id="yingdaoTemp">
-	 <div class="container weixingginfo">
-		<div class="wXinfotop">
-	        <p class="fz18 fl"><i class="icon-wXinfotop01 mr10"></i>公众号信息</p>
-	        <p class="fl txthui ml10 mt2"><i class="icon-wXinfotop02"></i>点击“更新”字样即可将微信公众号的名称、头像、二维码、公众号类型信息同步为最新状态。<a id="refreshEvent">更新 <span class="fsongti">>></span></a></p>
+    <!--微信内容主体e-->
+
+    <!-- 引导页模板 -->
+    <script type="text/html" id="yingdaoTemp">
+        <div class="container weixingginfo">
+            <div class="wXinfotop">
+                <p class="fz18 fl"><i class="icon-wXinfotop01 mr10"></i>公众号信息</p>
+                <p class="fl txthui ml10 mt2"><i class="icon-wXinfotop02"></i>点击“更新”字样即可将微信公众号的名称、头像、二维码、公众号类型信息同步为最新状态。<a id="refreshEvent">更新 <span class="fsongti">>></span></a></p>
+            </div>
+
+            <ul class="gginfomain">
+                <li class="a1 poi1">
+                    <p class="txt1">公众号类型：</p>
+                    <p>{{ ( d.content.service_type_info==0 || d.content.service_type_info==1) ? "订阅号" : " "}}</p>
+                    {{# if(d.content.service_type_info==0 || d.content.service_type_info==1 || d.content.verify_type_info==-1) { }}
+                    <p class="wXinfoTese poi2" ><i class="icon-wXinfotop03"></i>您需要更换公众号类型为【服务号】，才可使用全部微信服务。<a class="upgradeLink" target="_blank">如何更换？</a></p>
+                    {{# } }}
+                </li>
+
+                <li class="a2 poi1">
+                    <p class="txt1">是否认证：</p>
+                    <p>{{ d.verify_type_info==-1 ? "未认证" : "已认证"}}</p>
+                    <p class="wXinfoTese poi2"  ><i class="icon-wXinfotop03"></i>您需要【认证】服务号，才可使用全部微信服务。<a class="authLink" target="_blank">如何认证？</a></p>
+                </li>
+
+                <li class="a1">
+                    <p class="txt1">公众号名称：</p>
+                    <p>{{d.content.nick_name}}</p>
+
+
+                </li>
+                <li class="a3 poi1 downBcodeMain">
+                    <p class="txt1">二维码：</p>
+                    <p><img src="{{d.qrCodeImg}}" width="168" height="168"></p>
+                    <p class="poi2 downBcode"><a class="downLoadCodeImg">下载高清二维码</a></p>
+                </li>
+                <li class="a5">
+                    <p class="txt1">公众号头像：</p>
+                    <p><img src="{{d.content.head_image}}" width="168" height="168"></p>
+                </li>
+                <li class="tise2">
+                    <p class="ml40">如需解除绑定，请联系4007889166</p>
+                </li>
+            </ul>
+        </div>
         </div>
 
-        <ul class="gginfomain">
-            <li class="a1 poi1">
-                <p class="txt1">公众号类型：</p>
-                <p>{{ ( d.content.service_type_info==0 || d.content.service_type_info==1) ? "订阅号" : " "}}</p>
-                 {{# if(d.content.service_type_info==0 || d.content.service_type_info==1 || d.content.verify_type_info==-1) { }}
-				  <p class="wXinfoTese poi2" ><i class="icon-wXinfotop03"></i>您需要更换公众号类型为【服务号】，才可使用全部微信服务。<a class="upgradeLink" target="_blank">如何更换？</a></p>
-                 {{# } }}
-            </li>
-
-            <li class="a2 poi1">
-                <p class="txt1">是否认证：</p>
-                <p>{{ d.verify_type_info==-1 ? "未认证" : "已认证"}}</p>
-				<p class="wXinfoTese poi2"  ><i class="icon-wXinfotop03"></i>您需要【认证】服务号，才可使用全部微信服务。<a class="authLink" target="_blank">如何认证？</a></p>
-            </li>
-            
-            <li class="a1">
-                <p class="txt1">公众号名称：</p>
-                <p>{{d.content.nick_name}}</p>
+    </script>
 
 
-            </li>
-            <li class="a3 poi1 downBcodeMain">
-                <p class="txt1">二维码：</p>
-                <p><img src="{{d.qrCodeImg}}" width="168" height="168"></p>
-                <p class="poi2 downBcode"><a class="downLoadCodeImg">下载高清二维码</a></p>
-            </li>
-            <li class="a5">
-                <p class="txt1">公众号头像：</p>
-                <p><img src="{{d.content.head_image}}" width="168" height="168"></p>
-            </li>
-            <li class="tise2">
-                <p class="ml40">如需解除绑定，请联系4007889166</p>
-            </li>
+
+
+
+    <!-- 用户列表模版 S-->
+    <script type="text/html" id="userListInsert">
+        <ul class="weixin_user_tab_tatle">
+            <li class="apic">微信昵称</li>
+            <li class="a1"></li>
+            <li class="a2">关注时间</li>
+            <li class="a3">姓名</li>
+            <li class="a4">手机号</li>
+            <li class="a5">关联状态</li>
+            <li class="a6">操作</li>
+            <li class="a7">关联顾客</li>
         </ul>
-    </div>
-  </div>
-
-</script>
-
-
-
-
-
-<!-- 用户列表模版 S-->
-<script type="text/html" id="userListInsert">
-   <ul class="weixin_user_tab_tatle">
-        <li class="apic">微信昵称</li>
-        <li class="a1"></li>
-        <li class="a2">关注时间</li>
-        <li class="a3">姓名</li>
-        <li class="a4">手机号</li>
-        <li class="a5">关联状态</li>
-        <li class="a6">操作</li>
-        <li class="a7">关联顾客</li>
-  </ul>
-{{# if( d && d.length>0 ){ }}
-       {{# for(var i=0;i <d.length;i++){ }}
+        {{# if( d && d.length>0 ){ }}
+        {{# for(var i=0;i <d.length;i++){ }}
         <ul class="weixin_user_tab_list">
-          <li class="apic"><img src='{{d[i].head_img}}' width="180" height="180"></li>
-          <li class="a1">{{d[i].nick_name || "--"}}</li>
-          <li class="a2">{{d[i].subscribe_time || "--"}} </li>
+            <li class="apic"><img src='{{d[i].head_img}}' width="180" height="180"></li>
+            <li class="a1">{{d[i].nick_name || "--"}}</li>
+            <li class="a2">{{d[i].subscribe_time || "--"}} </li>
 
-          {{# if(d[i].bind_status == 0){ }}
-              {{# if(!d[i].cell_phone){ }}
-                       <li class="a3">{{d[i].user_name || "--"}}</li>
-                       <li class="a4">{{d[i].cell_phones || "--"}}</li>   
-                       <li class="a5">潜在用户</li>
-                       <li class="a6">--</li>
-                       <li class="a7">--</li>
-             {{# }else{ }}
-                       <li class="a3">{{d[i].user_name || "--"}}</li>
-                       <li class="a4">{{d[i].cell_phones || "--"}}</li>   
-                       <li class="a5">潜在用户</li>
-                       <li class="a6"><a name="1" data-userinfo='{"custom_name":"{{d[i].user_name || '--'}}","img":"{{d[i].head_img || '--'}}","custom_mobile":"{{d[i].cell_phone || '--'}}","open_id":"{{d[i].open_id}}","custom_id":"{{d[i].custom_id}}","check_code":"{{d[i].check_code}}","main_id":"{{d[i].id}}","app_id":"{{d[i].app_id}}"}'>点击关联</a></li>
-                       <li class="a7">--</li>
-                    
-             {{# } }}
-          {{# } }}
-          {{# if(d[i].bind_status == 1){  }}
-                       <li class="a3">{{d[i].user_name || "--"}}</li>
-                       <li class="a4">{{d[i].cell_phones || "--"}}</li>   
-                       <li class="a5">未关联</li>
-                       <li class="a6">
-                          <a name="1" data-userinfo='{"custom_name":"{{d[i].user_name || '--'}}","img":"{{d[i].head_img || '--'}}","custom_mobile":"{{d[i].cell_phone || '--'}}","open_id":"{{d[i].open_id}}","custom_id":"{{d[i].custom_id}}","check_code":"{{d[i].check_code}}","main_id":"{{d[i].id}}","app_id":"{{d[i].app_id}}"}'>点击关联</a>
-                       </li>
-                       
-                       <li class="a7">--</li>
-          {{# } }}
-          {{# if(d[i].bind_status == 2){ }}
-                        <li class="a3">{{d[i].user_name || "--"}}</li>
-                       <li class="a4">{{d[i].cell_phones || "--"}}</li>   
-                       <li class="a5">已关联</li>
-                       <li class="a6"><a name="0">取消关联</a></li>
-                       <li class="a7">{{d[i].custom_name || "--"}}</li>
-          {{# } }}
+            {{# if(d[i].bind_status == 0){ }}
+            {{# if(!d[i].cell_phone){ }}
+            <li class="a3">{{d[i].user_name || "--"}}</li>
+            <li class="a4">{{d[i].cell_phones || "--"}}</li>
+            <li class="a5">潜在用户</li>
+            <li class="a6">--</li>
+            <li class="a7">--</li>
+            {{# }else{ }}
+            <li class="a3">{{d[i].user_name || "--"}}</li>
+            <li class="a4">{{d[i].cell_phones || "--"}}</li>
+            <li class="a5">潜在用户</li>
+            <li class="a6"><a name="1" data-userinfo='{"custom_name":"{{d[i].user_name || '--'}}","img":"{{d[i].head_img || '--'}}","custom_mobile":"{{d[i].cell_phone || '--'}}","open_id":"{{d[i].open_id}}","custom_id":"{{d[i].custom_id}}","check_code":"{{d[i].check_code}}","main_id":"{{d[i].id}}","app_id":"{{d[i].app_id}}"}'>点击关联</a></li>
+            <li class="a7">--</li>
+
+            {{# } }}
+            {{# } }}
+            {{# if(d[i].bind_status == 1){  }}
+            <li class="a3">{{d[i].user_name || "--"}}</li>
+            <li class="a4">{{d[i].cell_phones || "--"}}</li>
+            <li class="a5">未关联</li>
+            <li class="a6">
+                <a name="1" data-userinfo='{"custom_name":"{{d[i].user_name || '--'}}","img":"{{d[i].head_img || '--'}}","custom_mobile":"{{d[i].cell_phone || '--'}}","open_id":"{{d[i].open_id}}","custom_id":"{{d[i].custom_id}}","check_code":"{{d[i].check_code}}","main_id":"{{d[i].id}}","app_id":"{{d[i].app_id}}"}'>点击关联</a>
+            </li>
+
+            <li class="a7">--</li>
+            {{# } }}
+            {{# if(d[i].bind_status == 2){ }}
+            <li class="a3">{{d[i].user_name || "--"}}</li>
+            <li class="a4">{{d[i].cell_phones || "--"}}</li>
+            <li class="a5">已关联</li>
+            <li class="a6"><a name="0">取消关联</a></li>
+            <li class="a7">{{d[i].custom_name || "--"}}</li>
+            {{# } }}
         </ul>
-  
 
 
-    {{# } }}  
-{{# }else{ }}
- <p class="lh40 text-center" id="yesNull">没有信息</p>
-     
-{{# } }}
-</script>
-<!-- 用户列表模版 E-->
 
-<!-- 搜索框弹窗 Start -->
-<div  id="search_boxshade" class="xubox_shade" style="display:none;z-index:53; background-color:#000; opacity:0.3; filter:alpha(opacity=30);">
- </div>
-<div  style="display:none; z-index: 54; width: 438px; height: auto; margin-left: -219px; top: 200.5px;" id="search_box" class="xubox_layer" >
- <div style="z-index: 53; height: 143px;" class="xubox_main">
-	<div class="xubox_page">
-	   <div class="xuboxPageHtml">
-	     
-	   <!-- 搜索 s -->
-	  <div class="weixinUs_search_tc" id="searchTc">
-	  <div>   <a id="closeSearch" ><i class="icon-editup06 fr" style=" margin-top: -20px; margin-right: 3px;"></i></a></div>
-		    <p class="p1">
-		    <span class="s1"><input name="" class="input248" id="search_cont" type="text" placeholder="搜索关联顾客的手机号／姓名"></span>
-		    <span class="s2"><a class="butsbase butblue01" style="margin-top: 8px; width: 50px;" id="searchUserButton">搜索</a></span>
-		    </p>
-	
-		    <p class="p2" id="error_search"></p>
-		    <p class="p3"><i class="icon-editpadTise_s"></i>微信用户关联后，可在手机上实时查看卡项和消费记录</p>
-		    
-	   </div>
-	      <!-- 搜索 e -->
-	    
-	    <!--搜索结果A-->
-			<div class="weixinUs_result_tc" id="searchResultNo" style="display: none;">
-			  <a id="closeSearchResult" ><i class="icon-editup06 fr" style=" margin-top: -5px; margin-right: 3px;"></i></a>
-			    <p class="p1">搜索结果</p>
-			    <p class="p2" id="noCustormer">该顾客不存在，请直接添加顾客资料并关联吧！</p>
-			    <p class="p3">
-			    <span class="s1" id="userInfoImg" style=" background-image:url()"></span>
-			    <span class="s2" id="userInfoName"></span>
-			    <span class="s3" id="userInfoTel"></span>
-			    <span class="s4"><a class="butsbase butblue01 addcustor" style="margin-top: 8px; width: 120px;" id="addCustormerButton"></a></span>
-			    </p>
-			    <p class="p4"><i class="icon-editpadTise_s"></i>微信用户关联后，可在手机上实时查看卡项和消费记录</p>
-			</div>
-	    
-	    
-	   </div>
-	</div><span class="xubox_setwin"></span><span class="xubox_botton"></span>
+        {{# } }}
+        {{# }else{ }}
+        <p class="lh40 text-center" id="yesNull">没有信息</p>
+
+        {{# } }}
+    </script>
+    <!-- 用户列表模版 E-->
+
+    <!-- 搜索框弹窗 Start -->
+    <div  id="search_boxshade" class="xubox_shade" style="display:none;z-index:53; background-color:#000; opacity:0.3; filter:alpha(opacity=30);">
     </div>
-</div> 
-<!-- 搜索框弹窗 end -->  
+    <div  style="display:none; z-index: 54; width: 438px; height: auto; margin-left: -219px; top: 200.5px;" id="search_box" class="xubox_layer" >
+        <div style="z-index: 53; height: 143px;" class="xubox_main">
+            <div class="xubox_page">
+                <div class="xuboxPageHtml">
+
+                    <!-- 搜索 s -->
+                    <div class="weixinUs_search_tc" id="searchTc">
+                        <div>   <a id="closeSearch" ><i class="icon-editup06 fr" style=" margin-top: -20px; margin-right: 3px;"></i></a></div>
+                        <p class="p1">
+                            <span class="s1"><input name="" class="input248" id="search_cont" type="text" placeholder="搜索关联顾客的手机号／姓名"></span>
+                            <span class="s2"><a class="butsbase butblue01" style="margin-top: 8px; width: 50px;" id="searchUserButton">搜索</a></span>
+                        </p>
+
+                        <p class="p2" id="error_search"></p>
+                        <p class="p3"><i class="icon-editpadTise_s"></i>微信用户关联后，可在手机上实时查看卡项和消费记录</p>
+
+                    </div>
+                    <!-- 搜索 e -->
+
+                    <!--搜索结果A-->
+                    <div class="weixinUs_result_tc" id="searchResultNo" style="display: none;">
+                        <a id="closeSearchResult" ><i class="icon-editup06 fr" style=" margin-top: -5px; margin-right: 3px;"></i></a>
+                        <p class="p1">搜索结果</p>
+                        <p class="p2" id="noCustormer">该顾客不存在，请直接添加顾客资料并关联吧！</p>
+                        <p class="p3">
+                            <span class="s1" id="userInfoImg" style=" background-image:url()"></span>
+                            <span class="s2" id="userInfoName"></span>
+                            <span class="s3" id="userInfoTel"></span>
+                            <span class="s4"><a class="butsbase butblue01 addcustor" style="margin-top: 8px; width: 120px;" id="addCustormerButton"></a></span>
+                        </p>
+                        <p class="p4"><i class="icon-editpadTise_s"></i>微信用户关联后，可在手机上实时查看卡项和消费记录</p>
+                    </div>
+
+
+                </div>
+            </div><span class="xubox_setwin"></span><span class="xubox_botton"></span>
+        </div>
+    </div>
+    <!-- 搜索框弹窗 end -->
 
 </div>
-<!-- 内容主区域E --> 
+<!-- 内容主区域E -->
 
 <script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/moment.min.js?v={{{ fileVersion }}}"></script>
 <script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/library/daterangepicker.js?v={{{ fileVersion }}}"></script>
@@ -294,8 +303,8 @@
 <!-- 转化base64工具 对emoji表情的支持 -->
 <script type="text/javascript" src="{{{staticResourcesUrl}}}/javascript/wechat/base/libbase64.min.js?v={{{ fileVersion }}}"></script>
 
- <script src="/resources/javascript/wechat/manage/weixinCustorm.js?v={{{ fileVersion }}}"></script>
-<script src="/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
+<script src="/o2o/resources/javascript/wechat/manage/weixinCustorm.js?v={{{ fileVersion }}}"></script>
+<script src="/o2o/resources/javascript/wechat/base/mljia_wx_userUtil.js?v={{{ fileVersion }}}"></script>
 
 {{{include '../layout_main/footer'}}}
 
